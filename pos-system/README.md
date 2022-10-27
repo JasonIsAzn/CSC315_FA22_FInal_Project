@@ -12,6 +12,8 @@ Design Client Pages
 
 (Consider) Redesign Server Pages
 
+Implement Designs in Figma
+
 ### `Start`
 Create all Nesseccary Pages
 
