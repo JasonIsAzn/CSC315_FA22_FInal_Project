@@ -16,6 +16,8 @@ Create all Nesseccary Pages
 
 Route Pages
 
+Make Login Page w/ GOOGLE AUTH
+
 
 ## BACK-END TODOs
 
