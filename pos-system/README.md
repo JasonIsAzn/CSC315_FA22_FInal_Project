@@ -1,5 +1,5 @@
 # TODO LIST (OCT 27 - OCT 30)
-            (Not a Due date, but General "Guidlines")
+  (Not a Due date, but General "Guidlines")
 
 
 ## FRONT-END TODOs
