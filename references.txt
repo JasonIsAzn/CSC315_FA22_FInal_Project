@@ -1,0 +1,5 @@
+Ignore this file; it's just used to store references for sources used during development.
+
+> using pg library: https://www.youtube.com/watch?v=_n-Ai30C1qs; https://www.youtube.com/watch?v=GTeCtIoV2Tw
+
+>  
