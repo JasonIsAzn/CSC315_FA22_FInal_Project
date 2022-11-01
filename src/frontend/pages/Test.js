@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 
 
 
-export default function Test() {
+const Test = () => {
   const [items, setItems] = useState([]);
 
   const getItems = async() => {
@@ -18,7 +18,7 @@ export default function Test() {
   useEffect(() => {
     getItems();
   }, [])
-  // console.log(items);
+  console.log(items);
   
   
   return (
@@ -47,3 +47,6 @@ export default function Test() {
     </div>
   );
 }
+
+
+export default Test;
