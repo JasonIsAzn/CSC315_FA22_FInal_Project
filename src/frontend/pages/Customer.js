@@ -45,7 +45,6 @@ export default function Customer() {
                 <td>{item.price}</td>
               </tr>
             ))}
-
           </tbody>
         </table>
       </Fragment>
