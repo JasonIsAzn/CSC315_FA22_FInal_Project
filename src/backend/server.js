@@ -15,15 +15,7 @@ process.on('SIGINT', function() {
 });
 
 // ROUTES // 
-// get items
-app.get("/items" , async (req, res) => {
-  try{
-    const orders = await pool.query("SELECT * FROM item");
-    res.json(orders.rows);
-  } catch {err} {
-    console.error(err.message);
-  }
-});
+
 
 
 app.listen(5000, () => {
