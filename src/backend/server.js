@@ -8,11 +8,11 @@ app.use(cors());
 app.use(express.json());
 
 // Add process hook to shutdown pool
-// process.on('SIGINT', function() {
-//   pool.end();
-//   console.log('Application successfully shutdown');
-//   process.exit(0);
-// });
+process.on('SIGINT', function() {
+  pool.end();
+  console.log('Application successfully shutdown');
+  process.exit(0);
+});
 
 // ROUTES // 
 // get items

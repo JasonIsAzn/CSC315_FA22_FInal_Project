@@ -24,6 +24,7 @@ const Test = () => {
   return (
     <div>
       <h1>TEST PAGE</h1>
+      {/* This is very ugly ;( */}
       <Fragment>
         <table>
           <thread>
