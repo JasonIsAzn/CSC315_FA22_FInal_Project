@@ -15,7 +15,7 @@ process.on('SIGINT', function() {
 });
 
 // ROUTES // 
-// get Items
+// get items
 app.get("/items" , async (req, res) => {
   try{
     const orders = await pool.query("SELECT * FROM item");
