@@ -19,6 +19,11 @@ export default function Login() {
     navigate("/customer");
   };
 
+  // sends the user to the Customer page
+  const goTest = () => {
+    navigate("/test");
+  };
+
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
       <button
@@ -40,6 +45,9 @@ export default function Login() {
         onClick={goCustomer}
       >
         Customer
+      </button>
+      <button onClick ={goTest}>
+        Test
       </button>
     </div>
   );
