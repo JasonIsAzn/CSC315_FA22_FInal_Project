@@ -7,15 +7,10 @@ const pool = require("./db");
 app.use(cors());
 app.use(express.json());
 
-// Add process hook to shutdown pool
-process.on('SIGINT', function() {
-  pool.end();
-  console.log('Application successfully shutdown');
-  process.exit(0);
-});
+//// ROUTES ////
 
-// ROUTES // 
-// get items
+// GETS 
+// get-items
 app.get("/items" , async (req, res) => {
   try{
     const orders = await pool.query("SELECT * FROM item");
@@ -24,6 +19,9 @@ app.get("/items" , async (req, res) => {
     console.error(err.message);
   }
 });
+
+// INSERTS
+// DELETES
 
 
 app.listen(5000, () => {
