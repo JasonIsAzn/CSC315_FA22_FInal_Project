@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
+import axios from "axios";
+import GlobalContext from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const { allItems, setAllItems, listItems, setListItems } =
+    useContext(GlobalContext);
+  // bring over all data here
+
+  // get all items
+  useEffect(() => {
+    axios.get("http://localhost:5000/items").then((result) => {
+      setAllItems(result.data);
+      const itemData = result.data;
+
+      for (let i = 0; i < itemData.length; i++) {
+        let item = [];
+        item.push(itemData[i].id);
+        item.push(itemData[i].name);
+        item.push(itemData[i].count);
+        item.push(itemData[i].price);
+        item.push(itemData[i].type);
+        console.log(item);
+        listItems.push(item);
+      }
+
+      setListItems(listItems);
+    });
+  }, []);
+
   const navigate = useNavigate();
 
   // sends the user to the Manager page
@@ -46,9 +73,7 @@ export default function Login() {
       >
         Customer
       </button>
-      <button onClick ={goTest}>
-        Test
-      </button>
+      <button onClick={goTest}>Test</button>
     </div>
   );
 }

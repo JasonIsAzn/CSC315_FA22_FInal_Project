@@ -5,6 +5,7 @@ export default function ContextWrapper(props) {
   // all global states are declared here
   const [allOrders, setAllOrders] = useState([]);
   const [allItems, setAllItems] = useState([]);
+  const [listItems, setListItems] = useState([]);
 
   return (
     <GlobalContext.Provider
@@ -14,6 +15,8 @@ export default function ContextWrapper(props) {
         setAllOrders,
         allItems,
         setAllItems,
+        listItems,
+        setListItems,
       }}
     >
       {props.children}
