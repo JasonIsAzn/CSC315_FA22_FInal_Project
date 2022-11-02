@@ -1,6 +1,4 @@
-# TODO LIST (OCT 27 - OCT 30)
-  (Not a Due date, but General "Guidelines")
-
+# TODO LIST (OCT 21 - Nov 6)
 
 ## FRONT-END TODOs
 
@@ -17,13 +15,24 @@ Implement Designs in Figma
 ### `Start`
 Create all Necessary Pages
 
-Route Pages
+Login Page w/ GOOGLE AUTH
 
-Make Login Page w/ GOOGLE AUTH
+Customer Page
+
+Server Page
+
+Manager Page
 
 
 ## BACK-END TODOs
 
-### `Start`
-Figure out exactly what we will be using
-express??
+### `Implement Basic Action`
+
+get (Need to Fix)
+
+insert
+
+delete 
+
+### `Implement into javascript`
+

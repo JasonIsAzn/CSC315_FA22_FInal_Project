@@ -19,6 +19,11 @@ export default function Login() {
     navigate("/customer");
   };
 
+  // sends the user to the Customer page
+  const goTest = () => {
+    navigate("/test");
+  };
+
   return (
     <div className="h-screen overflow-y-hidden">
       <div
