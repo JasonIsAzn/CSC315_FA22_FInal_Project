@@ -24,7 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "exStart": "node ./src/backend/server.js",
-    "testStart":"node ./src/backend/server.js & react-scripts start"
+    "testStart": "node ./src/backend/server.js & react-scripts start"
   },
   "eslintConfig": {
     "extends": [

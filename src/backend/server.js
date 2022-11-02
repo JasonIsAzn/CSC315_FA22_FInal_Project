@@ -20,9 +20,18 @@ app.get("/items" , async (req, res) => {
   }
 });
 
+app.get("/orders" , async (req, res) => {
+  try{
+    const orders = await pool.query("SELECT * FROM \"order\"");
+    res.json(orders.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 // INSERTS
 // DELETES
 
-app.listen(5000, () => {
-  console.log("Listening on port 5000");
+app.listen(5001, () => {
+  console.log("Listening on port 3001");
 });

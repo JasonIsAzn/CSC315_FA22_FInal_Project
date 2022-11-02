@@ -28,8 +28,6 @@ Manager Page
 
 ### `Implement Basic Action`
 
-get (Need to Fix)
-
 insert
 
 delete 

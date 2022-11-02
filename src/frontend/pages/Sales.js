@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Manager() {
+export default function Sales() {
   const navigate = useNavigate();
 
   // sends the user to the Home page
@@ -32,6 +32,7 @@ export default function Manager() {
 
   return (
     <div className="h-screen overflow-y-hidden">
+      
       <div className="h-screen w-screen flex justify-center mt-16">
       <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
