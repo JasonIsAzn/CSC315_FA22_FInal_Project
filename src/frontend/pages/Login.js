@@ -20,27 +20,34 @@ export default function Login() {
   };
 
   return (
-    <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-      <button
-        className="bg-red-400 hover:bg-red-600 text-white font-bold mx-6 p-6 rounded text-4xl border-2 border-gray-600"
-        onClick={goManager}
+    <div className="h-screen overflow-y-hidden">
+      <div
+        className="w-screen flex items-center mt-28 ml-36"
       >
-        Manager
-      </button>
+        <h1 className="italic font-bold text-5xl text-[#333333] text-[#0AADF4]">Spin N' Stone</h1>
+      </div>
+      <div className="h-screen w-screen flex justify-center mt-16">
+        <button
+          className="w-1/4 h-1/2 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-lg text-4xl"
+          onClick={goManager}
+        >
+          Manager
+        </button>
 
-      <button
-        className="bg-red-400 hover:bg-red-600 text-white font-bold mx-6 p-6 rounded text-4xl border-2 border-gray-600"
-        onClick={goServer}
-      >
-        Server
-      </button>
+        <button
+          className="w-1/4 h-1/2 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-lg text-4xl"
+          onClick={goServer}
+        >
+          Server
+        </button>
 
-      <button
-        className="bg-red-400 hover:bg-red-600 text-white font-bold mx-6 p-6 rounded text-4xl border-2 border-gray-600"
-        onClick={goCustomer}
-      >
-        Customer
-      </button>
+        <button
+          className="w-1/4 h-1/2 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-lg text-4xl"
+          onClick={goCustomer}
+        >
+          Customer
+        </button>
+      </div>
     </div>
   );
 }
