@@ -27,7 +27,7 @@ export default function Login() {
   return (
     <div className="h-screen overflow-y-hidden">
       <div
-        className="w-screen flex items-center mt-28 ml-36"
+        className="w-screen flex items-center mt-28 ml-28"
       >
         <h1 className="italic font-bold text-5xl text-[#333333] text-[#0AADF4]">Spin N' Stone</h1>
       </div>
@@ -40,14 +40,14 @@ export default function Login() {
         </button>
 
         <button
-          className="w-1/4 h-1/2 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-lg text-4xl"
+          className="w-1/4 h-1/2 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-3xl text-4xl"
           onClick={goServer}
         >
           Server
         </button>
 
         <button
-          className="w-1/4 h-1/2 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-lg text-4xl"
+          className="w-1/4 h-1/2 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-3xl text-4xl"
           onClick={goCustomer}
         >
           Customer
