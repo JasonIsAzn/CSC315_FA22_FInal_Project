@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Manager() {
+export default function Sales() {
   const navigate = useNavigate();
 
   // sends the user to the Home page
