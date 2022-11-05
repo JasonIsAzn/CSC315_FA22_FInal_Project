@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import pizza_type from "./pizza_type";
 
 export default function Customer() {
   const navigate = useNavigate();
@@ -18,9 +19,13 @@ export default function Customer() {
     navigate("/drinks");
   };
 
+  const goSauces = () => {
+    navigate("/sauces");
+  };
   const goCheckout = () => {
     navigate("/checkout");
   };
+
 
 
   return (
@@ -54,6 +59,19 @@ export default function Customer() {
           Checkout
         </button>
       </div>
+
+      <div>
+        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Pizza</h1>
+        <div className="grid lg:grid-cols-4 mx-20 mt-5">
+            {pizza_type.map(pizza => (
+                <div> 
+                    <button className="w-5.0 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center" onClick={goSauces}>{pizza.name}</button>
+                </div>
+            ))}
+        </div>
+
+      </div>
+
     </div>
   );
 }

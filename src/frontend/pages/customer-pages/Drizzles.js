@@ -27,9 +27,9 @@ export default function Drizzles() {
         navigate("/drizzles");
     };
 
-    const [pizzaToppings, setToppings] = useState([]);
+    const [drizzles, setDrizzles] = useState([]);
 
-    const getToppings = async() => {
+    const getDrizzles = async() => {
         try {
         const response = await fetch("http://localhost:5001/items") // get request
         const jsonData = await response.json();
@@ -40,18 +40,18 @@ export default function Drizzles() {
         })
 
         console.log("TESTSOSOS", JSON.stringify(drizzleToppings, null, 2))
-        setToppings(drizzleToppings);
+        setDrizzles(drizzleToppings);
         } catch (err) {
         console.error(err.message);
         }
     }
   
     useEffect(() => {
-        getToppings();
+        getDrizzles();
     }, [])
 
     
-    console.log(pizzaToppings);
+    console.log(drizzles);
 
 
   return (
@@ -102,10 +102,12 @@ export default function Drizzles() {
       
       <div>
       <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Drizzle</h1>
-        <div className="grid lg:grid-cols-4 mx-20 mt-10">
-            {pizzaToppings.map(topping => (
-                <div> 
-                    <button className="w-5.0 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center">{topping.name}</button>
+        <div className="grid lg:grid-cols-4 mx-20 mt-5">
+            {drizzles.map(drizzle => (
+                <div className="mx-auto"> 
+                      <input type="checkbox" class="hidden " id = {drizzle.name}/>
+                      <label class="" for={drizzle.name} className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center">{drizzle.name}
+                      </label>
                 </div>
             ))}
         </div>

@@ -104,8 +104,10 @@ export default function Toppings() {
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Meat</h1>
         <div className="grid lg:grid-cols-4 mx-20 mt-5">
             {pizzaToppings.map(topping => (
-                <div> 
-                    <button className="w-5.0 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center">{topping.name}</button>
+                <div className="mx-auto"> 
+                      <input type="checkbox" class="hidden " id = {topping.name}/>
+                      <label class="" for={topping.name} className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center">{topping.name}
+                      </label>
                 </div>
             ))}
         </div>
