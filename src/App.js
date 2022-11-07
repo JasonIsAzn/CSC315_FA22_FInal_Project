@@ -4,7 +4,6 @@ import Manager from "./frontend/pages/Manager";
 import Server from "./frontend/pages/Server";
 import Customer from "./frontend/pages/customer-pages/Customer";
 import Inventory from "./frontend/pages/Inventory";
-import Sales from "./frontend/pages/Sales";
 import Orders from "./frontend/pages/Orders";
 import Drinks from "./frontend/pages/customer-pages/Drinks";
 import Checkout from "./frontend/pages/customer-pages/Checkout";
@@ -26,7 +25,6 @@ function App() {
       <Route path="/manager" element={<Manager />} />
       <Route path="/server" element={<Server />} />
       <Route path="/inventory" element={<Inventory />} />
-      <Route path="/sales" element={<Sales />} />
       <Route path="/orders" element={<Orders />} />
 
       {/* Customer Routes */}
