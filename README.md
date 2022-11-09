@@ -1,5 +1,4 @@
 # TODO LIST (OCT 21 - Nov 6)
-
 ## FRONT-END TODOs
-
 ## BACK-END TODOs
+
