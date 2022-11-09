@@ -6,6 +6,7 @@ import Customer from "./frontend/pages/Customer";
 import Inventory from "./frontend/pages/Inventory";
 import Sales from "./frontend/pages/Sales";
 import Orders from "./frontend/pages/Orders";
+
 import Test from "./frontend/pages/Test";
 import { Routes, Route } from "react-router-dom";
 
