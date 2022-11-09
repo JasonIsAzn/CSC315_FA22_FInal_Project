@@ -2,13 +2,11 @@ import "./App.css";
 import Login from "./frontend/pages/Login";
 import Manager from "./frontend/pages/Manager";
 import Server from "./frontend/pages/Server";
-import Customer from "./frontend/pages/Customer";
 import Inventory from "./frontend/pages/Inventory";
 import Sales from "./frontend/pages/Sales";
 import Orders from "./frontend/pages/Orders";
+
 import Customer from "./frontend/pages/customer-pages/Customer";
-import Inventory from "./frontend/pages/Inventory";
-import Orders from "./frontend/pages/Orders";
 import Drinks from "./frontend/pages/customer-pages/Drinks";
 import Checkout from "./frontend/pages/customer-pages/Checkout";
 import Toppings from "./frontend/pages/customer-pages/Toppings"
@@ -28,7 +26,6 @@ function App() {
       <Route path="/server" element={<Server />} />
       <Route path="/inventory" element={<Inventory />} />
       <Route path="/orders" element={<Orders />} />
-      <Route path="/inventory" element={<Inventory />} />
       <Route path="/sales" element={<Sales />} />
       <Route path="/orders" element={<Orders />} />
         

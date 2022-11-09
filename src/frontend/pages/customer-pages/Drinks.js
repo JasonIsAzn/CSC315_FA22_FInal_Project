@@ -32,7 +32,7 @@ export default function Drinks() {
       //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
       
       var drinkFiltered = jsonData.filter((data) => {
-          return data.type == "drink"
+          return data.type === "drink"
       })
 
       console.log("TESTSOSOS", JSON.stringify(drinkFiltered, null, 2))

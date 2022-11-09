@@ -36,7 +36,7 @@ export default function Drizzles() {
         //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
         
         var drizzleToppings = jsonData.filter((data) => {
-            return data.type == "drizzle"
+            return data.type === "drizzle"
         })
 
         console.log("TESTSOSOS", JSON.stringify(drizzleToppings, null, 2))

@@ -23,7 +23,7 @@ export default function Sauces() {
         //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
         
         var saucesFiltered = jsonData.filter((data) => {
-            return data.type == "sauce"
+            return data.type === "sauce"
         })
 
         console.log("TESTSOSOS", JSON.stringify(saucesFiltered, null, 2))

@@ -33,7 +33,7 @@ export default function Veggies() {
         const response = await fetch("http://localhost:5001/items") // get request
         const jsonData = await response.json();
         var veggieToppings = jsonData.filter((data) => {
-            return data.type == "topping-veggie"
+            return data.type === "topping-veggie"
         })
 
         console.log("TESTSOSOS", JSON.stringify(veggieToppings, null, 2))

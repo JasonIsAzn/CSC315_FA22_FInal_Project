@@ -36,7 +36,7 @@ export default function Toppings() {
         //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
         
         var meatToppings = jsonData.filter((data) => {
-            return data.type == "topping-meat"
+            return data.type === "topping-meat"
         })
 
         console.log("TESTSOSOS", JSON.stringify(meatToppings, null, 2))
