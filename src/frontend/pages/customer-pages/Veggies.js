@@ -30,7 +30,7 @@ export default function Veggies() {
 
     const getToppings = async() => {
         try {
-        const response = await fetch("http://localhost:5000/items") // get request
+        const response = await fetch("http://localhost:5001/items") // get request
         const jsonData = await response.json();
         var veggieToppings = jsonData.filter((data) => {
             return data.type === "topping-veggie"
