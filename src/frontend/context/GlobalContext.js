@@ -10,6 +10,18 @@ const GlobalContext = React.createContext({
   setAllItems: () => {},
   listItems: [],
   setListItems: () => {},
+  doughs: [],
+  setDoughs: () => {},
+  sauces: [],
+  setSauces: () => {},
+  meats: [],
+  setMeats: () => {},
+  drizzles: [],
+  setDrizzles: () => {},
+  veggies: [],
+  setVeggies: () => {},
+  drinks: [],
+  setDrinks: () => {},
 });
 
 export default GlobalContext;

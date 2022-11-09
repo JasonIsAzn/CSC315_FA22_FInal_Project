@@ -45,39 +45,29 @@ export default function Sales() {
     navigate("/sales");
   };
 
-  const [items, setItems] = useState([]);
-  const getItems = async() => {
+  const [orders, setOrders] = useState([]);
+
+  const getOrders = async () => {
     try {
-      // const response = await fetch("http://localhost:5001/items") // get request
-      // const jsonData = response.json();
-      // console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
-      // setItems(jsonData);
-      axios.get("http://localhost:5001/items").then((result) => {
-        const itemData = result.data;
-        setItems(itemData);
-      })
+      const response = await fetch("http://localhost:5001/orders"); // get request
+      const jsonData = await response.json();
+      setOrders(jsonData);
     } catch (err) {
       console.error(err.message);
     }
-  }
-  
-  useEffect(() => {
-    getItems();
-  }, [])
-  console.log(items);
+  };
 
   const options = {
     filterType: "dropdown",
-    responsive: "scroll"
+    responsive: "scroll",
   };
 
-  const columns = ["id", "customer name", "cost", "# toppings", "time"];
+  const columns = ["id", "Customer Name", "Cost", "# Toppings", "Time"];
 
   return (
     <div className="h-screen overflow-y-hidden">
-      
-      <div className="w-screen flex justify-center mt-16">
-      <button
+      <div className=" w-screen flex justify-center mt-16">
+        <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goHome}
         >

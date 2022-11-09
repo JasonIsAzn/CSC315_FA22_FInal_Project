@@ -8,43 +8,48 @@ app.use(express.json());
 
 //// ROUTES ////
 
-// GETS 
-// get-items
-app.get("/items" , async (req, res) => {
-  try{
-    const orders = await pool.query("SELECT * FROM item");
-    res.json(orders.rows);
+// GETS
+// retrieves all items from database
+app.get("/items", async (req, res) => {
+  try {
+    const allItems = await pool.query("SELECT * FROM item;");
+    res.json(allItems.rows);
+    res.end();
   } catch (err) {
     console.error(err.message);
   }
 });
 
-app.get("/orders" , async (req, res) => {
-  try{
-    const orders = await pool.query("SELECT * FROM \"order\"");
-    res.json(orders.rows);
+// retrieves all orders (without their associated items) from database
+app.get("/orders", async (req, res) => {
+  try {
+    const allOrders = await pool.query('SELECT * FROM "order";');
+    res.json(allOrders.rows);
+    res.end();
   } catch (err) {
-    console.error(err.message);
+    console.log(err.message);
+  }
+});
 
-// =======
-
-// // GETS
-// // get-items
-// app.get("/items", async (req, res) => {
-//   try {
-//     const allItems = await pool.query("SELECT * FROM item;");
-//     res.json(allItems.rows);
-//     res.end();
-//   } catch (err) {
-//     console.log(err.message);
-// >>>>>>> main
-
+// retrieves all items associated with a given order
+app.get("/order_item", async (req, res) => {
+  try {
+    const items = await pool.query(
+      "SELECT name FROM order_item, item WHERE item.id = order_item.item_id AND order_item.order_id = " +
+        req.params.id +
+        ";"
+    );
+    res.json(items.rows);
+    res.end();
+  } catch (err) {
+    console.log(err.message);
   }
 });
 
 // INSERTS
+// UPDATES
 // DELETES
 
 app.listen(5001, () => {
-  console.log("Listening on port 3001");
+  console.log("Listening on port 5001");
 });

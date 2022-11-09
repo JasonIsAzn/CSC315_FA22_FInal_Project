@@ -24,11 +24,10 @@ export default function Manager() {
     navigate("/sales");
   };
 
-
   return (
     <div className="h-screen overflow-y-hidden">
       <div className="h-screen w-screen flex justify-center mt-16">
-      <button
+        <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goHome}
         >
@@ -55,7 +54,6 @@ export default function Manager() {
         >
           Server Mode
         </button>
-
       </div>
     </div>
   );
