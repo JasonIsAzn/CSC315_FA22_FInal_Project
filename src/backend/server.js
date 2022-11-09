@@ -1,8 +1,7 @@
 const express = require("express");
 const app = express();
-const cors = require("cors")
+const cors = require("cors");
 const pool = require("./db");
-
 
 app.use(cors());
 app.use(express.json());
@@ -26,6 +25,20 @@ app.get("/orders" , async (req, res) => {
     res.json(orders.rows);
   } catch (err) {
     console.error(err.message);
+
+// =======
+
+// // GETS
+// // get-items
+// app.get("/items", async (req, res) => {
+//   try {
+//     const allItems = await pool.query("SELECT * FROM item;");
+//     res.json(allItems.rows);
+//     res.end();
+//   } catch (err) {
+//     console.log(err.message);
+// >>>>>>> main
+
   }
 });
 

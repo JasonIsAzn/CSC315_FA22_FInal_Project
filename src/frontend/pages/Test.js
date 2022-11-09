@@ -1,51 +1,27 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import GlobalContext from "../context/GlobalContext";
+import MUIDataTable from "mui-datatables";
 
-const Test = () => {
-  const [items, setItems] = useState([]);
 
-  const getItems = async() => {
-    try {
-      const response = await fetch("http://localhost:5000/items") // get request
-      const jsonData = await response.json();
-      setItems(jsonData);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
-  
-  useEffect(() => {
-    getItems();
-  }, [])
-  console.log(items);
-  
+export default function Test() {
+  const { allItems, listItems } = useContext(GlobalContext);
+
+  // MUI data table stuff
+  const columns = ["id", "Name", "Count", "Price", "Type"];
+  const options = {
+    filterType: "dropdown",
+    responsive: "scroll",
+  };
   
   return (
-    <div>
-      <h1>TEST PAGE</h1>
-      {/* This is very ugly ;( */}
-      <Fragment>
-        <table>
-          <thread>
-            <tr>
-              <th>Name</th>
-              <th>Count</th>
-              <th>Price</th>
-            </tr>
-          </thread>
-          <tbody>
-            {items.map(item => (
-              <tr>
-                <td>{item.name}</td>
-                <td>{item.count}</td>
-                <td>{item.price}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Fragment>
+    <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
+      <MUIDataTable
+        title={"Item Data"}
+        data={listItems}
+        columns={columns}
+        options={options}
+      />
     </div>
   );
 }
-
-
-export default Test;

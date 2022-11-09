@@ -25,10 +25,6 @@ export default function Orders() {
     navigate("/sales");
   };
 
-  // sends the user to the Orders page
-  const goOrders = () => {
-    navigate("/orders");
-  };
 
   const [orders, setOrders] = useState([]);
 
@@ -76,9 +72,9 @@ export default function Orders() {
 
         <button
           className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
-          onClick={goOrders}
+          onClick={goSales}
         >
-          Orders
+          Sales
         </button>
 
         <button
@@ -105,7 +101,7 @@ export default function Orders() {
                 <h1 className="text-xl">{order.customer_name}</h1>
                 <h1 className="text-xl">{order.total_cost}</h1>
                 <h1 className="text-xl">{order.num_toppings}</h1>
-                <h1 className="col-span-2 ml-8 text-xl">{order.time_stamp}</h1>
+                <h1 className="col-span-2 ml-8 text-xl">{String(order.time_stamp).substring(0, 10)}</h1>
               </div>
             ))}
           </tbody>
@@ -115,3 +111,4 @@ export default function Orders() {
     </div>
   );
 }
+
