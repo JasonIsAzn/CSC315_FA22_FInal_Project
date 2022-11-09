@@ -3,6 +3,7 @@ import axios from "axios";
 import GlobalContext from "../context/GlobalContext";
 import MUIDataTable from "mui-datatables";
 
+
 export default function Test() {
   const { allItems, listItems } = useContext(GlobalContext);
 
@@ -12,7 +13,7 @@ export default function Test() {
     filterType: "dropdown",
     responsive: "scroll",
   };
-
+  
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
       <MUIDataTable

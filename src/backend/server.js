@@ -25,6 +25,7 @@ app.get("/orders" , async (req, res) => {
     res.json(orders.rows);
   } catch (err) {
     console.error(err.message);
+
 // =======
 
 // // GETS
@@ -37,6 +38,7 @@ app.get("/orders" , async (req, res) => {
 //   } catch (err) {
 //     console.log(err.message);
 // >>>>>>> main
+
   }
 });
 
