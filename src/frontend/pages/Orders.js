@@ -30,7 +30,7 @@ export default function Orders() {
 
   const getOrders = async() => {
     try {
-      const response = await fetch("http://localhost:5001/orders") // get request
+      const response = await fetch("http://localhost:5000/orders") // get request
       const jsonData = await response.json();
       setOrders(jsonData);
     } catch (err) {

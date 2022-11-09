@@ -29,7 +29,7 @@ export default function Inventory() {
 
   const getItems = async () => {
     try {
-      const response = await fetch("http://localhost:5000/items"); // get request
+      const response = await fetch("http://localhost:5000/items") // get request
       const jsonData = await response.json();
       console.log("JSOSOSO", JSON.stringify(jsonData, null, 2));
       setItems(jsonData);
