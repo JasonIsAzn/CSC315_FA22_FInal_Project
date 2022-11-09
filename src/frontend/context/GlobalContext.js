@@ -5,6 +5,8 @@ const GlobalContext = React.createContext({
   allOrders: [],
   setAllOrders: () => {},
   allItems: [],
+  listOrders: [],
+  setListOrders: () => {}, 
   setAllItems: () => {},
   listItems: [],
   setListItems: () => {},

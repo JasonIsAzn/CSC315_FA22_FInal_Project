@@ -10,7 +10,7 @@ export default function Login() {
 
   // get all items
   useEffect(() => {
-    axios.get("http://localhost:5000/items").then((result) => {
+    axios.get("http://localhost:5001/items").then((result) => {
       setAllItems(result.data);
       const itemData = result.data;
 
@@ -28,6 +28,7 @@ export default function Login() {
       setListItems(listItems);
     });
   }, []);
+
 
   const navigate = useNavigate();
 
@@ -54,7 +55,6 @@ export default function Login() {
   return (
     <div className="h-screen overflow-y-hidden">
       <div
-
         className="w-screen flex items-center mt-28 ml-28"
 
       >

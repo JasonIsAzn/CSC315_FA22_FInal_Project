@@ -1,7 +1,28 @@
-import React from "react";
+import React, {useEffect, Fragment, useState, useContext} from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import MUIDataTable from "mui-datatables";
+import GlobalContext from "../context/GlobalContext";
+
+
+
+
 
 export default function Sales() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const { listOrders } = useContext(GlobalContext);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   const navigate = useNavigate();
 
   // sends the user to the Home page
@@ -24,10 +45,38 @@ export default function Sales() {
     navigate("/sales");
   };
 
+  const [items, setItems] = useState([]);
+  const getItems = async() => {
+    try {
+      // const response = await fetch("http://localhost:5001/items") // get request
+      // const jsonData = response.json();
+      // console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
+      // setItems(jsonData);
+      axios.get("http://localhost:5001/items").then((result) => {
+        const itemData = result.data;
+        setItems(itemData);
+      })
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+  
+  useEffect(() => {
+    getItems();
+  }, [])
+  console.log(items);
+
+  const options = {
+    filterType: "dropdown",
+    responsive: "scroll"
+  };
+
+  const columns = ["id", "customer name", "cost", "# toppings", "time"];
+
   return (
     <div className="h-screen overflow-y-hidden">
       
-      <div className="h-screen w-screen flex justify-center mt-16">
+      <div className="w-screen flex justify-center mt-16">
       <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goHome}
@@ -55,8 +104,18 @@ export default function Sales() {
         >
           Server Mode
         </button>
-
       </div>
+      <div className="w-4.5 h-3/4 bg-white text-black border-black border-2 mx-40 p-6 text-2xl flex justify-center mt-12 overflow-y-scroll">
+      
+
+    <MUIDataTable 
+    title={"Order History"}
+    options={options}
+    columns={columns}
+    data={listOrders}
+    />
+    </div>
     </div>
   );
 }
+
