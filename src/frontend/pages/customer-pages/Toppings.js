@@ -31,7 +31,7 @@ export default function Toppings() {
 
     const getToppings = async() => {
         try {
-        const response = await fetch("http://localhost:5001/items") // get request
+        const response = await fetch("http://localhost:5000/items") // get request
         const jsonData = await response.json();
         //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
         
@@ -55,7 +55,7 @@ export default function Toppings() {
 
 
   return (
-    <div className="h-screen overflow-y-hidden">
+    <div className="h-screen overflow-y-show">
       <div className="w-screen flex justify-center mt-16">
       <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
