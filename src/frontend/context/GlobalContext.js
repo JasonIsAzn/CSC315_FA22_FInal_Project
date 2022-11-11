@@ -7,6 +7,8 @@ const GlobalContext = React.createContext({
   listOrders: [],
   setListOrders: () => {},
   allItems: [],
+  listOrders: [],
+  setListOrders: () => {}, 
   setAllItems: () => {},
   listItems: [],
   setListItems: () => {},
@@ -22,10 +24,13 @@ const GlobalContext = React.createContext({
   setVeggies: () => {},
   drinks: [],
   setDrinks: () => {},
+<<<<<<< HEAD
   selectedItems: [],
   setSelectedItems: () => {},
   maxID: 0,
   setMaxID: () => {},
+=======
+>>>>>>> 5dde977f11a3514193d7ed99c3774347309468a8
 });
 
 export default GlobalContext;

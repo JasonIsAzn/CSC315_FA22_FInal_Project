@@ -32,7 +32,7 @@ export default function Login() {
 
   // get all items
   useEffect(() => {
-    axios.get("http://localhost:5000/items").then((result) => {
+    axios.get("http://localhost:5001/items").then((result) => {
       setAllItems(result.data);
       const itemData = result.data;
 
@@ -101,7 +101,7 @@ export default function Login() {
 
   // get all orders
   useEffect(() => {
-    axios.get("http://localhost:5000/orders").then((result) => {
+    axios.get("http://localhost:5001/orders").then((result) => {
       setAllOrders(result.data);
       const orderData = result.data;
 
@@ -128,6 +128,7 @@ export default function Login() {
     });
   }, []);
 
+
   const navigate = useNavigate();
 
   // sends the user to the Home page
@@ -136,15 +137,46 @@ export default function Login() {
   };
 
   return (
+<<<<<<< HEAD
     <div className="h-screen w-full fixed left-0 top-0 flex flex-col items-center">
       <h1 className="text-gray-500 text-3xl py-[5%]">OAuth Stuff Goes Here</h1>
 
       <button
         className="w-1/4 h-1/4 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-3xl text-4xl"
         onClick={goHome}
+=======
+    <div className="h-screen overflow-y-hidden">
+      <div
+        className="w-screen flex items-center mt-28 ml-28"
+
+      >
+        <h1 className="italic font-bold text-5xl text-[#333333] text-[#0AADF4]">Spin N' Stone</h1>
+      </div>
+      <div className="h-screen w-screen flex justify-center mt-16">
+        <button
+          className="w-1/4 h-1/2 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-3xl text-4xl"
+          onClick={goManager}
+        >
+          Manager
+        </button>
+        <button
+          className="w-1/4 h-1/2 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-3xl text-4xl"
+          onClick={goServer}
+        >
+          Server
+        </button>
+
+      <button
+        className="w-1/4 h-1/2 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-3xl text-4xl"
+        onClick={goCustomer}
+>>>>>>> 5dde977f11a3514193d7ed99c3774347309468a8
       >
         Login
       </button>
+<<<<<<< HEAD
+=======
+    </div>
+>>>>>>> 5dde977f11a3514193d7ed99c3774347309468a8
     </div>
   );
 }

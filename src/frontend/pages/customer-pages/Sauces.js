@@ -21,9 +21,21 @@ export default function Sauces() {
       const jsonData = await response.json();
       //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
 
+<<<<<<< HEAD
       var saucesFiltered = jsonData.filter((data) => {
         return data.type === "sauce";
       });
+=======
+    const getSauces = async() => {
+        try {
+        const response = await fetch("http://localhost:5001/items") // get request
+        const jsonData = await response.json();
+          console.log("SAUCES_CONSOLE LOG", JSON.stringify(jsonData, null, 2))
+        
+        var saucesFiltered = jsonData.filter((data) => {
+            return data.type === "sauce"
+        })
+>>>>>>> 5dde977f11a3514193d7ed99c3774347309468a8
 
       console.log("TESTSOSOS", JSON.stringify(saucesFiltered, null, 2));
       setSauces(saucesFiltered);
@@ -39,7 +51,7 @@ export default function Sauces() {
   console.log(sauces);
 
   return (
-    <div className="h-screen overflow-y-hidden">
+    <div className="h-screen overflow-y-show">
       <div className="w-screen flex justify-right mt-16">
         <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
