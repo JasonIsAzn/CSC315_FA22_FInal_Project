@@ -25,6 +25,7 @@ export default function Login() {
     setDrinks,
     setVeggies,
     setDrizzles,
+    setMaxID,
   } = useContext(GlobalContext);
 
   // bring over all data here
@@ -49,54 +50,52 @@ export default function Login() {
       setListItems(listItems);
 
       // setup item storage for server and customer pages
-      if (doughs.length === 0) {
-        for (let i = 0; i < itemData.length; i++) {
-          if (itemData[i].type === "sauce" && itemData[i].name !== "regular") {
-            sauces.push({
-              label: itemData[i].name,
-              id: itemData[i].id,
-              price: itemData[i].price,
-            });
-          } else if (itemData[i].type === "topping-meat") {
-            meats.push({
-              label: itemData[i].name,
-              id: itemData[i].id,
-              price: itemData[i].price,
-            });
-          } else if (itemData[i].type === "drizzle") {
-            drizzles.push({
-              label: itemData[i].name,
-              id: itemData[i].id,
-              price: itemData[i].price,
-            });
-          } else if (itemData[i].type === "topping-veggie") {
-            veggies.push({
-              label: itemData[i].name,
-              id: itemData[i].id,
-              price: itemData[i].price,
-            });
-          } else if (itemData[i].type === "drink") {
-            drinks.push({
-              label: itemData[i].name,
-              id: itemData[i].id,
-              price: itemData[i].price,
-            });
-          } else {
-            doughs.push({
-              label: itemData[i].name,
-              id: itemData[i].id,
-              price: itemData[i].price,
-            });
-          }
+      for (let i = 0; i < itemData.length; i++) {
+        if (itemData[i].type === "sauce" && itemData[i].name !== "regular") {
+          sauces.push({
+            label: itemData[i].name,
+            value: itemData[i].id,
+            price: itemData[i].price,
+          });
+        } else if (itemData[i].type === "topping-meat") {
+          meats.push({
+            label: itemData[i].name,
+            value: itemData[i].id,
+            price: itemData[i].price,
+          });
+        } else if (itemData[i].type === "drizzle") {
+          drizzles.push({
+            label: itemData[i].name,
+            value: itemData[i].id,
+            price: itemData[i].price,
+          });
+        } else if (itemData[i].type === "topping-veggie") {
+          veggies.push({
+            label: itemData[i].name,
+            value: itemData[i].id,
+            price: itemData[i].price,
+          });
+        } else if (itemData[i].type === "drink") {
+          drinks.push({
+            label: itemData[i].name,
+            value: itemData[i].id,
+            price: itemData[i].price,
+          });
+        } else {
+          doughs.push({
+            label: itemData[i].name,
+            value: itemData[i].id,
+            price: itemData[i].price,
+          });
         }
-
-        setDoughs(doughs);
-        setSauces(sauces);
-        setMeats(meats);
-        setDrizzles(drizzles);
-        setVeggies(veggies);
-        setDrinks(drinks);
       }
+
+      setDoughs(doughs);
+      setSauces(sauces);
+      setMeats(meats);
+      setDrizzles(drizzles);
+      setVeggies(veggies);
+      setDrinks(drinks);
     });
   }, []);
 
@@ -113,54 +112,39 @@ export default function Login() {
         order.push(orderData[i].customer_name);
         order.push(orderData[i].total_cost);
         order.push(orderData[i].num_toppings);
-        order.push(String(orderData[i].time_stamp).substring(0, 11));
+        order.push(String(orderData[i].time_stamp).substring(0, 10));
         listOrders.push(order);
       }
 
       setListOrders(listOrders);
+
+      // misc. database activities
+      const idList = [];
+      for (let i = 0; i < orderData.length; i++) {
+        idList.push(orderData[i].id);
+      }
+
+      setMaxID(Math.max(idList));
     });
   }, []);
 
   const navigate = useNavigate();
 
-  // sends the user to the Manager page
-  const goManager = () => {
-    navigate("/manager");
-  };
-
-  // sends the user to the Server page
-  const goServer = () => {
-    navigate("/server");
-  };
-
-  // sends the user to the Customer page
-  const goCustomer = () => {
-    navigate("/customer");
+  // sends the user to the Home page
+  const goHome = () => {
+    navigate("/home");
   };
 
   return (
-    <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-      <button
-        className="bg-red-400 hover:bg-red-600 text-white font-bold mx-6 p-6 rounded text-4xl border-2 border-gray-600"
-        onClick={goManager}
-      >
-        Manager
-      </button>
+    <div className="h-screen w-full fixed left-0 top-0 flex flex-col items-center">
+      <h1 className="text-gray-500 text-3xl py-[5%]">OAuth Stuff Goes Here</h1>
 
       <button
-        className="bg-red-400 hover:bg-red-600 text-white font-bold mx-6 p-6 rounded text-4xl border-2 border-gray-600"
-        onClick={goServer}
+        className="w-1/4 h-1/4 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-3xl text-4xl"
+        onClick={goHome}
       >
-        Server
+        Login
       </button>
-
-      <button
-        className="bg-red-400 hover:bg-red-600 text-white font-bold mx-6 p-6 rounded text-4xl border-2 border-gray-600"
-        onClick={goCustomer}
-      >
-        Customer
-      </button>
-      <button onClick={goTest}>Test</button>
     </div>
   );
 }

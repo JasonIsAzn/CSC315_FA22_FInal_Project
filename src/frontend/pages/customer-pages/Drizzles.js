@@ -3,61 +3,59 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Drizzles() {
-    const navigate = useNavigate();
-    
-    // cancel btn 
-    const goCustomer = () => {
-        navigate("/customer");
-    };
-    
-    // back btn
-    const goSauces = () => {
+  const navigate = useNavigate();
+
+  // cancel btn
+  const goCustomer = () => {
+    navigate("/customer");
+  };
+
+  // back btn
+  const goSauces = () => {
     navigate("/sauces");
-    };
+  };
 
-    const goToppings = () => {
-        navigate("/toppings");
-    };
+  const goToppings = () => {
+    navigate("/toppings");
+  };
 
-    const goVeggies = () => {
-        navigate("/veggies");
-    };
+  const goVeggies = () => {
+    navigate("/veggies");
+  };
 
-    const goDrizzles = () => {
-        navigate("/drizzles");
-    };
+  const goDrizzles = () => {
+    navigate("/drizzles");
+  };
 
-    const [drizzles, setDrizzles] = useState([]);
+  const [drizzles, setDrizzles] = useState([]);
 
-    const getDrizzles = async() => {
-        try {
-        const response = await fetch("http://localhost:5001/items") // get request
-        const jsonData = await response.json();
-        //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
-        
-        var drizzleToppings = jsonData.filter((data) => {
-            return data.type === "drizzle"
-        })
+  const getDrizzles = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/items"); // get request
+      const jsonData = await response.json();
+      //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
 
-        console.log("TESTSOSOS", JSON.stringify(drizzleToppings, null, 2))
-        setDrizzles(drizzleToppings);
-        } catch (err) {
-        console.error(err.message);
-        }
+      var drizzleToppings = jsonData.filter((data) => {
+        return data.type === "drizzle";
+      });
+
+      console.log("TESTSOSOS", JSON.stringify(drizzleToppings, null, 2));
+      setDrizzles(drizzleToppings);
+    } catch (err) {
+      console.error(err.message);
     }
-  
-    useEffect(() => {
-        getDrizzles();
-    }, [])
+  };
 
-    
-    console.log(drizzles);
+  useEffect(() => {
+    getDrizzles();
+  }, []);
 
+  console.log(drizzles);
 
   return (
     <div className="h-screen overflow-y-hidden">
       <div className="w-screen flex justify-center mt-16">
-      <button
+        <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goSauces}
         >
@@ -99,21 +97,24 @@ export default function Drizzles() {
           Cancel
         </button>
       </div>
-      
-      <div>
-      <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Drizzle</h1>
-        <div className="grid lg:grid-cols-4 mx-20 mt-5">
-            {drizzles.map(drizzle => (
-                <div className="mx-auto"> 
-                      <input type="checkbox" class="hidden " id = {drizzle.name}/>
-                      <label class="" for={drizzle.name} className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center">{drizzle.name}
-                      </label>
-                </div>
-            ))}
-        </div>
 
+      <div>
+        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Drizzle</h1>
+        <div className="grid lg:grid-cols-4 mx-20 mt-5">
+          {drizzles.map((drizzle) => (
+            <div className="mx-auto">
+              <input type="checkbox" class="hidden " id={drizzle.name} />
+              <label
+                class=""
+                for={drizzle.name}
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center"
+              >
+                {drizzle.name}
+              </label>
+            </div>
+          ))}
+        </div>
       </div>
-      
     </div>
   );
 }

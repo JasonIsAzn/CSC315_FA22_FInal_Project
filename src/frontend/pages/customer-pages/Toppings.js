@@ -2,62 +2,60 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Toppings() {
-    const navigate = useNavigate();
-    
-    // cancel btn 
-    const goCustomer = () => {
-        navigate("/customer");
-    };
-    
-    // back btn
-    const goSauces = () => {
+  const navigate = useNavigate();
+
+  // cancel btn
+  const goCustomer = () => {
+    navigate("/customer");
+  };
+
+  // back btn
+  const goSauces = () => {
     navigate("/sauces");
-    };
-    
-    // meats page
-    const goToppings = () => {
-        navigate("/toppings");
-    };
+  };
 
-    const goVeggies = () => {
-        navigate("/veggies");
-    };
+  // meats page
+  const goToppings = () => {
+    navigate("/toppings");
+  };
 
-    const goDrizzles = () => {
-        navigate("/drizzles");
-    };
+  const goVeggies = () => {
+    navigate("/veggies");
+  };
 
-    const [pizzaToppings, setToppings] = useState([]);
+  const goDrizzles = () => {
+    navigate("/drizzles");
+  };
 
-    const getToppings = async() => {
-        try {
-        const response = await fetch("http://localhost:5001/items") // get request
-        const jsonData = await response.json();
-        //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
-        
-        var meatToppings = jsonData.filter((data) => {
-            return data.type === "topping-meat"
-        })
+  const [pizzaToppings, setToppings] = useState([]);
 
-        console.log("TESTSOSOS", JSON.stringify(meatToppings, null, 2))
-        setToppings(meatToppings);
-        } catch (err) {
-        console.error(err.message);
-        }
+  const getToppings = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/items"); // get request
+      const jsonData = await response.json();
+      //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
+
+      var meatToppings = jsonData.filter((data) => {
+        return data.type === "topping-meat";
+      });
+
+      console.log("TESTSOSOS", JSON.stringify(meatToppings, null, 2));
+      setToppings(meatToppings);
+    } catch (err) {
+      console.error(err.message);
     }
-  
-    useEffect(() => {
-        getToppings();
-    }, [])
+  };
 
-    
-    console.log(pizzaToppings);
+  useEffect(() => {
+    getToppings();
+  }, []);
 
+  console.log(pizzaToppings);
 
   return (
     <div className="h-screen overflow-y-hidden">
       <div className="w-screen flex justify-center mt-16">
-      <button
+        <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goSauces}
         >
@@ -99,21 +97,24 @@ export default function Toppings() {
           Cancel
         </button>
       </div>
-      
+
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Meat</h1>
         <div className="grid lg:grid-cols-4 mx-20 mt-5">
-            {pizzaToppings.map(topping => (
-                <div className="mx-auto"> 
-                      <input type="checkbox" class="hidden " id = {topping.name}/>
-                      <label class="" for={topping.name} className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center">{topping.name}
-                      </label>
-                </div>
-            ))}
+          {pizzaToppings.map((topping) => (
+            <div className="mx-auto">
+              <input type="checkbox" class="hidden " id={topping.name} />
+              <label
+                class=""
+                for={topping.name}
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center"
+              >
+                {topping.name}
+              </label>
+            </div>
+          ))}
         </div>
-
       </div>
-      
     </div>
   );
 }

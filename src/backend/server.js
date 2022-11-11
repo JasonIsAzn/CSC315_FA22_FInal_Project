@@ -6,10 +6,9 @@ const pool = require("./db");
 app.use(cors());
 app.use(express.json());
 
-//// ROUTES ////
+// GET REQUESTS //
 
-// GETS
-// retrieves all items from database
+// retrieves all items
 app.get("/items", async (req, res) => {
   try {
     const allItems = await pool.query("SELECT * FROM item;");
@@ -20,7 +19,7 @@ app.get("/items", async (req, res) => {
   }
 });
 
-// retrieves all orders (without their associated items) from database
+// retrieves all orders (without their associated items)
 app.get("/orders", async (req, res) => {
   try {
     const allOrders = await pool.query('SELECT * FROM "order";');
@@ -46,9 +45,64 @@ app.get("/order_item", async (req, res) => {
   }
 });
 
-// INSERTS
-// UPDATES
-// DELETES
+// INSERT REQUESTS //
+
+// adds a new order
+app.post("/order", async (req, res) => {
+  try {
+    const newOrder = await pool.query(
+      'INSERT INTO "order" (customer_name, total_cost, num_toppings, time_stamp, server_id) VALUES ($1, $2, $3, $4, $5);',
+      [
+        req.body.name,
+        req.body.cost,
+        req.body.num_toppings,
+        req.body.date,
+        req.body.server_id,
+      ]
+    );
+
+    console.log(newOrder); // DELETEME
+    res.end();
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+// associates new order with items
+app.post("/order_item", async (req, res) => {
+  try {
+    const newOI = await pool.query(
+      "INSERT INTO order_item (order_id, item_id) VALUES ($1, $2);",
+      [req.body.order_id, req.body.item_id]
+    );
+
+    console.log(newOI); // DELETEME
+    res.end();
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+// adds an item (TODO)
+
+// UPDATE REQUESTS //
+
+// decrements an item's inventory
+app.put("/items/count", async (req, res) => {
+  try {
+    const updateItem = await pool.query(
+      'UPDATE "item" SET count = count - 1 WHERE id = $1;',
+      [req.body.id]
+    );
+
+    console.log(updateItem); // DELETEME
+    res.end();
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+// DELETE REQUESTS //
 
 app.listen(5000, () => {
   console.log("Listening on port 5000");

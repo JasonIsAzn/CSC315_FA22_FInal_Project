@@ -6,7 +6,7 @@ const pool = new Pool({
   host: "csce-315-db.engr.tamu.edu",
   port: "5432",
   database: "csce315_909_92",
-  ssl: {rejectUnauthorized: false}
+  ssl: { rejectUnauthorized: false },
 });
 
 module.exports = pool;
