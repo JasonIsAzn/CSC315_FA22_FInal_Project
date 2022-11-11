@@ -9,15 +9,9 @@ import Toppings from "./frontend/pages/customer-pages/Toppings";
 import Sauces from "./frontend/pages/customer-pages/Sauces";
 import Veggies from "./frontend/pages/customer-pages/Veggies";
 import Drizzles from "./frontend/pages/customer-pages/Drizzles";
-<<<<<<< HEAD
 import Customer from "./frontend/pages/customer-pages/Customer";
 import Home from "./frontend/pages/Home";
 import Submission from "./frontend/pages/server-pages/Submission";
-=======
-import Customer from  "./frontend/pages/customer-pages/Customer";
-
-import Test from "./frontend/pages/Test";
->>>>>>> 5dde977f11a3514193d7ed99c3774347309468a8
 
 import { Routes, Route } from "react-router-dom";
 

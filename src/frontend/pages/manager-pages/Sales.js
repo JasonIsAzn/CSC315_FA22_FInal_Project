@@ -1,32 +1,11 @@
-import React, {useEffect, Fragment, useState, useContext} from "react";
+import React, { useEffect, Fragment, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import MUIDataTable from "mui-datatables";
 import GlobalContext from "../../context/GlobalContext";
 
-
-
-
-
 export default function Sales() {
-<<<<<<< HEAD:src/frontend/pages/manager-pages/Sales.js
   const { listOrders, allOrders } = useContext(GlobalContext);
-=======
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const { listOrders } = useContext(GlobalContext);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
->>>>>>> 5dde977f11a3514193d7ed99c3774347309468a8:src/frontend/pages/Sales.js
   const navigate = useNavigate();
 
   // sends the user to the Home page
@@ -49,22 +28,7 @@ export default function Sales() {
     navigate("/sales");
   };
 
-<<<<<<< HEAD:src/frontend/pages/manager-pages/Sales.js
   // MUI data table stuff
-=======
-  const [orders, setOrders] = useState([]);
-
-  const getOrders = async () => {
-    try {
-      const response = await fetch("http://localhost:5001/orders"); // get request
-      const jsonData = await response.json();
-      setOrders(jsonData);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
->>>>>>> 5dde977f11a3514193d7ed99c3774347309468a8:src/frontend/pages/Sales.js
   const options = {
     filterType: "dropdown",
     responsive: "scroll",
@@ -103,7 +67,6 @@ export default function Sales() {
           Server Mode
         </button>
       </div>
-<<<<<<< HEAD:src/frontend/pages/manager-pages/Sales.js
       <div className="items-center justify-center px-[10%] pt-[3%]">
         <MUIDataTable
           title={"Order History"}
@@ -112,19 +75,6 @@ export default function Sales() {
           options={options}
         />
       </div>
-=======
-      <div className="w-4.5 h-3/4 bg-white text-black border-black border-2 mx-40 p-6 text-2xl flex justify-center mt-12 overflow-y-scroll">
-      
-
-    <MUIDataTable 
-    title={"Order History"}
-    options={options}
-    columns={columns}
-    data={listOrders}
-    />
-    </div>
->>>>>>> 5dde977f11a3514193d7ed99c3774347309468a8:src/frontend/pages/Sales.js
     </div>
   );
 }
-
