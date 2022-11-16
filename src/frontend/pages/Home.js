@@ -27,9 +27,9 @@ export default function Home() {
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex flex-col">
       {/* header section for logout button */}
-      <div className="flex justify-end items-end pb-[10%]">
+      <div className="flex justify-end items-center">
         <button
-          className="w-[10%] h-[20%] bg-red-500 hover:bg-white hover:text-red-600 hover:border-red-600 hover:border-2 text-white font-bold mx-6 pb-[2.5%] pt-[1%] rounded-xl text-xl"
+          className="w-28 h-0 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-12 py-[1%] rounded-xl text-xl flex justify-center items-center my-12"
           onClick={logout}
         >
           Logout
@@ -37,27 +37,28 @@ export default function Home() {
       </div>
 
       {/* main section for POS mode buttons */}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-start h-3/4">
+      <button
+          className="w-3/4 h-full hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2  hover:text-white font-bold mx-6 p-6 py-[10%] rounded-xl text-4xl"
+          onClick={goCustomer}
+        >
+          Welcome to Spin N' Stone!
+        </button>
+        <div className="h-1/3 grid grid-cols-1 ">
         <button
-          className="w-1/3 h-full bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 py-[10%] rounded-3xl text-4xl"
+          className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl"
           onClick={goManager}
         >
           Manager
         </button>
 
         <button
-          className="w-1/3 h-full bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 py-[10%] rounded-3xl text-4xl"
+          className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl"
           onClick={goServer}
         >
           Server
         </button>
-
-        <button
-          className="w-1/3 h-full bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 py-[10%] rounded-3xl text-4xl"
-          onClick={goCustomer}
-        >
-          Customer
-        </button>
+        </div>
       </div>
     </div>
   );
