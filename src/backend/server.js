@@ -13,6 +13,11 @@ app.get("/items", async (req, res) => {
   try {
     const allItems = await pool.query("SELECT * FROM item;");
     res.json(allItems.rows);
+    // pool.query("SELECT * FROM item;").then((allItems) => {
+    //   res.status(200).send({
+    //     response: allItems.rows
+    //   })
+    // })
     res.end();
   } catch (err) {
     console.error(err.message);
@@ -35,8 +40,8 @@ app.get("/order_item", async (req, res) => {
   try {
     const items = await pool.query(
       "SELECT name FROM order_item, item WHERE item.id = order_item.item_id AND order_item.order_id = " +
-        req.params.id +
-        ";"
+      req.params.id +
+      ";"
     );
     res.json(items.rows);
     res.end();
@@ -82,6 +87,21 @@ app.post("/order_item", async (req, res) => {
     console.log(err.message);
   }
 });
+app.post("/items/add_item", async (req, res) => {
+  try {
+    // const add_item
+    await pool.query(
+      "INSERT INTO item (name, count, price, type) VALUES ($1, $2, $3, $4);",
+      [req.body.name, req.body.count, req.body.price, req.body.type]
+    ).then((inserted) => {
+      res.status(200).send({
+        response: `Inserted ${inserted.rowCount} rows`
+      })
+    }).catch(err => res.status(500).send({error: err}))
+  } catch (err) {
+    console.log(err.message)
+  }
+})
 
 // adds an item (TODO)
 
