@@ -41,7 +41,7 @@ order_queries = []
 order_item_queries = []
 
 # normal times (part 1)
-while (total_spent < 15000):
+while (total_spent < 15001):
     customer_name = customers[random.randint(0, len(customers) - 1)]
     day_num = total_spent // 3000 + 1
     

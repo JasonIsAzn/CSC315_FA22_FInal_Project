@@ -54,7 +54,7 @@ export default function Submission() {
     };
 
     axios
-      .post("http://localhost:5000/order", {
+      .post("http://localhost:5001/order", {
         name: customerName,
         cost: total(),
         num_toppings: 3,
@@ -66,7 +66,7 @@ export default function Submission() {
         let addOI = async () => {
           for (let i = 0; i < selectedItems.length; i++) {
             await axios
-              .post("http://localhost:5000/order_item", {
+              .post("http://localhost:5001/order_item", {
                 order_id: maxID + 1,
                 item_id: selectedItems[i].value,
               })
@@ -83,7 +83,7 @@ export default function Submission() {
         let updateInventory = async () => {
           for (let i = 0; i < selectedItems.length; i++) {
             await axios
-              .put("http://localhost:5000/items/count", {
+              .put("http://localhost:5001/items/count", {
                 id: selectedItems[i].value,
               })
               .then((result) => {

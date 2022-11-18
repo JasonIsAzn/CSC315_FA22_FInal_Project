@@ -5,6 +5,10 @@ import MUIDataTable from "mui-datatables";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function Inventory() {
+
+  // getting the items
+
+  // other stuff
   const { listItems, allItems } = useContext(GlobalContext);
 
   const [itemName, setItemName] = useState("");
