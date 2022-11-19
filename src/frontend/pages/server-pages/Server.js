@@ -19,17 +19,14 @@ export default function Server() {
 
   const navigate = useNavigate();
 
-  // sends the user to the Home page
   const goHome = () => {
     navigate("/home");
   };
 
-  // sends the user to the Manager page
   const goManager = () => {
     navigate("/inventory");
   };
 
-  // sends user to submission page
   const goSubmission = () => {
     navigate("/submission");
   };
@@ -72,20 +69,15 @@ export default function Server() {
   return (
     <div className="h-screen flex flex-col">
       {/* header button content */}
-      <div className="flex flex-row h-[5%] mt-[3%]">
+      <div className="flex flex-row mt-8 justify-end">
         <button
-          className="pb-[2.3%] px-[1.5%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center"
+          className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl flex justify-center items-center"
           onClick={goHome}
         >
           <h1 className="">Home</h1>
         </button>
-
-        <button className="ml-[9%] pb-[2.3%] px-[25%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center font-bold whitespace-nowrap">
-          <h1 className="">Create An Order</h1>
-        </button>
-
         <button
-          className=" ml-[9%] pb-[2.3%] px-[1.5%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center whitespace-nowrap"
+          className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center whitespace-nowrap"
           onClick={goManager}
         >
           <h1 className="">Manager Mode</h1>
@@ -96,13 +88,10 @@ export default function Server() {
       <div className="p-[4%]">
         <div className="grid grid-cols-3 gap-x-[8%] mb-[12%]">
           <div className="flex flex-col">
-            <h1 className="text-gray-400 mb-[3%] font-semibold text-3xl">
-              Dough
-            </h1>
+            <h1 className="text-black mb-[3%] font-semibold text-3xl">Dough</h1>
             <Select
               options={doughs}
               placeholder="Select Dough"
-              menuIsOpen={true}
               className="w-full"
               maxMenuHeight={150}
               onChange={handleAddItem}
@@ -115,13 +104,10 @@ export default function Server() {
           </div>
 
           <div className="flex flex-col">
-            <h1 className="text-gray-400 mb-[3%] font-semibold text-3xl">
-              Sauce
-            </h1>
+            <h1 className="text-black mb-[3%] font-semibold text-3xl">Sauce</h1>
             <Select
               options={sauces}
               placeholder="Select Sauce"
-              menuIsOpen={true}
               className="w-full"
               isMulti
               maxMenuHeight={150}
@@ -135,13 +121,10 @@ export default function Server() {
           </div>
 
           <div className="flex flex-col">
-            <h1 className="text-gray-400 mb-[3%] font-semibold text-3xl">
-              Meat
-            </h1>
+            <h1 className="text-black mb-[3%] font-semibold text-3xl">Meat</h1>
             <Select
               options={meats}
               placeholder="Select Meat"
-              menuIsOpen={true}
               className="w-full"
               isMulti
               maxMenuHeight={150}
@@ -157,13 +140,12 @@ export default function Server() {
 
         <div className="grid grid-cols-3 gap-x-[8%]">
           <div className="flex flex-col">
-            <h1 className="text-gray-400 mb-[3%] font-semibold text-3xl">
+            <h1 className="text-black mb-[3%] font-semibold text-3xl">
               Drizzle
             </h1>
             <Select
               placeholder="Select Drizzle"
               options={drizzles}
-              menuIsOpen={true}
               className="w-full"
               isMulti
               maxMenuHeight={150}
@@ -177,13 +159,12 @@ export default function Server() {
           </div>
 
           <div className="flex flex-col">
-            <h1 className="text-gray-400 mb-[3%] font-semibold text-3xl">
+            <h1 className="text-black mb-[3%] font-semibold text-3xl">
               Veggies
             </h1>
             <Select
               placeholder="Select Veggies"
               options={veggies}
-              menuIsOpen={true}
               className="w-full"
               isMulti
               maxMenuHeight={150}
@@ -197,13 +178,10 @@ export default function Server() {
           </div>
 
           <div className="flex flex-col">
-            <h1 className="text-gray-400 mb-[3%] font-semibold text-3xl">
-              Drink
-            </h1>
+            <h1 className="text-black mb-[3%] font-semibold text-3xl">Drink</h1>
             <Select
               placeholder="Select Drink"
               options={drinks}
-              menuIsOpen={true}
               className="w-full"
               isMulti
               maxMenuHeight={150}
@@ -219,7 +197,7 @@ export default function Server() {
       </div>
       <div className="mt-[8%] items-center justify-center flex">
         <button
-          className="px-[15%] bg-green-300 hover:bg-white hover:text-green-400 hover:border-green-400 hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center"
+          className="px-[15%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center"
           onClick={goSubmission}
         >
           Confirm Contents

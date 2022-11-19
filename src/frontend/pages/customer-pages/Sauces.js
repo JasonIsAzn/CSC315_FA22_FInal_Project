@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import GlobalContext from "../../context/GlobalContext";
 
 export default function Sauces() {
+  // get sauces
+  const { sauces } = useContext(GlobalContext);
+  // routes
   const navigate = useNavigate();
 
-  // cancel Btn or default option
   const goCustomer = () => {
     navigate("/customer");
   };
@@ -13,39 +16,19 @@ export default function Sauces() {
     navigate("/toppings");
   };
 
-  const [sauces, setSauces] = useState([]);
-
-  const getSauces = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/items"); // get request
-      const jsonData = await response.json();
-      //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
-
-      var saucesFiltered = jsonData.filter((data) => {
-        return data.type === "sauce";
-      });
-
-      console.log("TESTSOSOS", JSON.stringify(saucesFiltered, null, 2));
-      setSauces(saucesFiltered);
-    } catch (err) {
-      console.error(err.message);
-    }
+  const changeSelectedItem = (e) => {
+    console.log(e);
   };
-
-  useEffect(() => {
-    getSauces();
-  }, []);
-
-  console.log(sauces);
 
   return (
     <div className="h-screen overflow-y-show">
+      {/* navigation bar */}
       <div className="w-screen flex justify-right mt-16">
         <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goToppings}
         >
-          <h1 className="">Next</h1>
+          Next
         </button>
 
         <button
@@ -56,28 +39,32 @@ export default function Sauces() {
         </button>
       </div>
 
+      {/* sauce buttons */}
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Sauce</h1>
         <div className="grid lg:grid-cols-4 mx-20 mt-5">
-          {sauces.map((topping) => (
+          {sauces.map((sauce) => (
             <div className="mx-auto">
+              {/* TODO: save sauce type */}
+              {/* when clicked save id to local storage. if radio == local storage, then check */}
               <input
                 type="radio"
-                class="hidden "
-                name="hello"
-                id={topping.name}
+                class="hidden"
+                name="sauce-btn"
+                id={sauce.value}
               />
               <label
                 class=""
                 className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center"
-                for={topping.name}
+                for={sauce.value}
               >
-                {topping.name}
+                {sauce.label}
               </label>
             </div>
           ))}
         </div>
       </div>
+      {/* TODO: pizza animation */}
     </div>
   );
 }

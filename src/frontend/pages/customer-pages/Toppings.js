@@ -1,20 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import GlobalContext from "../../context/GlobalContext";
 
 export default function Toppings() {
+  // prep-meat data
+  const { meats } = useContext(GlobalContext);
+  const [selectedMeats, setSelectedMeats] = useState(meats);
+  let count = localStorage.getItem("topping-count");
+  let max_topping = JSON.parse(localStorage.getItem("selected-pizza"))
+    .topping_amount[1];
+
+  // Render Page
+  useEffect(() => {
+    const data = localStorage.getItem("selected-meats");
+    if (data) {
+      setSelectedMeats(JSON.parse(data));
+    } else {
+      for (let i = 0; i < selectedMeats.length; i++) {
+        selectedMeats[i].selected = "";
+      }
+    }
+    for (let i = 0; i < selectedMeats.length; i++) {
+      if (selectedMeats[i].selected === "checked") {
+        document.getElementById(selectedMeats[i].value).checked = true;
+      } else {
+        document.getElementById(selectedMeats[i].value).checked = false;
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    for (let i = 0; i < selectedMeats.length; i++) {
+      if (selectedMeats[i].selected === "checked") {
+        document.getElementById(selectedMeats[i].value).checked = true;
+      } else {
+        document.getElementById(selectedMeats[i].value).checked = false;
+      }
+    }
+  });
+
+  // routes
   const navigate = useNavigate();
 
-  // cancel btn
   const goCustomer = () => {
     navigate("/customer");
   };
 
-  // back btn
   const goSauces = () => {
     navigate("/sauces");
   };
 
-  // meats page
   const goToppings = () => {
     navigate("/toppings");
   };
@@ -27,46 +62,62 @@ export default function Toppings() {
     navigate("/drizzles");
   };
 
-  const [pizzaToppings, setToppings] = useState([]);
-
-  const getToppings = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/items"); // get request
-      const jsonData = await response.json();
-      //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
-
-      var meatToppings = jsonData.filter((data) => {
-        return data.type === "topping-meat";
-      });
-
-      console.log("TESTSOSOS", JSON.stringify(meatToppings, null, 2));
-      setToppings(meatToppings);
-    } catch (err) {
-      console.error(err.message);
+  // stores selected meat and update button
+  const selectingMeats = async (event, index, id) => {
+    if (selectedMeats[index].selected === "checked") {
+      count--;
+      console.log("count: ", count);
+      selectedMeats[index].selected = "";
+      document.getElementById(id).checked = false;
+    } else {
+      if (count < max_topping) {
+        count++;
+        console.log("count: ", count);
+        selectedMeats[index].selected = "checked";
+        document.getElementById(id).checked = true;
+      } else {
+        document.getElementById(id).checked = false;
+      }
     }
+    localStorage.setItem("topping-count", count);
+    localStorage.setItem("selected-meats", JSON.stringify(selectedMeats));
   };
 
-  useEffect(() => {
-    getToppings();
-  }, []);
+  // Delete Local Storage
+  const resetStorage = () => {
+    localStorage.removeItem("selected-meats");
+    localStorage.removeItem("selected-veggies");
+    localStorage.removeItem("selected-drizzles");
+    localStorage.removeItem("selected-pizza");
+    localStorage.removeItem("topping-count");
+  };
+  // Add to Order Function
+  const addOrder = () => {
+    resetStorage();
+    goCustomer();
+  };
 
-  console.log(pizzaToppings);
+  const goCancel = () => {
+    resetStorage();
+    goCustomer();
+  };
 
   return (
     <div className="h-screen overflow-y-show">
+      {/* navigation bar */}
       <div className="w-screen flex justify-center mt-16">
         <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goSauces}
         >
-          <h1 className="">Back</h1>
+          Back
         </button>
 
         <button
           className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
           onClick={goToppings}
         >
-          <h1 className="">Meats</h1>
+          Meats
         </button>
 
         <button
@@ -85,14 +136,14 @@ export default function Toppings() {
 
         <button
           className="w-1/5 h-1 bg-[#90ee90] hover:bg-white hover:text-[#90ee90] hover:border-[#90ee90] hover:border-2 text-white font-bold mx-6 p-6 rounded-lg text-l flex justify-center items-center"
-          onClick={goCustomer}
+          onClick={addOrder}
         >
           Add to Order
         </button>
 
         <button
           className="w-4.5 h-1 bg-[#ED2939] hover:bg-white hover:text-[#ED2939] hover:border-[#ED2939] hover:border-2 text-white font-bold mx-6 p-6 rounded-lg text-l flex justify-center items-center"
-          onClick={goCustomer}
+          onClick={goCancel}
         >
           Cancel
         </button>
@@ -101,15 +152,22 @@ export default function Toppings() {
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Meat</h1>
         <div className="grid lg:grid-cols-4 mx-20 mt-5">
-          {pizzaToppings.map((topping) => (
+          {selectedMeats.map((meat, index) => (
             <div className="mx-auto">
-              <input type="checkbox" class="hidden " id={topping.name} />
+              {/* Have Label for checked */}
+              <input
+                type="checkbox"
+                class="hidden"
+                name="meat-btn"
+                onChange={(event) => selectingMeats(event, index, meat.value)}
+                id={meat.value}
+              />
               <label
                 class=""
-                for={topping.name}
+                for={meat.value}
                 className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center"
               >
-                {topping.name}
+                {meat.label}
               </label>
             </div>
           ))}

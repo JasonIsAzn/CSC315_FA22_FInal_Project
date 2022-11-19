@@ -30,11 +30,49 @@ export default function Sales() {
 
   // MUI data table stuff
   const options = {
-    filterType: "dropdown",
+    filterType: "multiselect",
     responsive: "scroll",
+    download: false,
+    elevation: 10,
+    print:false,
+    viewColumns: false,
   };
 
-  const columns = ["id", "Customer Name", "Cost", "# Toppings", "Date"];
+  const columns = [
+      {
+        name: "id",
+        options: {
+         filter: false,
+         sort: true,
+        }
+      },
+      {
+        name: "Customer Name",
+        options: {
+          filter: false,
+          sort: true,
+        }
+      },
+      {
+        name: "Cost",
+        options: {
+          filter: false,
+          sort: true,
+        }
+      },
+      {
+        name: "# Toppings",
+        options: {
+          filter: false,
+          sort: true,
+        }
+      },
+      {
+        name: "Date",
+        options: {
+          filter: true,
+          sort: true,
+        }}];
 
   return (
     <div className="h-screen overflow-y-hidden">
@@ -67,7 +105,7 @@ export default function Sales() {
           Server Mode
         </button>
       </div>
-      <div className="items-center justify-center px-[10%] pt-[3%]">
+      <div className="items-center justify-center px-[10%] pt-[3%] ">
         <MUIDataTable
           title={"Order History"}
           data={listOrders}

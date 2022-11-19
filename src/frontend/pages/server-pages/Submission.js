@@ -13,7 +13,7 @@ export default function Submission() {
   // displays currently selected items
   function displayContents() {
     console.log(selectedItems);
-    let contents = "Order Contents: \n";
+    let contents = "";
     let total = 0;
     for (let i = 0; i < selectedItems.length; i++) {
       contents +=
@@ -25,7 +25,7 @@ export default function Submission() {
       total += selectedItems[i].price;
     }
 
-    contents += "\n\nTotal: $" + total;
+    contents += "\n\n\t\tTotal: $" + total;
     return contents;
   }
 
@@ -54,7 +54,7 @@ export default function Submission() {
     };
 
     axios
-      .post("http://localhost:5000/order", {
+      .post("http://localhost:5001/order", {
         name: customerName,
         cost: total(),
         num_toppings: 3,
@@ -66,7 +66,7 @@ export default function Submission() {
         let addOI = async () => {
           for (let i = 0; i < selectedItems.length; i++) {
             await axios
-              .post("http://localhost:5000/order_item", {
+              .post("http://localhost:5001/order_item", {
                 order_id: maxID + 1,
                 item_id: selectedItems[i].value,
               })
@@ -83,7 +83,7 @@ export default function Submission() {
         let updateInventory = async () => {
           for (let i = 0; i < selectedItems.length; i++) {
             await axios
-              .put("http://localhost:5000/items/count", {
+              .put("http://localhost:5001/items/count", {
                 id: selectedItems[i].value,
               })
               .then((result) => {
@@ -103,22 +103,18 @@ export default function Submission() {
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-y-hidden">
       {/* header button content */}
       <div className="flex flex-row h-[5%] mt-[3%]">
         <button
-          className="pb-[2.3%] px-[1.5%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center"
+          className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl flex justify-center items-center"
           onClick={goBack}
         >
           <h1 className="">Back</h1>
         </button>
 
-        <button className="ml-[9%] pb-[2.3%] px-[25%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center font-bold whitespace-nowrap">
-          <h1 className="">Order Submission</h1>
-        </button>
-
         <button
-          className=" ml-[9%] pb-[2.3%] px-[1.5%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center whitespace-nowrap"
+          className=" ml-[78%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl flex justify-center items-center whitespace-nowrap"
           onClick={goManager}
         >
           <h1 className="">Manager Mode</h1>
@@ -126,15 +122,19 @@ export default function Submission() {
       </div>
 
       {/* main area with submission content */}
-      <div className="p-[2%] flex flex-col items-center justify-center">
-        <div className="w-2/5 text-3xl border border-2 text-gray-400 rounded-3xl">
-          <h1 className="mb-[3%] font-semibold  whitespace-pre-wrap px-[3%] py-[1%] ">
+      <div className="mt-4 flex justify-center items-center">
+        <h1 className="text-[#4FC3F7] text-3xl font-semibold">Review Order</h1>
+      </div>
+      <div className="flex flex-col items-center mt-8">
+        <div className="h-2/4 w-2/5 text-2xl border border-2 text-black rounded-xl overflow-y-scroll">
+          <h1 className="mb-[3%]   whitespace-pre-wrap px-[3%] py-[1%] ">
             {displayContents()}
           </h1>
-
-          <input
+        </div>
+        
+        <input
             type="text"
-            className="mx-[25%] border border-1 border-gray-300 hover:border-gray-500 focus:ring-0 focus:outline-none rounded-xl mb-[3%]"
+            className="w-1/2 h-12 mt-20 mx-[13%] border border-1 border-gray-300 hover:border-gray-500 focus:ring-0 focus:outline-none rounded-lg text-2xl mb-[3%]"
             placeholder="Customer Name"
             onChange={(e) => {
               setCustomerName(e.target.value);
@@ -142,12 +142,11 @@ export default function Submission() {
           />
 
           <button
-            className="px-[25%] mx-[18%] mb-[5%] bg-green-300 hover:bg-white hover:text-green-400 hover:border-green-400 hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center"
+            className="w-1/2 mx-[25%] bg-[#4FC3F7] mb-12 hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-1 px-2 rounded-lg text-2xl flex justify-center items-center"
             onClick={handleSubmission}
           >
             Submit Order
           </button>
-        </div>
       </div>
     </div>
   );
