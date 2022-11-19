@@ -9,6 +9,7 @@ export default function Toppings() {
   let count = localStorage.getItem("topping-count");
   let max_topping = JSON.parse(localStorage.getItem("selected-pizza"))
     .topping_amount[1];
+
   // Render Page
   useEffect(() => {
     const data = localStorage.getItem("selected-meats");

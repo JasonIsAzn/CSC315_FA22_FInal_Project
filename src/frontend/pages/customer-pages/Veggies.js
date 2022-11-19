@@ -146,14 +146,11 @@ export default function Veggies() {
           Cancel
         </button>
       </div>
-      {/* veggie buttons */}
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Veggie</h1>
         <div className="grid lg:grid-cols-4 mx-20 mt-5">
           {veggies.map((veggie, index) => (
             <div className="mx-auto">
-              {/* save veggie chooses */}
-              {/* increment counter */}
               <input
                 type="checkbox"
                 class="hidden"
