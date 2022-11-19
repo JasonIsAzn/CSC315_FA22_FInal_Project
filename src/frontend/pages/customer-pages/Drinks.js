@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import GlobalContext from "../../context/GlobalContext";
 
 export default function Drinks() {
+  const { drinks } = useContext(GlobalContext);
+  // routes
   const navigate = useNavigate();
 
-  // back to login page
   const goHome = () => {
     navigate("/home");
   };
 
-  // pizza Btn
   const goCustomer = () => {
     navigate("/customer");
   };
@@ -21,31 +22,6 @@ export default function Drinks() {
   const goCheckout = () => {
     navigate("/checkout");
   };
-
-  const [drinks, setDrinks] = useState([]);
-
-  const getDrinks = async () => {
-    try {
-      const response = await fetch("http://localhost:5001/items"); // get request
-      const jsonData = await response.json();
-      //   console.log("JSOSOSO", JSON.stringify(jsonData, null, 2))
-
-      var drinkFiltered = jsonData.filter((data) => {
-        return data.type === "drink";
-      });
-
-      console.log("TESTSOSOS", JSON.stringify(drinkFiltered, null, 2));
-      setDrinks(drinkFiltered);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  useEffect(() => {
-    getDrinks();
-  }, []);
-
-  console.log(drinks);
 
   return (
     <div className="h-screen overflow-y-show">
@@ -95,7 +71,7 @@ export default function Drinks() {
               <div>
                 <input
                   type="text"
-                  id={topping.name}
+                  id={topping.value}
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="0"
                 />

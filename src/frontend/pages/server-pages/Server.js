@@ -19,17 +19,14 @@ export default function Server() {
 
   const navigate = useNavigate();
 
-  // sends the user to the Home page
   const goHome = () => {
     navigate("/home");
   };
 
-  // sends the user to the Manager page
   const goManager = () => {
     navigate("/inventory");
   };
 
-  // sends user to submission page
   const goSubmission = () => {
     navigate("/submission");
   };
@@ -91,9 +88,7 @@ export default function Server() {
       <div className="p-[4%]">
         <div className="grid grid-cols-3 gap-x-[8%] mb-[12%]">
           <div className="flex flex-col">
-            <h1 className="text-black mb-[3%] font-semibold text-3xl">
-              Dough
-            </h1>
+            <h1 className="text-black mb-[3%] font-semibold text-3xl">Dough</h1>
             <Select
               options={doughs}
               placeholder="Select Dough"
@@ -109,9 +104,7 @@ export default function Server() {
           </div>
 
           <div className="flex flex-col">
-            <h1 className="text-black mb-[3%] font-semibold text-3xl">
-              Sauce
-            </h1>
+            <h1 className="text-black mb-[3%] font-semibold text-3xl">Sauce</h1>
             <Select
               options={sauces}
               placeholder="Select Sauce"
@@ -128,9 +121,7 @@ export default function Server() {
           </div>
 
           <div className="flex flex-col">
-            <h1 className="text-black mb-[3%] font-semibold text-3xl">
-              Meat
-            </h1>
+            <h1 className="text-black mb-[3%] font-semibold text-3xl">Meat</h1>
             <Select
               options={meats}
               placeholder="Select Meat"
@@ -187,9 +178,7 @@ export default function Server() {
           </div>
 
           <div className="flex flex-col">
-            <h1 className="text-black mb-[3%] font-semibold text-3xl">
-              Drink
-            </h1>
+            <h1 className="text-black mb-[3%] font-semibold text-3xl">Drink</h1>
             <Select
               placeholder="Select Drink"
               options={drinks}

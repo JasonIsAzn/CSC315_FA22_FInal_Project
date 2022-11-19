@@ -3,12 +3,13 @@
 ## FRONT-END TODOs
 
 ### `CUSTOMER PAGE`
-    - Improve Overall Design
     - Create Checkout Page
     - Show Current Number of Items
     - Limit Topping Choices to 2/3 Options
-    - Look into Cookies?
-
+    - cookie/cache for saving selected item
+    - Add Logo to top of pages
+    - pizza animation
+    - 
 
 
 ## BACK-END TODOs
