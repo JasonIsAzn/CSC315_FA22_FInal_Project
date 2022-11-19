@@ -9,16 +9,18 @@
 - <del>Local Storage for saving item for order</del>
 - <del>Implemented Cancel Order Buton </del>
 - Create Checkout Page
-- - Use Server code
+  - may require more local storage, then push to database
+  - reuse server code
 - Show Current Number of Items
-- - simple counter
-- Fix Pizza Type Routes
-- - simlple if-conditions
+  - simple counter
+  - design counter bubble
+- Pizza Type Routes
+  - simlple if-conditions
 - UI Fixes
-- - Add Logo
-- - Pizza Animation (if not possible can think of other ideas)
-- - Add background
-- - redesign buttons to look uniform/better
+  - Add Logo
+  - Pizza Animation (if not possible can think of other ideas)
+  - Add background
+  - redesign buttons to look uniform/better
 
 ### `Manager PAGE`
 
