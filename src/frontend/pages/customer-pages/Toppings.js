@@ -66,13 +66,11 @@ export default function Toppings() {
   const selectingMeats = async (event, index, id) => {
     if (selectedMeats[index].selected === "checked") {
       count--;
-      console.log("count: ", count);
       selectedMeats[index].selected = "";
       document.getElementById(id).checked = false;
     } else {
       if (count < max_topping) {
         count++;
-        console.log("count: ", count);
         selectedMeats[index].selected = "checked";
         document.getElementById(id).checked = true;
       } else {
@@ -89,6 +87,8 @@ export default function Toppings() {
     localStorage.removeItem("selected-veggies");
     localStorage.removeItem("selected-drizzles");
     localStorage.removeItem("selected-pizza");
+    localStorage.removeItem("selected-sauce");
+    localStorage.removeItem("sauce-count");
     localStorage.removeItem("topping-count");
   };
   // Add to Order Function
@@ -105,12 +105,28 @@ export default function Toppings() {
   return (
     <div className="h-screen overflow-y-show">
       {/* navigation bar */}
-      <div className="w-screen flex justify-center mt-16">
+      <div className="flex flex-row mt-2 justify-end">
         <button
-          className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
+          className="bg-[#90ee90] hover:bg-white hover:text-[#90ee90] hover:border-[#90ee90] hover:border-2 text-white p-2 rounded-lg text-2xl flex justify-center items-center"
+          onClick={addOrder}
+        >
+          <h1 className="">Add to Order</h1>
+        </button>
+        <button
+          className="bg-[#ED2939] hover:bg-white hover:text-[#ED2939] hover:border-[#ED2939] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center whitespace-nowrap"
+          onClick={goCancel}
+        >
+          <h1 className="">Cancel</h1>
+        </button>
+      </div>
+
+      <div className="w-screen flex justify-center mt-2">
+        <button
+          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
+          hidden="hidden"
           onClick={goSauces}
         >
-          Back
+          Sauces
         </button>
 
         <button
@@ -132,20 +148,6 @@ export default function Toppings() {
           onClick={goDrizzles}
         >
           Drizzles
-        </button>
-
-        <button
-          className="w-1/5 h-1 bg-[#90ee90] hover:bg-white hover:text-[#90ee90] hover:border-[#90ee90] hover:border-2 text-white font-bold mx-6 p-6 rounded-lg text-l flex justify-center items-center"
-          onClick={addOrder}
-        >
-          Add to Order
-        </button>
-
-        <button
-          className="w-4.5 h-1 bg-[#ED2939] hover:bg-white hover:text-[#ED2939] hover:border-[#ED2939] hover:border-2 text-white font-bold mx-6 p-6 rounded-lg text-l flex justify-center items-center"
-          onClick={goCancel}
-        >
-          Cancel
         </button>
       </div>
 

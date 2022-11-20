@@ -18,29 +18,25 @@ export default function Customer() {
   // preset data for button
   const pizza_type = [
     {
-      name: "Orginial Cheese",
-      type: 1,
-      topping_amount: [0, 0],
-    },
-    {
-      name: "Classic Pepproni",
-      type: 2,
-      topping_amount: [1, 1],
-    },
-    {
       name: "1-Topping",
-      type: 3,
+      type: 0,
       topping_amount: [1, 1],
     },
     {
       name: "2-4 Topping",
+      type: 1,
       topping_amount: [2, 4],
     },
-    // {
-    //   name: "Featured Items",
-    //   type: 5,
-    //   topping_amount: [0, 4],
-    // },
+    {
+      name: "Orginial Cheese",
+      type: 2,
+      topping_amount: [0, 0],
+    },
+    {
+      name: "Classic Pepproni",
+      type: 3,
+      topping_amount: [1, 1],
+    },
   ];
 
   // Routes
