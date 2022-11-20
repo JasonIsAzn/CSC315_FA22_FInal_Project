@@ -1,9 +1,41 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function Drinks() {
+  // prep-drink data
   const { drinks } = useContext(GlobalContext);
+  const [selectedDrinks, setSelectedDrinks] = useState(drinks);
+
+  // Render Page
+  useEffect(() => {
+    const data = localStorage.getItem("selected-drinks");
+    if (data) {
+      setSelectedDrinks(JSON.parse(data));
+    } else {
+      for (let i = 0; i < selectedDrinks.length; i++) {
+        selectedDrinks[i].selected = "";
+      }
+    }
+    for (let i = 0; i < selectedDrinks.length; i++) {
+      if (selectedDrinks[i].selected === "checked") {
+        document.getElementById(selectedDrinks[i].value).checked = true;
+      } else {
+        document.getElementById(selectedDrinks[i].value).checked = false;
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    for (let i = 0; i < selectedDrinks.length; i++) {
+      if (selectedDrinks[i].selected === "checked") {
+        document.getElementById(selectedDrinks[i].value).checked = true;
+      } else {
+        document.getElementById(selectedDrinks[i].value).checked = false;
+      }
+    }
+  });
+
   // routes
   const navigate = useNavigate();
 
@@ -21,6 +53,18 @@ export default function Drinks() {
 
   const goCheckout = () => {
     navigate("/checkout");
+  };
+
+  // stores selected drink and update button
+  const selectingDrinks = async (event, index, id) => {
+    if (selectedDrinks[index].selected === "checked") {
+      selectedDrinks[index].selected = "";
+      document.getElementById(id).checked = false;
+    } else {
+      selectedDrinks[index].selected = "checked";
+      document.getElementById(id).checked = true;
+    }
+    localStorage.setItem("selected-drinks", JSON.stringify(selectedDrinks));
   };
 
   return (
@@ -58,25 +102,22 @@ export default function Drinks() {
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Drinks</h1>
         <div className="grid lg:grid-cols-4 mx-20 mt-5">
-          {drinks.map((topping) => (
+          {drinks.map((drink, index) => (
             <div className="mx-auto">
-              <input type="checkbox" class="hidden " id={topping.name} />
+              <input
+                type="checkbox"
+                class="hidden"
+                name="drink-btn"
+                onChange={(event) => selectingDrinks(event, index, drink.value)}
+                id={drink.value}
+              />
               <label
                 class=""
-                for={topping.name}
+                for={drink.value}
                 className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center"
               >
-                {topping.name}
+                {drink.label}
               </label>
-              <div>
-                <input
-                  type="text"
-                  id={topping.value}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="0"
-                />
-                {/* <label> hello</label> */}
-              </div>
             </div>
           ))}
         </div>
