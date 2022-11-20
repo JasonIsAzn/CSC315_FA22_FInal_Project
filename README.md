@@ -26,10 +26,10 @@
     - consider difficult color for buttons
     - need uniform sized button
     - choose fonts for button. Reform button
-    - <div>move sauce to other screen</div>
-      - consequencely must redo button appearance
+    - <del>move sauce to other screen</del>
+      - <del>consequencely must redo button appearance</del>
     - add topping counter?
-    - <div>no sauce option</div>
+    - <del>no sauce option</del>
       - later consdier not adding this to create order
 
 ### `Manager PAGE`
