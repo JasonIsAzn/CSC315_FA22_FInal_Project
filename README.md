@@ -4,10 +4,9 @@
 
 ### `Customer PAGE` (DIfficulty LEVEL: (0-5))
 
-- <del>Limit Topping Choices to 2/3 Options</del>
-- <del>Local Storage for saving state of order and rendering</del>
-- <del>Local Storage for saving item for order</del>
-- <del>Implemented Cancel Order Buton </del>
+- <del>Limit Topping Choices across pages to 2/3 Options (4)</del>
+- <del>Local Storage for saving state of order and rendering(2)</del>
+- <del>Implemented Cancel Order Butons (0)</del>
 - Create Checkout Page (3)
   - may require more local storage, then push to database
   - reuse server code (waiting for karanja code)
