@@ -25,7 +25,12 @@
   - redesign buttons to look uniform/better (3)
     - consider difficult color for buttons
     - need uniform sized button
-    - choose fonts for button
+    - choose fonts for button. Reform button
+    - <div>move sauce to other screen</div>
+      - consequencely must redo button appearance
+    - add topping counter?
+    - <div>no sauce option</div>
+      - later consdier not adding this to create order
 
 ### `Manager PAGE`
 
