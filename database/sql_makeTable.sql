@@ -51,6 +51,8 @@ CREATE TABLE purchase(
 );
 
 
+DROP TABLE order_item, vendor_item, purchase, item, "order", "user";  
+
 GRANT ALL PRIVILEGES ON item TO csce315_909_evans;
 GRANT ALL PRIVILEGES ON item TO csce315_909_narwekar;
 GRANT ALL PRIVILEGES ON item TO csce315_909_oliai;
