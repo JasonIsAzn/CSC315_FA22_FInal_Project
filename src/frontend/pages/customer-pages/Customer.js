@@ -76,6 +76,11 @@ export default function Customer() {
     <div className="h-screen overflow-y-show">
       {/* TODO: add logo */}
       {/* navigation bar */}
+
+      <div>
+        <img></img>
+      </div>
+
       <div className="w-screen flex justify-start mt-16">
         <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"

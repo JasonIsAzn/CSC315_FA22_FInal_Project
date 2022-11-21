@@ -205,9 +205,9 @@ export default function Drinks() {
 
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Drinks</h1>
-        <div className="grid lg:grid-cols-4 mt-5">
+        <div className="grid lg:grid-cols-4">
           {drinks.map((drink, index) => (
-            <div className="mx-auto">
+            <div className="min-w-full">
               <input
                 type="checkbox"
                 class="hidden"
