@@ -6,9 +6,11 @@ export default function Drinks() {
   // prep-drink data
   const { drinks } = useContext(GlobalContext);
   const [selectedDrinks, setSelectedDrinks] = useState(drinks);
+  const [selectedDrinksCounts, setSelectedDrinksCounts] = useState([]);
 
-  // Render Page
+  // Render Page - Initial Load Data
   useEffect(() => {
+    // Selected Drinks
     const data = localStorage.getItem("selected-drinks");
     if (data) {
       setSelectedDrinks(JSON.parse(data));
@@ -17,6 +19,24 @@ export default function Drinks() {
         selectedDrinks[i].selected = "";
       }
     }
+
+    // Counts for Drinks
+    const countData = localStorage.getItem("selected-drinks-counts");
+    if (countData) {
+      setSelectedDrinksCounts(JSON.parse(countData));
+    } else {
+      for (let i = 0; i < selectedDrinks.length; i++) {
+        selectedDrinksCounts.push({
+          drink_id: selectedDrinks[i].value,
+          count: 0,
+        });
+      }
+    }
+  }, []);
+
+  // Render Page - Load onto Page
+  useEffect(() => {
+    // Format Selected Drinks
     for (let i = 0; i < selectedDrinks.length; i++) {
       if (selectedDrinks[i].selected === "checked") {
         document.getElementById(selectedDrinks[i].value).checked = true;
@@ -24,24 +44,16 @@ export default function Drinks() {
         document.getElementById(selectedDrinks[i].value).checked = false;
       }
     }
-  }, []);
 
-  useEffect(() => {
-    for (let i = 0; i < selectedDrinks.length; i++) {
-      if (selectedDrinks[i].selected === "checked") {
-        document.getElementById(selectedDrinks[i].value).checked = true;
-      } else {
-        document.getElementById(selectedDrinks[i].value).checked = false;
-      }
+    // Format Counts Button
+    for (let i = 0; i < selectedDrinksCounts.length; i++) {
+      document.getElementById("num-" + i).textContent =
+        selectedDrinksCounts[i].count;
     }
   });
 
   // routes
   const navigate = useNavigate();
-
-  const goHome = () => {
-    navigate("/home");
-  };
 
   const goCustomer = () => {
     navigate("/customer");
@@ -55,16 +67,92 @@ export default function Drinks() {
     navigate("/checkout");
   };
 
-  // stores selected drink and update button
+  // store selected drink and update button
   const selectingDrinks = async (event, index, id) => {
     if (selectedDrinks[index].selected === "checked") {
       selectedDrinks[index].selected = "";
       document.getElementById(id).checked = false;
+
+      // Hide Count
+      document
+        .getElementById("minus-" + index)
+        .setAttribute("class", "h-8 w-8 text-white");
+      document
+        .getElementById("num-" + index)
+        .setAttribute("class", "mx-4 font-bold text-white");
+      document
+        .getElementById("plus-" + index)
+        .setAttribute("class", "h-8 w-8 text-white");
+      // Reset Count;
+      selectedDrinksCounts[index].count = 0;
+      document.getElementById("num-" + index).textContent =
+        selectedDrinksCounts[index].count;
+      localStorage.setItem(
+        "selected-drinks-counts",
+        JSON.stringify(selectedDrinksCounts)
+      );
     } else {
       selectedDrinks[index].selected = "checked";
       document.getElementById(id).checked = true;
+
+      // Show Count
+      document
+        .getElementById("minus-" + index)
+        .setAttribute(
+          "class",
+          "h-8 w-8 flex items-center justify-center font-bold cursor-pointer border-b-2 border-black text-black"
+        );
+      document
+        .getElementById("num-" + index)
+        .setAttribute("class", "mx-4 font-bold");
+      document
+        .getElementById("plus-" + index)
+        .setAttribute(
+          "class",
+          "h-8 w-8 items-center justify-center flex font-bold cursor-pointer border-b-2 border-black text-black"
+        );
+      // First Button Click
+      if (selectedDrinksCounts[index].count === 0) {
+        selectedDrinksCounts[index].count += 1;
+        document.getElementById("num-" + index).textContent =
+          selectedDrinksCounts[index].count;
+        localStorage.setItem(
+          "selected-drinks-counts",
+          JSON.stringify(selectedDrinksCounts)
+        );
+      }
     }
     localStorage.setItem("selected-drinks", JSON.stringify(selectedDrinks));
+  };
+
+  // plus and minus counter
+  const plusMinusCounter = async (event, increment_type, index) => {
+    console.log("plusMinusCounter", increment_type, index);
+    console.log(selectedDrinksCounts);
+    if (increment_type === "plus") {
+      selectedDrinksCounts[index].count += 1;
+    } else {
+      if (selectedDrinksCounts[index].count > 1) {
+        selectedDrinksCounts[index].count -= 1;
+      }
+    }
+    document.getElementById("num-" + index).textContent =
+      selectedDrinksCounts[index].count;
+    localStorage.setItem(
+      "selected-drinks-counts",
+      JSON.stringify(selectedDrinksCounts)
+    );
+  };
+
+  const resetStorage = () => {
+    localStorage.removeItem("selected-drinks");
+    localStorage.removeItem("selected-drinks-counts");
+  };
+
+  // Add to Order Function
+  const goHome = () => {
+    resetStorage();
+    navigate("/home");
   };
 
   return (
@@ -85,7 +173,7 @@ export default function Drinks() {
         </button>
 
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
+          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
           onClick={goDrinks}
         >
           Drinks
@@ -114,10 +202,31 @@ export default function Drinks() {
               <label
                 class=""
                 for={drink.value}
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center"
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-1 p-20 rounded-lg text-l flex justify-center items-center"
               >
                 {drink.label}
               </label>
+
+              <div className="h-10 w-auto mb-5 flex items-center justify-center bg-[#FFF]">
+                <span
+                  className="h-8 w-8 text-white"
+                  id={"minus-" + index}
+                  name="plus/minus"
+                  onClick={(event) => plusMinusCounter(event, "minus", index)}
+                >
+                  -
+                </span>
+                <span className="mx-4 font-bold text-white" id={"num-" + index}>
+                  0
+                </span>
+                <span
+                  className="h-8 w-8 text-white"
+                  id={"plus-" + index}
+                  onClick={(event) => plusMinusCounter(event, "plus", index)}
+                >
+                  +
+                </span>
+              </div>
             </div>
           ))}
         </div>
