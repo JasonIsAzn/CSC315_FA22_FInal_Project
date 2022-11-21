@@ -10,6 +10,17 @@ export default function Veggies() {
   let max_topping = JSON.parse(localStorage.getItem("selected-pizza"))
     .topping_amount[1];
 
+  let veggiesTextFormatted = [];
+  for (let i = 0; i < selectedVeggies.length; ++i) {
+    let formatText = selectedVeggies[i].label;
+    formatText = formatText.replace("_", " ");
+    const texts = formatText.split(" ");
+    for (let j = 0; j < texts.length; ++j) {
+      texts[j] = texts[j][0].toUpperCase() + texts[j].substr(1);
+    }
+    veggiesTextFormatted.push(texts.join(" "));
+  }
+
   // Render Page
   useEffect(() => {
     const data = localStorage.getItem("selected-veggies");
@@ -103,7 +114,7 @@ export default function Veggies() {
   };
 
   return (
-    <div className="h-screen overflow-y-show">
+    <div className="w-screen overflow-y-show">
       {/* navigation bar */}
       <div className="flex flex-row mt-2 justify-end">
         <button
@@ -136,7 +147,7 @@ export default function Veggies() {
         </button>
 
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
+          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
           onClick={goVeggies}
         >
           Veggies
@@ -151,9 +162,9 @@ export default function Veggies() {
       </div>
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Veggie</h1>
-        <div className="grid lg:grid-cols-4 mx-20 mt-5">
+        <div className="grid lg:grid-cols-4 mt-5">
           {veggies.map((veggie, index) => (
-            <div className="mx-auto">
+            <div className="min-w-full">
               <input
                 type="checkbox"
                 class="hidden"
@@ -166,9 +177,9 @@ export default function Veggies() {
               <label
                 class=""
                 for={veggie.value}
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center"
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-16 my-5 p-20 rounded-lg text-l flex justify-center items-center"
               >
-                {veggie.label}
+                {veggiesTextFormatted[index]}
               </label>
             </div>
           ))}

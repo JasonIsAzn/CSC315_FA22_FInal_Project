@@ -1,3 +1,4 @@
+import { LocalGasStationRounded } from "@mui/icons-material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
@@ -6,6 +7,19 @@ export default function Drizzles() {
   // prep-drizzle data
   const { drizzles } = useContext(GlobalContext);
   const [selectedDrizzles, setSelectedDrizzles] = useState(drizzles);
+  let drizzlesTextFormatted = [];
+  for (let i = 0; i < selectedDrizzles.length; ++i) {
+    let formatText = selectedDrizzles[i].label;
+    formatText = formatText.replace("_", " ");
+    const texts = formatText.split(" ");
+    if (texts[0] === "bbq") {
+      texts[0] = "BBQ";
+    }
+    for (let j = 0; j < texts.length; ++j) {
+      texts[j] = texts[j][0].toUpperCase() + texts[j].substr(1);
+    }
+    drizzlesTextFormatted.push(texts.join(" "));
+  }
 
   // Render Page
   useEffect(() => {
@@ -30,7 +44,7 @@ export default function Drizzles() {
     const showMeatVeggieOpt = JSON.parse(
       localStorage.getItem("selected-pizza")
     ).type;
-    if (showMeatVeggieOpt === 2 || showMeatVeggieOpt === 3) {
+    if (showMeatVeggieOpt === 1 || showMeatVeggieOpt === 2) {
       document.getElementById("nav-btn-all").style.display = "none";
       document.getElementById("nav-btn-sauces-drizzles").style.display = "flex";
     } else {
@@ -104,7 +118,7 @@ export default function Drizzles() {
   };
 
   return (
-    <div className="h-screen overflow-y-show">
+    <div className="w-screen overflow-y-show">
       {/* navigation bar */}
       <div className="flex flex-row mt-2 justify-end">
         <button
@@ -144,7 +158,7 @@ export default function Drizzles() {
         </button>
 
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
+          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
           onClick={goDrizzles}
         >
           Drizzles
@@ -163,7 +177,7 @@ export default function Drizzles() {
         </button>
 
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
+          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
           onClick={goDrizzles}
         >
           Drizzles
@@ -172,9 +186,9 @@ export default function Drizzles() {
 
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Drizzle</h1>
-        <div className="grid lg:grid-cols-4 mx-20 mt-5">
+        <div className="grid lg:grid-cols-4 mt-5">
           {drizzles.map((drizzle, index) => (
-            <div className="mx-auto">
+            <div className="min-w-full">
               {/* save drizzle */}
               <input
                 type="checkbox"
@@ -188,9 +202,9 @@ export default function Drizzles() {
               <label
                 class=""
                 for={drizzle.value}
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center"
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-16 my-5 p-20 rounded-lg text-l flex justify-center items-center"
               >
-                {drizzle.label}
+                {drizzlesTextFormatted[index]}
               </label>
             </div>
           ))}

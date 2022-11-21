@@ -14,6 +14,17 @@ export default function Sauces() {
   }
   const [selectedSauce, setSelectedSauce] = useState(sauces);
 
+  let saucesTextFormatted = [];
+  for (let i = 0; i < selectedSauce.length; ++i) {
+    let formatText = selectedSauce[i].label;
+    formatText = formatText.replace("_", " ");
+    const texts = formatText.split(" ");
+    for (let j = 0; j < texts.length; ++j) {
+      texts[j] = texts[j][0].toUpperCase() + texts[j].substr(1);
+    }
+    saucesTextFormatted.push(texts.join(" "));
+  }
+
   // Render Page
   useEffect(() => {
     const data = localStorage.getItem("selected-sauce");
@@ -37,7 +48,7 @@ export default function Sauces() {
     const showMeatVeggieOpt = JSON.parse(
       localStorage.getItem("selected-pizza")
     ).type;
-    if (showMeatVeggieOpt === 2 || showMeatVeggieOpt === 3) {
+    if (showMeatVeggieOpt === 1 || showMeatVeggieOpt === 2) {
       document.getElementById("nav-btn-all").style.display = "none";
       document.getElementById("nav-btn-sauces-drizzles").style.display = "flex";
     } else {
@@ -113,7 +124,7 @@ export default function Sauces() {
   };
 
   return (
-    <div className="h-screen overflow-y-show">
+    <div className="w-screen overflow-y-show">
       {/* navigation bar */}
       <div className="flex flex-row mt-2 justify-end">
         <button
@@ -132,7 +143,7 @@ export default function Sauces() {
 
       <div id="nav-btn-all" className="w-screen flex justify-right mt-2">
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
+          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
           onClick={goSauces}
         >
           Sauces
@@ -165,7 +176,7 @@ export default function Sauces() {
         className="w-screen flex justify-right mt-2"
       >
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
+          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
           onClick={goSauces}
         >
           Sauces
@@ -182,9 +193,9 @@ export default function Sauces() {
       {/* sauce buttons */}
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Sauce</h1>
-        <div className="grid lg:grid-cols-4 mx-20 mt-5">
+        <div className="grid lg:grid-cols-4 mt-5">
           {sauces.map((sauce, index) => (
-            <div className="mx-auto">
+            <div className="min-w-full">
               {/* TODO: save sauce type */}
               {/* when clicked save id to local storage. if radio == local storage, then check */}
               <input
@@ -196,10 +207,10 @@ export default function Sauces() {
               />
               <label
                 class=""
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center"
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-20 my-5 p-20 rounded-lg text-l flex justify-center items-center"
                 for={sauce.value}
               >
-                {sauce.label}
+                {saucesTextFormatted[index]}
               </label>
             </div>
           ))}

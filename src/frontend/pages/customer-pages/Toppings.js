@@ -10,6 +10,17 @@ export default function Toppings() {
   let max_topping = JSON.parse(localStorage.getItem("selected-pizza"))
     .topping_amount[1];
 
+  let meatsTextFormatted = [];
+  for (let i = 0; i < selectedMeats.length; ++i) {
+    let formatText = selectedMeats[i].label;
+    formatText = formatText.replace("_", " ");
+    const texts = formatText.split(" ");
+    for (let j = 0; j < texts.length; ++j) {
+      texts[j] = texts[j][0].toUpperCase() + texts[j].substr(1);
+    }
+    meatsTextFormatted.push(texts.join(" "));
+  }
+
   // Render Page
   useEffect(() => {
     const data = localStorage.getItem("selected-meats");
@@ -103,7 +114,7 @@ export default function Toppings() {
   };
 
   return (
-    <div className="h-screen overflow-y-show">
+    <div className="w-screen overflow-y-show">
       {/* navigation bar */}
       <div className="flex flex-row mt-2 justify-end">
         <button
@@ -130,7 +141,7 @@ export default function Toppings() {
         </button>
 
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
+          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
           onClick={goToppings}
         >
           Meats
@@ -153,9 +164,9 @@ export default function Toppings() {
 
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Meat</h1>
-        <div className="grid lg:grid-cols-4 mx-20 mt-5">
+        <div className="grid lg:grid-cols-4">
           {selectedMeats.map((meat, index) => (
-            <div className="mx-auto">
+            <div className="min-w-full">
               {/* Have Label for checked */}
               <input
                 type="checkbox"
@@ -167,9 +178,9 @@ export default function Toppings() {
               <label
                 class=""
                 for={meat.value}
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center"
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-16 my-5 p-20 rounded-lg text-l flex justify-center items-center "
               >
-                {meat.label}
+                {meatsTextFormatted[index]}
               </label>
             </div>
           ))}
