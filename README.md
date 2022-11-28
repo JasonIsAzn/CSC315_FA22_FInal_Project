@@ -20,21 +20,20 @@
     - Reform button labels
     - move sauce to other screen
       - consequencely must redo button appearance
-    - no sauce option</del>
-      - later consider to not adding this to create order
-  - Add Logo (2?)
-  - Pizza Animation (if not possible can think of other ideas) (5)
-  - Add background (1)
+    - no sauce option - later consider to not adding this to create order </del>
+      <!-- - Add Logo (2?) -->
+      <!-- - Pizza Animation (if not possible can think of other ideas) (5) -->
+      <!-- - Add background (1) -->
 - Create Checkout Page (3)
   - may require more local storage, then push to database
   - reuse server code (waiting for karanja code)
 - Show Current Number of Items (2)
   - simple counter
   - design counter bubble
-- Implment Safe Gaurds
-  - if attempt to add order. show a message (1)
-  - guards to consider: Must pick sauce
-
+- Auto selecting no sauce
+- topping screen drops action thingy
+- checkout confetti 
+ 
 ### `Manager PAGE`
 
 ### `Server PAGE`

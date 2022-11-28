@@ -4,7 +4,7 @@ import GlobalContext from "../../context/GlobalContext";
 
 export default function Toppings() {
   // prep-meat data
-  const { meats } = useContext(GlobalContext);
+  const { meats, selectedItems, setSelectedItems } = useContext(GlobalContext);
   const [selectedMeats, setSelectedMeats] = useState(meats);
   let count = localStorage.getItem("topping-count");
   let max_topping = JSON.parse(localStorage.getItem("selected-pizza"))
@@ -84,6 +84,12 @@ export default function Toppings() {
         count++;
         selectedMeats[index].selected = "checked";
         document.getElementById(id).checked = true;
+        selectedItems.push({
+          label: selectedMeats[index].label,
+          value: selectedMeats[index].value,
+          price: selectedMeats[index].price,
+        });
+        setSelectedItems(selectedItems);
       } else {
         document.getElementById(id).checked = false;
       }
@@ -163,27 +169,33 @@ export default function Toppings() {
       </div>
 
       <div>
-        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Meat</h1>
-        <div className="grid lg:grid-cols-4">
-          {selectedMeats.map((meat, index) => (
-            <div className="min-w-full">
-              {/* Have Label for checked */}
-              <input
-                type="checkbox"
-                class="hidden"
-                name="meat-btn"
-                onChange={(event) => selectingMeats(event, index, meat.value)}
-                id={meat.value}
-              />
-              <label
-                class=""
-                for={meat.value}
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-16 my-5 p-20 rounded-lg text-l flex justify-center items-center "
-              >
-                {meatsTextFormatted[index]}
-              </label>
-            </div>
-          ))}
+        <h1 class="text-3xl font-bold ml-5 mb-6 mt-10">Choose Meat</h1>
+        <div className="grid lg:grid-cols-2">
+          <div className="grid lg:grid-cols-4 ">
+            {selectedMeats.map((meat, index) => (
+              <div className="min-w-full">
+                {/* Have Label for checked */}
+                <input
+                  type="checkbox"
+                  class="hidden"
+                  name="meat-btn"
+                  onChange={(event) => selectingMeats(event, index, meat.value)}
+                  id={meat.value}
+                />
+                <label
+                  class=""
+                  for={meat.value}
+                  className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-auto p-10 rounded-lg text-l flex justify-center items-center"
+                >
+                  {meatsTextFormatted[index]}
+                </label>
+              </div>
+            ))}
+          </div>
+          <div> 
+            <h1> PIZZA </h1>
+          </div>
+
         </div>
       </div>
     </div>
