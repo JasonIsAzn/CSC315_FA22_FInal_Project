@@ -39,7 +39,42 @@ export default function Inventory() {
   };
 
   // MUI data table stuff
-  const columns = ["id", "Name", "Count", "Price", "Type"];
+  const columns = [
+    {
+      name: "id",
+      options: {
+       filter: false,
+       sort: true,
+      }
+    },
+    {
+      name: "Customer Name",
+      options: {
+        filter: false,
+        sort: true,
+      }
+    },
+    {
+      name: "Cost",
+      options: {
+        filter: false,
+        sort: true,
+      }
+    },
+    {
+      name: "# Toppings",
+      options: {
+        filter: false,
+        sort: true,
+      }
+    },
+    {
+      name: "Date",
+      options: {
+        filter: true,
+        sort: true,
+      }}];
+
   const options = {
     filterType: "dropdown",
     responsive: "scroll",
@@ -60,7 +95,9 @@ export default function Inventory() {
     }).catch((err) => {
       alert(err);
     })
+    // listItems.push(itemName, price, count, type);
   }
+
   return (
     <div className="h-screen overflow-y-hidden">
       <div className="w-screen flex justify-center mt-16">

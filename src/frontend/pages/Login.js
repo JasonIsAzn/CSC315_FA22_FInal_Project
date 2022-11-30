@@ -32,7 +32,7 @@ export default function Login() {
 
   // get all items
   useEffect(() => {
-    axios.get("http://localhost:5000/items").then((result) => {
+    axios.get("http://localhost:5001/items").then((result) => {
       setAllItems(result.data);
       const itemData = result.data;
 
@@ -101,7 +101,7 @@ export default function Login() {
 
   // get all orders
   useEffect(() => {
-    axios.get("http://localhost:5000/orders").then((result) => {
+    axios.get("http://localhost:5001/orders").then((result) => {
       setAllOrders(result.data);
       const orderData = result.data;
 

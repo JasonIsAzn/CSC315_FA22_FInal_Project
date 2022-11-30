@@ -23,7 +23,7 @@ export default function Customer() {
       topping_amount: [0, 4],
     },
     {
-      name: "Orginial Cheese",
+      name: "Original Cheese",
       type: 1,
       topping_amount: [0, 0],
     },
