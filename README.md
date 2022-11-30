@@ -1,26 +1,24 @@
-# TODO LIST (OCT 21 - Nov 6)
+# TODO LIST (Nov 28 - Dec 4)
 
 ## FRONT-END TODOs
 
-### `Customer PAGE`
+### `Customer PAGE` (DIfficulty LEVEL: (0-5))
 
-- <del>Limit Topping Choices to 2/3 Options</del>
-- <del>Local Storage for saving state of order and rendering</del>
-- <del>Local Storage for saving item for order</del>
-- <del>Implemented Cancel Order Buton </del>
-- Create Checkout Page
-  - may require more local storage, then push to database
-  - reuse server code
+- Simple Design Additions
+  - redesign buttons
+  - add logo
+  - Add background
+- Checkout Page
+  - Setup Data
+  - Use karanja Code
 - Show Current Number of Items
   - simple counter
   - design counter bubble
-- Pizza Type Routes
-  - simlple if-conditions
-- UI Fixes
-  - Add Logo
-  - Pizza Animation (if not possible can think of other ideas)
-  - Add background
-  - redesign buttons to look uniform/better
+- Auto selecting no sauce
+- Checkout confetti
+- images for drinks
+- images for special pizza
+- google maps API
 
 ### `Manager PAGE`
 

@@ -3,8 +3,5 @@
 @tailwind utilities;
 
 input[type="checkbox"]:checked + label {
-    @apply bg-[#191970] hover:bg-[#191970] hover:text-white hover:border-[#191970] hover:border-2
-}
-input[type="radio"]:checked + label {
-    @apply bg-[#191970] hover:bg-[#191970] hover:text-white hover:border-[#191970] hover:border-2
+    @apply text-white bg-[#2e294e] hover:bg-[#2e294e] hover:border-[#4FC3F7] hover:border-4
 }
