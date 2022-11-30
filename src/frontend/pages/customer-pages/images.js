@@ -22,13 +22,13 @@ import Spinach from "../../assets/Spinach.png";
 export default [
   [
     {
-      photo: "Zestyred",
+      photo: "Alfredo",
     },
     {
       photo: "Traditionalred",
     },
     {
-      photo: "Alfredo",
+      photo: "Zestyred",
     },
     {
       photo: "Nosauce",
@@ -36,10 +36,10 @@ export default [
   ],
   [
     {
-      photo: "Smokedchicken",
+      photo: "Dicedham",
     },
     {
-      photo: "Meatball",
+      photo: "Pepperoni",
     },
     {
       photo: "Salami",
@@ -48,33 +48,18 @@ export default [
       photo: "Meatball", // Change Later
     },
     {
-      photo: "Pepperoni",
+      photo: "Meatball",
     },
     {
-      photo: "Dicedham",
+      photo: "Smokedchicken",
     },
   ],
   [
     {
-      photo: "Roastedgarlic",
-    },
-    {
-      photo: "Onion",
-    },
-    {
       photo: "Tomatoes",
     },
     {
-      photo: "Spinach",
-    },
-    {
-      photo: "Greenpepper",
-    },
-    {
-      photo: "Jalapenos",
-    },
-    {
-      photo: "Olive",
+      photo: "Onion",
     },
     {
       photo: "Mushrooms",
@@ -83,7 +68,22 @@ export default [
       photo: "Pineapple",
     },
     {
+      photo: "Greenpepper",
+    },
+    {
       photo: "Bananapepper",
+    },
+    {
+      photo: "Olive",
+    },
+    {
+      photo: "Jalapenos",
+    },
+    {
+      photo: "Roastedgarlic",
+    },
+    {
+      photo: "Spinach",
     },
   ],
   [

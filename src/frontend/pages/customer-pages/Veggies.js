@@ -162,6 +162,12 @@ export default function Veggies() {
 
   return (
     <div className="w-screen overflow-y-show">
+      <div className="flex justify-center">
+        <img
+          src={require("../../assets/logo.png")}
+          className=".max-w-full and .h-12"
+        />
+      </div>
       {/* navigation bar */}
       <div className="flex flex-row mt-2 justify-end">
         <button
@@ -209,7 +215,7 @@ export default function Veggies() {
       </div>
 
       <div>
-        <h1 class="text-3xl font-bold ml-5 mb-6 mt-10">Choose Veggie</h1>
+        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Veggie</h1>
         <div className="grid lg:grid-cols-4">
           <div className="grid lg:grid-cols-4 col-span-3">
             {veggies.map((veggie, index) => (

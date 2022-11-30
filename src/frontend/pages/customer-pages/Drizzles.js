@@ -165,6 +165,12 @@ export default function Drizzles() {
 
   return (
     <div className="w-screen overflow-y-show">
+      <div className="flex justify-center">
+        <img
+          src={require("../../assets/logo.png")}
+          className=".max-w-full and .h-12"
+        />
+      </div>
       {/* navigation bar */}
       <div className="flex flex-row mt-2 justify-end">
         <button
