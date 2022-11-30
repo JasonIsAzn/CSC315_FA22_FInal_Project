@@ -28,11 +28,36 @@ export default function Login() {
     setMaxID,
   } = useContext(GlobalContext);
 
-  // bring over all data here
+  // HELPER FUNCTIONS START HERE //
+
+  // makes item names more formal
+  function formatName(name) {
+    let result = "";
+    const data = name.split("_");
+    for (let i = 0; i < data.length; i++) {
+      data[i] = data[i][0].toUpperCase() + data[i].substring(1);
+      result += data[i] + " ";
+    }
+
+    return result.substring(0, result.length - 1);
+  }
+
+  // converts date format to ideal form
+  function formatDate(date) {
+    let part1 = date.substring(5);
+    let part2 = date.substring(0, 4);
+    let result = part1 + "-" + part2;
+    return result;
+  }
+
+  // HELPER FUNCTIONS END HERE //
+
+  // bring over all data here //
 
   // get all items
   useEffect(() => {
-    axios.get("http://localhost:5000/items").then((result) => {
+    axios.get("http://localhost:5000/item").then((result) => {
+      // store all item data
       setAllItems(result.data);
       const itemData = result.data;
 
@@ -40,7 +65,7 @@ export default function Login() {
       for (let i = 0; i < itemData.length; i++) {
         let item = [];
         item.push(itemData[i].id);
-        item.push(itemData[i].name);
+        item.push(formatName(itemData[i].name));
         item.push(itemData[i].count);
         item.push(itemData[i].price);
         item.push(itemData[i].type);
@@ -53,37 +78,37 @@ export default function Login() {
       for (let i = 0; i < itemData.length; i++) {
         if (itemData[i].type === "sauce" && itemData[i].name !== "regular") {
           sauces.push({
-            label: itemData[i].name,
+            label: formatName(itemData[i].name),
             value: itemData[i].id,
             price: itemData[i].price,
           });
         } else if (itemData[i].type === "topping-meat") {
           meats.push({
-            label: itemData[i].name,
+            label: formatName(itemData[i].name),
             value: itemData[i].id,
             price: itemData[i].price,
           });
         } else if (itemData[i].type === "drizzle") {
           drizzles.push({
-            label: itemData[i].name,
+            label: formatName(itemData[i].name),
             value: itemData[i].id,
             price: itemData[i].price,
           });
         } else if (itemData[i].type === "topping-veggie") {
           veggies.push({
-            label: itemData[i].name,
+            label: formatName(itemData[i].name),
             value: itemData[i].id,
             price: itemData[i].price,
           });
         } else if (itemData[i].type === "drink") {
           drinks.push({
-            label: itemData[i].name,
+            label: formatName(itemData[i].name),
             value: itemData[i].id,
             price: itemData[i].price,
           });
         } else {
           doughs.push({
-            label: itemData[i].name,
+            label: formatName(itemData[i].name),
             value: itemData[i].id,
             price: itemData[i].price,
           });
@@ -101,31 +126,60 @@ export default function Login() {
 
   // get all orders
   useEffect(() => {
-    axios.get("http://localhost:5000/orders").then((result) => {
-      setAllOrders(result.data);
-      const orderData = result.data;
+    axios
+      .get("http://localhost:5000/order")
+      .then((result) => {
+        // store all order data
+        const orderData = result.data;
 
-      // setup order storage for MUI data tables
-      for (let i = 0; i < orderData.length; i++) {
-        let order = [];
-        order.push(orderData[i].id);
-        order.push(orderData[i].customer_name);
-        order.push(orderData[i].total_cost);
-        order.push(orderData[i].num_toppings);
-        order.push(String(orderData[i].time_stamp).substring(0, 10));
-        listOrders.push(order);
-      }
+        // setup order storage for MUI data tables
+        for (let i = 0; i < orderData.length; i++) {
+          let order = [];
+          order.push(orderData[i].id);
+          order.push(orderData[i].customer_name);
+          order.push(orderData[i].total_cost);
+          order.push(orderData[i].num_toppings);
+          order.push(
+            formatDate(String(orderData[i].time_stamp).substring(0, 10))
+          );
+          listOrders.push(order);
+        }
 
-      setListOrders(listOrders);
+        setListOrders(listOrders);
 
-      // misc. database activities
-      const idList = [];
-      for (let i = 0; i < orderData.length; i++) {
-        idList.push(orderData[i].id);
-      }
+        // misc. database activities
+        const idList = [];
+        for (let i = 0; i < orderData.length; i++) {
+          idList.push(orderData[i].id);
+        }
+        setMaxID(Math.max(...idList));
+        return orderData;
+      })
+      .then((orderData) => {
+        // associates all orders with their items (TODO)
+        axios.get("http://localhost:5000/order_item/all").then((result) => {
+          const allOIs = result.data;
 
-      setMaxID(Math.max(idList));
-    });
+          let j = 0;
+          for (let i = 0; i < orderData.length; i++) {
+            let items = new Set();
+            while (
+              j < allOIs.length &&
+              orderData[i].id === allOIs[j].order_id
+            ) {
+              items.add(allOIs[j].name);
+              j++;
+            }
+
+            orderData[i].items = items;
+            orderData[i].time_stamp = formatDate(
+              String(orderData[i].time_stamp).substring(0, 10)
+            );
+          }
+
+          setAllOrders(orderData);
+        });
+      });
   }, []);
 
   const navigate = useNavigate();

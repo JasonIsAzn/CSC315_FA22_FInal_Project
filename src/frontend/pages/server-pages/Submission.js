@@ -12,7 +12,6 @@ export default function Submission() {
 
   // displays currently selected items
   function displayContents() {
-    console.log(selectedItems);
     let contents = "";
     let total = 0;
     for (let i = 0; i < selectedItems.length; i++) {
@@ -25,7 +24,7 @@ export default function Submission() {
       total += selectedItems[i].price;
     }
 
-    contents += "\n\n\t\tTotal: $" + total;
+    contents += "\n\n\t\tTotal: $" + parseFloat(String(total)).toFixed(2);
     return contents;
   }
 
@@ -33,6 +32,7 @@ export default function Submission() {
 
   // sends the user to the Home page
   const goBack = () => {
+    setSelectedItems([]);
     navigate("/server");
   };
 
@@ -43,7 +43,7 @@ export default function Submission() {
 
   // adds order and adjusts inventory
   const handleSubmission = () => {
-    // add order data to DB
+    // compute order total cost
     let total = () => {
       let value = 0;
       for (let i = 0; i < selectedItems.length; i++) {
@@ -53,52 +53,44 @@ export default function Submission() {
       return value;
     };
 
+    // add order information
     axios
-      .post("http://localhost:5001/order", {
+      .post("http://localhost:5000/order", {
         name: customerName,
         cost: total(),
         num_toppings: 3,
-        data: new Date().toISOString().split("T")[0],
-        server_id: 1,
+        date: new Date().toISOString().split("T")[0],
       })
       .then(() => {
         // associate order with all its items
-        let addOI = async () => {
-          for (let i = 0; i < selectedItems.length; i++) {
-            await axios
-              .post("http://localhost:5001/order_item", {
-                order_id: maxID + 1,
-                item_id: selectedItems[i].value,
-              })
-              .then((result) => {
-                console.log(result);
-              });
-          }
-        };
+        let item_ids = [];
+        for (let i = 0; i < selectedItems.length; i++) {
+          item_ids.push(selectedItems[i].value);
+        }
 
-        addOI();
-      })
-      .then(() => {
-        // update inventory based on order's contents
-        let updateInventory = async () => {
-          for (let i = 0; i < selectedItems.length; i++) {
-            await axios
-              .put("http://localhost:5001/items/count", {
-                id: selectedItems[i].value,
-              })
-              .then((result) => {
-                console.log(result);
-              });
-          }
-        };
+        axios
+          .post("http://localhost:5000/order_item", {
+            order_id: maxID + 1,
+            ids: item_ids,
+          })
+          .then(() => {
+            // update inventory based on order's contents
+            let item_ids = [];
+            for (let i = 0; i < selectedItems.length; i++) {
+              item_ids.push(selectedItems[i].value);
+            }
 
-        updateInventory();
-        setSelectedItems([]);
-        setMaxID(maxID + 1);
-        navigate("/server");
-      })
-      .then(() => {
-        console.log("Order Processed");
+            axios
+              .put("http://localhost:5000/item/count", {
+                ids: item_ids,
+              })
+              .then(() => {
+                setSelectedItems([]);
+                setMaxID(maxID + 1);
+                navigate("/server");
+                console.log("Order Processed -", maxID);
+              });
+          });
       });
   };
 
@@ -131,22 +123,22 @@ export default function Submission() {
             {displayContents()}
           </h1>
         </div>
-        
-        <input
-            type="text"
-            className="w-1/2 h-12 mt-20 mx-[13%] border border-1 border-gray-300 hover:border-gray-500 focus:ring-0 focus:outline-none rounded-lg text-2xl mb-[3%]"
-            placeholder="Customer Name"
-            onChange={(e) => {
-              setCustomerName(e.target.value);
-            }}
-          />
 
-          <button
-            className="w-1/2 mx-[25%] bg-[#4FC3F7] mb-12 hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-1 px-2 rounded-lg text-2xl flex justify-center items-center"
-            onClick={handleSubmission}
-          >
-            Submit Order
-          </button>
+        <input
+          type="text"
+          className="w-1/2 h-12 mt-20 mx-[13%] border border-1 border-gray-300 hover:border-gray-500 focus:ring-0 focus:outline-none rounded-lg text-2xl mb-[3%]"
+          placeholder="Customer Name"
+          onChange={(e) => {
+            setCustomerName(e.target.value);
+          }}
+        />
+
+        <button
+          className="w-1/2 mx-[25%] bg-[#4FC3F7] mb-12 hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-1 px-2 rounded-lg text-2xl flex justify-center items-center"
+          onClick={handleSubmission}
+        >
+          Submit Order
+        </button>
       </div>
     </div>
   );
