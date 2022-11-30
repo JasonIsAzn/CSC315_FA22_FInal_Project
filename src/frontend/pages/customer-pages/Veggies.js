@@ -1,11 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
+import { motion } from "framer-motion";
+import toppingImages from "./images";
 
 export default function Veggies() {
   // prep-veggie data
+  const { drizzles } = useContext(GlobalContext);
+  const [selectedDrizzles, setSelectedDrizzles] = useState(drizzles);
+
   const { veggies } = useContext(GlobalContext);
   const [selectedVeggies, setSelectedVeggies] = useState(veggies);
+
+  const { meats } = useContext(GlobalContext);
+  const [selectedMeats, setSelectedMeats] = useState(meats);
+
+  const { sauces } = useContext(GlobalContext);
+  const [selectedSauce, setSelectedSauce] = useState(sauces);
+
   let count = localStorage.getItem("topping-count");
   let max_topping = JSON.parse(localStorage.getItem("selected-pizza"))
     .topping_amount[1];
@@ -24,6 +36,28 @@ export default function Veggies() {
   // Render Page
   useEffect(() => {
     const data = localStorage.getItem("selected-veggies");
+    const drizzlesData = localStorage.getItem("selected-drizzles");
+    const meatData = localStorage.getItem("selected-meats");
+    const sauceData = localStorage.getItem("selected-sauce");
+
+    if (meatData) {
+      setSelectedMeats(JSON.parse(meatData));
+    } else {
+      for (let i = 0; i < selectedMeats.length; i++) {
+        selectedMeats[i].selected = "";
+      }
+      setSelectedMeats(JSON.parse(JSON.stringify(selectedMeats)));
+    }
+
+    if (sauceData) {
+      setSelectedSauce(JSON.parse(sauceData));
+    } else {
+      for (let i = 0; i < selectedSauce.length; i++) {
+        selectedSauce[i].selected = "";
+      }
+      setSelectedSauce(JSON.parse(JSON.stringify(selectedSauce)));
+    }
+
     if (data) {
       setSelectedVeggies(JSON.parse(data));
     } else {
@@ -31,6 +65,16 @@ export default function Veggies() {
         selectedVeggies[i].selected = "";
       }
     }
+
+    if (drizzlesData) {
+      setSelectedDrizzles(JSON.parse(drizzlesData));
+    } else {
+      for (let i = 0; i < selectedDrizzles.length; i++) {
+        selectedDrizzles[i].selected = "";
+      }
+      setSelectedDrizzles(JSON.parse(JSON.stringify(selectedDrizzles)));
+    }
+
     for (let i = 0; i < selectedVeggies.length; i++) {
       if (selectedVeggies[i].selected === "checked") {
         document.getElementById(selectedVeggies[i].value).checked = true;
@@ -88,6 +132,9 @@ export default function Veggies() {
         document.getElementById(id).checked = false;
       }
     }
+
+    setSelectedVeggies(JSON.parse(JSON.stringify(selectedVeggies)));
+
     localStorage.setItem("topping-count", count);
     localStorage.setItem("selected-veggies", JSON.stringify(selectedVeggies));
   };
@@ -160,29 +207,124 @@ export default function Veggies() {
           Drizzles
         </button>
       </div>
+
       <div>
-        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Veggie</h1>
-        <div className="grid lg:grid-cols-4 mt-5">
-          {veggies.map((veggie, index) => (
-            <div className="min-w-full">
-              <input
-                type="checkbox"
-                class="hidden"
-                name="veggie-btn"
-                onChange={(event) =>
-                  selectingVeggies(event, index, veggie.value)
-                }
-                id={veggie.value}
+        <h1 class="text-3xl font-bold ml-5 mb-6 mt-10">Choose Veggie</h1>
+        <div className="grid lg:grid-cols-4">
+          <div className="grid lg:grid-cols-4 col-span-3">
+            {veggies.map((veggie, index) => (
+              <div className="min-w-full">
+                <input
+                  type="checkbox"
+                  class="hidden"
+                  name="veggie-btn"
+                  onChange={(event) =>
+                    selectingVeggies(event, index, veggie.value)
+                  }
+                  id={veggie.value}
+                />
+                <label
+                  class=""
+                  for={veggie.value}
+                  className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border text-white font-bold p-24 rounded-lg text-l flex justify-center items-center min-h-full min-w-full whitespace-nowrap"
+                >
+                  {veggiesTextFormatted[index]}
+                </label>
+              </div>
+            ))}
+          </div>
+          {/* Pizza Animation */}
+          <div className="flex relative ml-32">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: true ? 1 : 0,
+              }}
+              transition={{ duration: 0.5 }}
+            >
+              <img
+                src={require("../../assets/Nosauce.png")}
+                class="h-64 absolute"
+                alt=""
               />
-              <label
-                class=""
-                for={veggie.value}
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-16 my-5 p-20 rounded-lg text-l flex justify-center items-center"
-              >
-                {veggiesTextFormatted[index]}
-              </label>
+            </motion.div>
+            <div>
+              {/* Generate Base Sauce */}
+              {toppingImages[0].map((item, index) => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity:
+                      selectedSauce[index].selected === "checked" ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                </motion.div>
+              ))}
+
+              {/* Generate Meats */}
+              {toppingImages[1].map((item, index) => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity:
+                      selectedMeats[index].selected === "checked" ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                </motion.div>
+              ))}
+
+              {/* Generate Veggies */}
+              {toppingImages[2].map((item, index) => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity:
+                      selectedVeggies[index].selected === "checked" ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                </motion.div>
+              ))}
+
+              {/* Generate Drizzles */}
+              {toppingImages[3].map((item, index) => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity:
+                      selectedDrizzles[index].selected === "checked" ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                </motion.div>
+              ))}
             </div>
-          ))}
+            <div>
+              <h1 class="mt-64 p-5">Toppings List</h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>

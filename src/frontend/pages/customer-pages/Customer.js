@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import GlobalContext from "../../context/GlobalContext";
 import party from "party-js";
 import "./customer_page.css";
 
 export default function Customer() {
-  // confetti
   useEffect(() => {
+    // confetti
     document.querySelectorAll(".confetti-button").forEach((e) =>
       e.addEventListener("click", function (e) {
         party.confetti(this);
