@@ -1,39 +1,24 @@
-# TODO LIST (Nov 14 - Nov 20)
+# TODO LIST (Nov 28 - Dec 4)
 
 ## FRONT-END TODOs
 
 ### `Customer PAGE` (DIfficulty LEVEL: (0-5))
 
-- <del>Limit Topping Choices across pages to 2/3 Options (4)</del>
-- <del>Local Storage for saving state of order and rendering(2)</del>
-- <del>Implemented Cancel Order Butons (0)</del>
-- <del>Drink Page
-  - add +/- button and count label (2) </del>
-- <del> Topping Pages
-  - remove choose toppigng btn. Instead do one customize pizza btn</del> (0)
-- <del>Pizza Type Routes (0)
-  - simlple if-conditions</del>
-- UI Fixes ** Will REVIST UI Design for another day **
-  - <del>redesign buttons(3)
-    - consider different color for buttons
-    - need uniform sized button
-    - Reform button labels
-    - move sauce to other screen
-      - consequencely must redo button appearance
-    - no sauce option</del>
-      - later consider to not adding this to create order
-  - Add Logo (2?)
-  - Pizza Animation (if not possible can think of other ideas) (5)
-  - Add background (1)
-- Create Checkout Page (3)
-  - may require more local storage, then push to database
-  - reuse server code (waiting for karanja code)
-- Show Current Number of Items (2)
+- Simple Design Additions
+  - redesign buttons
+  - add logo
+  - Add background
+- Checkout Page
+  - Setup Data
+  - Use karanja Code
+- Show Current Number of Items
   - simple counter
   - design counter bubble
-- Implment Safe Gaurds
-  - if attempt to add order. show a message (1)
-  - guards to consider: Must pick sauce
+- Auto selecting no sauce
+- Checkout confetti
+- images for drinks
+- images for special pizza
+- google maps API
 
 ### `Manager PAGE`
 

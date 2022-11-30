@@ -12,6 +12,7 @@ import Drizzles from "./frontend/pages/customer-pages/Drizzles";
 import Customer from "./frontend/pages/customer-pages/Customer";
 import Home from "./frontend/pages/Home";
 import Submission from "./frontend/pages/server-pages/Submission";
+import "react-datepicker/dist/react-datepicker.css";
 
 import { Routes, Route } from "react-router-dom";
 

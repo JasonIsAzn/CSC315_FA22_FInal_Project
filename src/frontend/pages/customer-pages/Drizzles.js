@@ -2,11 +2,23 @@ import { LocalGasStationRounded } from "@mui/icons-material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
+import { motion } from "framer-motion";
+import toppingImages from "./images";
 
 export default function Drizzles() {
   // prep-drizzle data
   const { drizzles } = useContext(GlobalContext);
   const [selectedDrizzles, setSelectedDrizzles] = useState(drizzles);
+
+  const { veggies } = useContext(GlobalContext);
+  const [selectedVeggies, setSelectedVeggies] = useState(veggies);
+
+  const { meats } = useContext(GlobalContext);
+  const [selectedMeats, setSelectedMeats] = useState(meats);
+
+  const { sauces } = useContext(GlobalContext);
+  const [selectedSauce, setSelectedSauce] = useState(sauces);
+
   let drizzlesTextFormatted = [];
   for (let i = 0; i < selectedDrizzles.length; ++i) {
     let formatText = selectedDrizzles[i].label;
@@ -24,13 +36,46 @@ export default function Drizzles() {
   // Render Page
   useEffect(() => {
     const data = localStorage.getItem("selected-drizzles");
+    const meatData = localStorage.getItem("selected-meats");
+    const veggieData = localStorage.getItem("selected-veggies");
+    const sauceData = localStorage.getItem("selected-sauce");
+
+    if (veggieData) {
+      setSelectedVeggies(JSON.parse(veggieData));
+    } else {
+      for (let i = 0; i < selectedVeggies.length; i++) {
+        selectedVeggies[i].selected = "";
+      }
+      setSelectedVeggies(JSON.parse(JSON.stringify(selectedVeggies)));
+    }
+
+    if (sauceData) {
+      setSelectedSauce(JSON.parse(sauceData));
+    } else {
+      for (let i = 0; i < selectedSauce.length; i++) {
+        selectedSauce[i].selected = "";
+      }
+      setSelectedSauce(JSON.parse(JSON.stringify(selectedSauce)));
+    }
+
+    if (meatData) {
+      setSelectedMeats(JSON.parse(meatData));
+    } else {
+      for (let i = 0; i < selectedMeats.length; i++) {
+        selectedMeats[i].selected = "";
+      }
+      setSelectedMeats(JSON.parse(JSON.stringify(selectedMeats)));
+    }
+
     if (data) {
       setSelectedDrizzles(JSON.parse(data));
     } else {
       for (let i = 0; i < selectedDrizzles.length; i++) {
         selectedDrizzles[i].selected = "";
       }
+      setSelectedDrizzles(JSON.parse(JSON.stringify(selectedDrizzles)));
     }
+
     for (let i = 0; i < selectedDrizzles.length; i++) {
       if (selectedDrizzles[i].selected === "checked") {
         document.getElementById(selectedDrizzles[i].value).checked = true;
@@ -93,6 +138,7 @@ export default function Drizzles() {
       selectedDrizzles[index].selected = "checked";
       document.getElementById(id).checked = true;
     }
+    setSelectedDrizzles(JSON.parse(JSON.stringify(selectedDrizzles)));
     localStorage.setItem("selected-drizzles", JSON.stringify(selectedDrizzles));
   };
 
@@ -119,6 +165,12 @@ export default function Drizzles() {
 
   return (
     <div className="w-screen overflow-y-show">
+      <div className="flex justify-center">
+        <img
+          src={require("../../assets/logo.png")}
+          className=".max-w-full and .h-12"
+        />
+      </div>
       {/* navigation bar */}
       <div className="flex flex-row mt-2 justify-end">
         <button
@@ -186,28 +238,121 @@ export default function Drizzles() {
 
       <div>
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Drizzle</h1>
-        <div className="grid lg:grid-cols-4 mt-5">
-          {drizzles.map((drizzle, index) => (
-            <div className="min-w-full">
-              {/* save drizzle */}
-              <input
-                type="checkbox"
-                class="hidden"
-                name="drizzle-btn"
-                onChange={(event) =>
-                  selectingDrizzles(event, index, drizzle.value)
-                }
-                id={drizzle.value}
+        <div className="grid lg:grid-cols-4">
+          <div className="grid lg:grid-cols-4 col-span-3">
+            {drizzles.map((drizzle, index) => (
+              <div className="min-w-full">
+                <input
+                  type="checkbox"
+                  class="hidden"
+                  name="drizzle-btn"
+                  onChange={(event) =>
+                    selectingDrizzles(event, index, drizzle.value)
+                  }
+                  id={drizzle.value}
+                />
+                <label
+                  class=""
+                  for={drizzle.value}
+                  className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border text-white font-bold p-24 rounded-lg text-l flex justify-center items-center min-h-full min-w-full whitespace-nowrap"
+                >
+                  {drizzlesTextFormatted[index]}
+                </label>
+              </div>
+            ))}
+          </div>
+          {/* PIZZA ANIMATION HERE */}
+          <div className="flex relative ml-32">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: true ? 1 : 0,
+              }}
+              transition={{ duration: 0.5 }}
+            >
+              <img
+                src={require("../../assets/Nosauce.png")}
+                class="h-64 absolute"
+                alt=""
               />
-              <label
-                class=""
-                for={drizzle.value}
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-16 my-5 p-20 rounded-lg text-l flex justify-center items-center"
-              >
-                {drizzlesTextFormatted[index]}
-              </label>
+            </motion.div>
+            <div>
+              {/* Generate Base Sauce */}
+              {toppingImages[0].map((item, index) => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity:
+                      selectedSauce[index].selected === "checked" ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                </motion.div>
+              ))}
+
+              {/* Generate Meats */}
+              {toppingImages[1].map((item, index) => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity:
+                      selectedMeats[index].selected === "checked" ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                </motion.div>
+              ))}
+
+              {/* Generate Veggies */}
+              {toppingImages[2].map((item, index) => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity:
+                      selectedVeggies[index].selected === "checked" ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                </motion.div>
+              ))}
+
+              {/* Generate Drizzles */}
+              {toppingImages[3].map((item, index) => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity:
+                      selectedDrizzles[index].selected === "checked" ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                </motion.div>
+              ))}
             </div>
-          ))}
+            <div>
+              <h1 class="mt-64 p-5">Toppings List</h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>

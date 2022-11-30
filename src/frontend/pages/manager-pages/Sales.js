@@ -1,11 +1,34 @@
-import React, { useEffect, Fragment, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import MUIDataTable from "mui-datatables";
 import GlobalContext from "../../context/GlobalContext";
+import DatePicker from "react-datepicker";
+
+// makes item names more formal
+function formatName(name) {
+  let result = "";
+  const data = name.split("_");
+  for (let i = 0; i < data.length; i++) {
+    data[i] = data[i][0].toUpperCase() + data[i].substring(1);
+    result += data[i] + " ";
+  }
+
+  return result.substring(0, result.length - 1);
+}
 
 export default function Sales() {
   const { listOrders, allOrders } = useContext(GlobalContext);
+
+  // stores information for reports
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [startDateCombo, setStartDateCombo] = useState("");
+  const [salesData, setSalesData] = useState([]);
+  const [comboData, setComboData] = useState([]);
+
+  // used to determine what contents are shown in data table
+  const [displayData, setDisplayData] = useState(0);
+
   const navigate = useNavigate();
 
   // sends the user to the Home page
@@ -34,45 +57,117 @@ export default function Sales() {
     responsive: "scroll",
     download: false,
     elevation: 10,
-    print:false,
+    print: false,
     viewColumns: false,
+    rowsPerPage: 10,
+    rowsPerPageOptions: [10, 50, 100],
   };
 
-  const columns = [
-      {
-        name: "id",
-        options: {
-         filter: false,
-         sort: true,
+  // generates data for sales report
+  const handleSalesReport = () => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    for (let i = 0; i < listOrders.length; i++) {
+      const orderDate = new Date(listOrders[i][4]);
+      if (orderDate >= start && orderDate <= end) {
+        salesData.push(listOrders[i]);
+      }
+    }
+
+    setSalesData(salesData);
+    setDisplayData(1);
+  };
+
+  // generates data for combo report (TODO) [FIXME]
+  const handleComboReport = () => {
+    const combos = [
+      ["Smoked Chicken", "Bbq Sauce", 0],
+      ["Pepperoni", "Ftn Drink", 0],
+      ["Smoked Chicken", "Pineapple", 0],
+      ["Cauliflower", "Ranch", 0],
+      ["Pepsi", "Meatball", 0],
+      ["Spinach", "Alfredo", 0],
+      ["Pepperoni", "Jalapenos", 0],
+      ["Cauliflower", "Mushrooms", 0],
+      ["Zesty Red", "Meatball", 0],
+      ["Pepperoni", "Green Peppers", 0],
+      ["Salami", "Black Olives", 0],
+      ["Banana Peppers", "Smoked Chicken", 0],
+      ["Pepperoni", "Gatorade", 0],
+      ["Alfredo", "Cauliflower", 0],
+      ["Mushrooms", "Smoked Chicken", 0],
+      ["Meatball", "Bbq Sauce", 0],
+      ["Smoked Chicken", "Siracha", 0],
+      ["Diced Ham", "Bbq Sauce", 0],
+      ["Spinach", "Meatball", 0],
+      ["Pepperoni", "Mushrooms", 0],
+    ];
+
+    for (let i = 0; i < allOrders.length; i++) {
+      const orderDate = new Date(allOrders[i].time_stamp);
+      if (orderDate >= startDate) {
+        let items = new Set();
+        const data = allOrders[i].items;
+
+        for (const item of data) {
+          items.add(formatName(item));
         }
-      },
-      {
-        name: "Customer Name",
-        options: {
-          filter: false,
-          sort: true,
+
+        for (let j = 0; j < combos.length; j++) {
+          if (items.has(combos[j][0]) && items.has(combos[j][1])) {
+            combos[j][2] += 1;
+          }
         }
-      },
-      {
-        name: "Cost",
-        options: {
-          filter: false,
-          sort: true,
-        }
-      },
-      {
-        name: "# Toppings",
-        options: {
-          filter: false,
-          sort: true,
-        }
-      },
-      {
-        name: "Date",
-        options: {
-          filter: true,
-          sort: true,
-        }}];
+      }
+    }
+
+    setComboData(combos);
+    setDisplayData(2);
+  };
+
+  // determines what data is shown in data table
+  const determineData = () => {
+    if (displayData === 0) {
+      return listOrders;
+    } else if (displayData === 1) {
+      return salesData;
+    } else {
+      return comboData;
+    }
+  };
+
+  // determines which columns to display based on data in table (TODO)
+  const determineColumns = () => {
+    if (displayData === 0) {
+      return ["id", "Customer Name", "Cost", "# Toppings", "Date"];
+    } else if (displayData === 1) {
+      return ["id", "Customer Name", "Cost", "# Toppings", "Date"];
+    } else {
+      return ["Item 1", "Item 2", "Frequency"];
+    }
+  };
+
+  // determines which title the data table has
+  const determineTitle = () => {
+    if (displayData === 0) {
+      return "Order History";
+    } else if (displayData === 1) {
+      return "Sales Report";
+    } else {
+      return "Combo Report";
+    }
+  };
+
+  // reverts back to general data table
+  const handleEndReport = () => {
+    setDisplayData(0);
+    setSalesData([]);
+    setComboData([]);
+    setStartDate("");
+    setEndDate("");
+    setStartDateCombo("");
+  };
 
   return (
     <div className="h-screen overflow-y-hidden">
@@ -105,13 +200,80 @@ export default function Sales() {
           Server Mode
         </button>
       </div>
-      <div className="items-center justify-center px-[10%] pt-[3%] ">
-        <MUIDataTable
-          title={"Order History"}
-          data={listOrders}
-          columns={columns}
-          options={options}
-        />
+
+      <div className="flex flex-row">
+        {/* sidebar contents start here */}
+        <aside className="border mt-[2%] mr-[1%] w-1/5 rounded-lg flex flex-col items-center py-[1%] h-screen">
+          <div className="border w-[90%] items-center justify-center rounded-lg flex flex-col">
+            <h1 className="font-semibold text-gray-600"> Sales Report </h1>
+            <h3 className="text-gray-500 px-[12.5%] mb-[3%]">
+              See all orders that occurred between two specified dates
+            </h3>
+            <DatePicker
+              className="w-3/4 h-12 mt-[2%] mx-[13%] border border-1 border-gray-300 hover:border-gray-500 focus:ring-0 focus:outline-none rounded-lg text-xl mb-[3%]"
+              placeholderText="Start Date"
+              selected={startDate}
+              onChange={(date) => {
+                setStartDate(date);
+              }}
+            />
+
+            <DatePicker
+              className="w-3/4 h-12 mt-[2%] mx-[13%] border border-1 border-gray-300 hover:border-gray-500 focus:ring-0 focus:outline-none rounded-lg text-xl mb-[3%]"
+              placeholderText="End Date"
+              selected={endDate}
+              onChange={(date) => {
+                setEndDate(date);
+              }}
+            />
+            <button
+              className="mt-[2%] bg-green-400 border border-2 rounded-lg border-green-600 mb-[3%] w-3/4 hover:bg-white text-gray-500 mb-[6%] py-[1%]"
+              onClick={handleSalesReport}
+            >
+              Generate Report
+            </button>
+          </div>
+
+          <div className="border w-[90%] items-center justify-center rounded-lg flex flex-col mt-[10%]">
+            <h1 className="font-semibold text-gray-600">Combo Report</h1>
+            <h3 className="text-gray-500 px-[12.5%] mb-[3%]">
+              See which item combinations are most popular since a specified
+              date
+            </h3>
+            <DatePicker
+              className="w-3/4 h-12 mt-[2%] mx-[13%] border border-1 border-gray-300 hover:border-gray-500 focus:ring-0 focus:outline-none rounded-lg text-xl mb-[3%]"
+              placeholderText="Start Date"
+              selected={startDateCombo}
+              onChange={(date) => {
+                setStartDateCombo(date);
+              }}
+            />
+
+            <button
+              className="mt-[2%] bg-green-400 border border-2 rounded-lg border-green-600 mb-[3%] w-3/4 hover:bg-white text-gray-500 mb-[6%] py-[1%]"
+              onClick={handleComboReport}
+            >
+              Generate Report
+            </button>
+          </div>
+
+          <button
+            className="mt-[25%] bg-red-400 border border-2 rounded-lg px-[3%] border-red-600 w-3/4 py-[5%] hover:bg-white text-gray-600"
+            onClick={handleEndReport}
+          >
+            End Report
+          </button>
+        </aside>
+        {/* sidebar contents end here */}
+
+        <div className="items-center justify-center px-[3%] pt-[3%] w-4/5">
+          <MUIDataTable
+            title={determineTitle()}
+            data={determineData()}
+            columns={determineColumns()}
+            options={options}
+          />
+        </div>
       </div>
     </div>
   );

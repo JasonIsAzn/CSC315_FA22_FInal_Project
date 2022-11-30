@@ -34,7 +34,7 @@ UPDATE item
 SET type = 'topping-veggie' 
 WHERE id in (10, 11, 13, 14, 12, 25);
 
-INSERT INTO item ("name", count, price, "type") VALUES ('italian_sasusage', 340, 1.0, 'topping-meat');
+INSERT INTO item ("name", count, price, "type") VALUES ('italian_sausage', 340, 1.0, 'topping-meat');
 INSERT INTO item ("name", count, price, "type") VALUES ('smoked_chicken', 334, 1.5, 'topping-meat');
 INSERT INTO item ("name", count, price, "type") VALUES ('banana_peppers', 334, 1.5, 'topping-veggie');
 INSERT INTO item ("name", count, price, "type") VALUES ('black_olives', 334, 1.5, 'topping-veggie');
@@ -42,7 +42,3 @@ INSERT INTO item ("name", count, price, "type") VALUES ('jalapenos', 334, 1.5, '
 INSERT INTO item ("name", count, price, "type") VALUES ('roasted_garlic', 334, 1.5, 'topping-veggie');
 INSERT INTO item ("name", count, price, "type") VALUES ('spinach', 334, 1.5, 'topping-veggie');
 INSERT INTO item ("name", count, price, "type") VALUES ('oregano', 300, 1.5, 'drizzle');
-
-
-
-

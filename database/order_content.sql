@@ -4,6 +4,7 @@ INSERT INTO "user" (first_name, last_name, username, password, is_manager) VALUE
 INSERT INTO "user" (first_name, last_name, username, password, is_manager) VALUES ('Guppy', 'NotHuman', 'gp123', 'iLikeTreats', TRUE);
 INSERT INTO "user" (first_name, last_name, username, password, is_manager) VALUES ('Paul', 'Barnes', 'pbjelly', 'superSecret', FALSE);
 INSERT INTO "user" (first_name, last_name, username, password, is_manager) VALUES ('Ben', 'Thompson', 'bt123', 'notYourPassword', TRUE);
+
 INSERT INTO "order" (customer_name, total_cost, num_toppings, time_stamp, server_id) VALUES ('bob', 8.8, 3, '2022-10-1', 1);
 INSERT INTO "order" (customer_name, total_cost, num_toppings, time_stamp, server_id) VALUES ('anne', 8.55, 3, '2022-10-1', 4);
 INSERT INTO "order" (customer_name, total_cost, num_toppings, time_stamp, server_id) VALUES ('david', 9.75, 3, '2022-10-1', 1);

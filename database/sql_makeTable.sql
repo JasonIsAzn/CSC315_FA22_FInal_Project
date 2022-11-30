@@ -47,7 +47,6 @@ CREATE TABLE purchase(
     quantity int,
     time_stamp date,
     FOREIGN KEY (item_id) REFERENCES item(id)
-
 );
 
 

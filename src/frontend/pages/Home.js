@@ -22,6 +22,7 @@ export default function Home() {
   // sends the user back to login page
   const logout = () => {
     navigate("/");
+    window.location.reload(false); // prevents data duplication issue
   };
 
   return (
@@ -38,26 +39,26 @@ export default function Home() {
 
       {/* main section for POS mode buttons */}
       <div className="flex justify-center items-start h-3/4">
-      <button
+        <button
           className="w-3/4 h-full hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2  hover:text-white font-bold mx-6 p-6 py-[10%] rounded-xl text-4xl"
           onClick={goCustomer}
         >
           Welcome to Spin N' Stone!
         </button>
         <div className="h-1/3 grid grid-cols-1 ">
-        <button
-          className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl"
-          onClick={goManager}
-        >
-          Manager
-        </button>
+          <button
+            className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl"
+            onClick={goManager}
+          >
+            Manager
+          </button>
 
-        <button
-          className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl"
-          onClick={goServer}
-        >
-          Server
-        </button>
+          <button
+            className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl"
+            onClick={goServer}
+          >
+            Server
+          </button>
         </div>
       </div>
     </div>

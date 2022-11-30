@@ -4,7 +4,7 @@ sauces = {"'alfredo'": 2.50, "'traditional_red'": 1.25, "'zesty_red'": 1.75 }
 doughs = {"'regular'": 1.50, "'cauliflower'": 2.50 }
 meats = {"'diced_ham'": 1.25, "'pepperoni'": .75, "'salami'": 2.00, "'meatball'": 1.50}
 veggies = {"'tomatoes'": .30, "'onions'": .30, "'mushrooms'": .50, "'pineapple'": .75, "'green_peppers'": .30}
-drizzles = {"'bbq_sauce'": 1.50, "'ranch'": 1.00, "'siracha'": .50, "'olive oil'": .50}
+drizzles = {"'bbq_sauce'": 1.50, "'ranch'": 1.00, "'siracha'": .50, "'olive_oil'": .50}
 drinks = {"'gatorade'": 2.00, "'pepsi'": 2.50, "'mtn_dew'": 2.50, "'aquafina'": 1.50, "'ftn_drink'": 3.00}
 
 customers = ["'anne'", "'bob'", "'carson'", "'david'"]
