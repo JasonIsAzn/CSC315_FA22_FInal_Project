@@ -3,7 +3,6 @@
 ## FRONT-END TODOs
 
 ### `Customer PAGE` (DIfficulty LEVEL: (0-5))
-
 - <del>Limit Topping Choices across pages to 2/3 Options (4)</del>
 - <del>Local Storage for saving state of order and rendering(2)</del>
 - <del>Implemented Cancel Order Butons (0)</del>
@@ -34,6 +33,13 @@
 - topping screen drops action thingy
 - checkout confetti 
  
+### `JASON's OVERALL TODO`
+- recreate tables 
+- complete checkout page 
+- google maps API
+- add pizza animation
+- images for drinks
+- images for special pizza chooses
 ### `Manager PAGE`
 
 ### `Server PAGE`
