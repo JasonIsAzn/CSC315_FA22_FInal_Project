@@ -9,6 +9,7 @@ export default function Sauces() {
 
   const { sauces, drizzles, meats, veggies, selectedItems, setSelectedItems } =
     useContext(GlobalContext);
+
   if (sauces[sauces.length - 1].value != -1) {
     sauces.push({
       label: "no_sauce",
@@ -21,6 +22,7 @@ export default function Sauces() {
   const [selectedDrizzles, setSelectedDrizzles] = useState(drizzles);
   const [selectedMeats, setSelectedMeats] = useState(meats);
   const [selectedVeggies, setSelectedVeggies] = useState(veggies);
+  let [toppingList, setToppingList] = useState([[], [], [], []]);
 
   let saucesTextFormatted = [];
   for (let i = 0; i < selectedSauce.length; ++i) {
@@ -71,7 +73,7 @@ export default function Sauces() {
       setSelectedSauce(JSON.parse(data));
     } else {
       for (let i = 0; i < selectedSauce.length; i++) {
-        if (selectedSauce.label === "no_sauce") {
+        if (selectedSauce[i].label === "no_sauce") {
           selectedSauce[i].selected = "checked";
         } else {
           selectedSauce[i].selected = "";
@@ -80,6 +82,7 @@ export default function Sauces() {
       setSelectedSauce(JSON.parse(JSON.stringify(selectedSauce)));
     }
 
+    // Load Button Clicked
     for (let i = 0; i < selectedSauce.length; i++) {
       if (selectedSauce[i].selected === "checked") {
         document.getElementById(selectedSauce[i].value).checked = true;
@@ -88,6 +91,39 @@ export default function Sauces() {
       }
     }
   }, []);
+
+  // THIS IS HORRIBLE
+  let [useEffectCount, setUseEffectCount] = useState(0);
+  useEffect(() => {
+    if (useEffectCount < 5) {
+      toppingList = [[], [], [], []];
+      for (let i = 0; i < selectedSauce.length; i++) {
+        if (selectedSauce[i].selected === "checked") {
+          toppingList[0].push(selectedSauce[i].label);
+        }
+      }
+      for (let i = 0; i < selectedMeats.length; i++) {
+        if (selectedMeats[i].selected === "checked") {
+          toppingList[1].push(selectedMeats[i].label);
+        }
+      }
+
+      for (let i = 0; i < selectedVeggies.length; i++) {
+        if (selectedVeggies[i].selected === "checked") {
+          toppingList[2].push(selectedVeggies[i].label);
+        }
+      }
+
+      for (let i = 0; i < selectedDrizzles.length; i++) {
+        if (selectedDrizzles[i].selected === "checked") {
+          toppingList[3].push(selectedDrizzles[i].label);
+        }
+      }
+      setToppingList(JSON.parse(JSON.stringify(toppingList)));
+      useEffectCount = useEffectCount + 1;
+      setUseEffectCount(useEffectCount);
+    }
+  }, [toppingList]);
 
   useEffect(() => {
     const showMeatVeggieOpt = JSON.parse(
@@ -145,6 +181,31 @@ export default function Sauces() {
     }
     setSelectedSauce(JSON.parse(JSON.stringify(selectedSauce)));
     localStorage.setItem("selected-sauce", JSON.stringify(selectedSauce));
+
+    toppingList = [[], [], [], []];
+    for (let i = 0; i < selectedSauce.length; i++) {
+      if (selectedSauce[i].selected === "checked") {
+        toppingList[0].push(selectedSauce[i].label);
+      }
+    }
+    for (let i = 0; i < selectedMeats.length; i++) {
+      if (selectedMeats[i].selected === "checked") {
+        toppingList[1].push(selectedMeats[i].label);
+      }
+    }
+
+    for (let i = 0; i < selectedVeggies.length; i++) {
+      if (selectedVeggies[i].selected === "checked") {
+        toppingList[2].push(selectedVeggies[i].label);
+      }
+    }
+
+    for (let i = 0; i < selectedDrizzles.length; i++) {
+      if (selectedDrizzles[i].selected === "checked") {
+        toppingList[3].push(selectedDrizzles[i].label);
+      }
+    }
+    setToppingList(JSON.parse(JSON.stringify(toppingList)));
   };
 
   // Delete Local Storage
@@ -331,6 +392,7 @@ export default function Sauces() {
             <div>
               {/* Generate Base Sauce */}
               {toppingImages[0].map((item, index) => (
+                // console.log(item.key[selectedSauce[index].label])
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -340,7 +402,7 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.photo + ".png")}
+                    src={require("../../assets/" + item.key[selectedSauce[index].label] + ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -363,7 +425,7 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.photo + ".png")}
+                    src={require("../../assets/" + item.key[selectedMeats[index].label] + ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -381,7 +443,7 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.photo + ".png")}
+                    src={require("../../assets/" +  item.key[selectedVeggies[index].label] + ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -399,15 +461,60 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.photo + ".png")}
+                    src={require("../../assets/" + item.key[selectedDrizzles[index].label] + ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
                 </motion.div>
               ))}
             </div>
-            <div>
-              <h1 class="mt-64 p-5">Toppings List</h1>
+            <div className="mt-64 p-5 ">
+              <div>
+                {toppingList[0].map((item, index) => (
+                  <label className="">
+                    {(toppingList[0].length != 0 && index === 0
+                      ? "Sauce: "
+                      : "") +
+                      item +
+                      (index != toppingList[0].length - 1 ? ", " : "")}
+                  </label>
+                ))}
+              </div>
+
+              <div>
+                {toppingList[1].map((item, index) => (
+                  <label className="">
+                    {(toppingList[1].length != 0 && index === 0
+                      ? "Meat(s): "
+                      : "") +
+                      item +
+                      (index != toppingList[1].length - 1 ? ", " : "")}
+                  </label>
+                ))}
+              </div>
+
+              <div>
+                {toppingList[2].map((item, index) => (
+                  <label className="">
+                    {(toppingList[2].length != 0 && index === 0
+                      ? "Veggie(s): "
+                      : "") +
+                      item +
+                      (index != toppingList[2].length - 1 ? ", " : "")}
+                  </label>
+                ))}
+              </div>
+              <div>
+                {toppingList[3].map((item, index) => (
+                  <label className="">
+                    {(toppingList[3].length != 0 && index === 0
+                      ? "Drizzle(s): "
+                      : "") +
+                      item +
+                      (index != toppingList[3].length - 1 ? ", " : "")}
+                  </label>
+                ))}
+              </div>
             </div>
           </div>
         </div>
