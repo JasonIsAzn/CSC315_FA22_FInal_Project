@@ -6,10 +6,9 @@ import toppingImages from "./images";
 
 export default function Sauces() {
   // prep-sauces data
-  const { drizzles } = useContext(GlobalContext);
-  const [selectedDrizzles, setSelectedDrizzles] = useState(drizzles);
 
-  const { sauces } = useContext(GlobalContext);
+  const { sauces, drizzles, meats, veggies, selectedItems, setSelectedItems } =
+    useContext(GlobalContext);
   if (sauces[sauces.length - 1].value != -1) {
     sauces.push({
       label: "no_sauce",
@@ -17,12 +16,10 @@ export default function Sauces() {
       price: 0,
     });
   }
+
   const [selectedSauce, setSelectedSauce] = useState(sauces);
-
-  const { meats } = useContext(GlobalContext);
+  const [selectedDrizzles, setSelectedDrizzles] = useState(drizzles);
   const [selectedMeats, setSelectedMeats] = useState(meats);
-
-  const { veggies } = useContext(GlobalContext);
   const [selectedVeggies, setSelectedVeggies] = useState(veggies);
 
   let saucesTextFormatted = [];
@@ -157,12 +154,58 @@ export default function Sauces() {
     localStorage.removeItem("selected-drizzles");
     localStorage.removeItem("selected-pizza");
     localStorage.removeItem("selected-sauce");
-    localStorage.removeItem("sauce-count");
     localStorage.removeItem("topping-count");
   };
 
   // Add to Order Function
   const addOrder = () => {
+    console.log("Sauce", selectedSauce);
+    for (let i = 0; i < selectedSauce.length; ++i) {
+      if (selectedSauce[i].selected === "checked") {
+        if (selectedSauce[i].label != "no_sauce") {
+          selectedItems.push({
+            label: selectedSauce[i].label,
+            value: selectedSauce[i].value,
+            price: selectedSauce[i].price,
+          });
+          setSelectedItems(selectedItems);
+        }
+      }
+    }
+
+    for (let i = 0; i < selectedMeats.length; ++i) {
+      if (selectedMeats[i].selected === "checked") {
+        selectedItems.push({
+          label: selectedMeats[i].label,
+          value: selectedMeats[i].value,
+          price: selectedMeats[i].price,
+        });
+        setSelectedItems(selectedItems);
+      }
+    }
+
+    for (let i = 0; i < selectedVeggies.length; ++i) {
+      if (selectedVeggies[i].selected === "checked") {
+        selectedItems.push({
+          label: selectedVeggies[i].label,
+          value: selectedVeggies[i].value,
+          price: selectedVeggies[i].price,
+        });
+        setSelectedItems(selectedItems);
+      }
+    }
+
+    for (let i = 0; i < selectedDrizzles.length; ++i) {
+      if (selectedDrizzles[i].selected === "checked") {
+        selectedItems.push({
+          label: selectedDrizzles[i].label,
+          value: selectedDrizzles[i].value,
+          price: selectedDrizzles[i].price,
+        });
+        setSelectedItems(selectedItems);
+      }
+    }
+
     resetStorage();
     goCustomer();
   };
@@ -174,11 +217,8 @@ export default function Sauces() {
 
   return (
     <div className="w-screen overflow-y-show">
-      <div className="flex justify-center">
-        <img
-          src={require("../../assets/logo.png")}
-          className=".max-w-full and .h-12"
-        />
+      <div className="flex justify-center mt-5">
+        <img src={require("../../assets/logo.png")} className="" />
       </div>
       {/* navigation bar */}
       <div className="flex flex-row mt-2 justify-end">
@@ -247,10 +287,12 @@ export default function Sauces() {
 
       {/* sauce buttons */}
       <div>
-        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Sauce</h1>
+        <h1 class="text-3xl font-bold ml-10 mb-6 mt-10">
+          Choose Sauce (Pick 1)
+        </h1>
         <div className="grid lg:grid-cols-4">
           <div className="grid lg:grid-cols-4 col-span-3">
-            {sauces.map((sauce, index) => (
+            {selectedSauce.map((sauce, index) => (
               <div className="">
                 <input
                   type="checkbox"
@@ -299,6 +341,11 @@ export default function Sauces() {
                 >
                   <img
                     src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                  <img
+                    src={require("../../assets/Basecheese.png")}
                     class="h-64 absolute"
                     alt=""
                   />

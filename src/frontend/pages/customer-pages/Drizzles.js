@@ -1,4 +1,3 @@
-import { LocalGasStationRounded } from "@mui/icons-material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
@@ -165,11 +164,8 @@ export default function Drizzles() {
 
   return (
     <div className="w-screen overflow-y-show">
-      <div className="flex justify-center">
-        <img
-          src={require("../../assets/logo.png")}
-          className=".max-w-full and .h-12"
-        />
+      <div className="flex justify-center mt-5">
+        <img src={require("../../assets/logo.png")} className="" />
       </div>
       {/* navigation bar */}
       <div className="flex flex-row mt-2 justify-end">
@@ -237,7 +233,10 @@ export default function Drizzles() {
       </div>
 
       <div>
-        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Drizzle</h1>
+        <div className="inline-flex">
+          <h1 class="text-3xl font-bold ml-10 mb-6 mt-10">Choose Drizzles</h1>
+          <h2 class="text-3xl font-bold ml-2 mb-6 mt-10">(Pick Any)</h2>
+        </div>
         <div className="grid lg:grid-cols-4">
           <div className="grid lg:grid-cols-4 col-span-3">
             {drizzles.map((drizzle, index) => (
@@ -289,6 +288,11 @@ export default function Drizzles() {
                 >
                   <img
                     src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                  <img
+                    src={require("../../assets/Basecheese.png")}
                     class="h-64 absolute"
                     alt=""
                   />

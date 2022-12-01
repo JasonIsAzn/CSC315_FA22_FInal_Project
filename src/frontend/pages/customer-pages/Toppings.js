@@ -19,6 +19,7 @@ export default function Toppings() {
   const [selectedSauce, setSelectedSauce] = useState(sauces);
 
   let count = localStorage.getItem("topping-count");
+
   let max_topping = JSON.parse(localStorage.getItem("selected-pizza"))
     .topping_amount[1];
 
@@ -35,6 +36,8 @@ export default function Toppings() {
 
   // Render Page
   useEffect(() => {
+    console.log("test");
+
     const data = localStorage.getItem("selected-meats");
     const drizzlesData = localStorage.getItem("selected-drizzles");
     const veggieData = localStorage.getItem("selected-veggies");
@@ -82,6 +85,8 @@ export default function Toppings() {
         document.getElementById(selectedMeats[i].value).checked = false;
       }
     }
+    document.getElementById("topping-count").textContent =
+      "(Pick " + (4 - count) + ")";
   }, []);
 
   useEffect(() => {
@@ -92,6 +97,9 @@ export default function Toppings() {
         document.getElementById(selectedMeats[i].value).checked = false;
       }
     }
+
+    document.getElementById("topping-count").textContent =
+      "(Pick " + (4 - count) + ")";
   });
 
   // routes
@@ -128,17 +136,14 @@ export default function Toppings() {
         count++;
         selectedMeats[index].selected = "checked";
         document.getElementById(id).checked = true;
-        // selectedItems.push({
-        //   label: selectedMeats[index].label,
-        //   value: selectedMeats[index].value,
-        //   price: selectedMeats[index].price,
-        // });
-        // setSelectedItems(selectedItems);
       } else {
         document.getElementById(id).checked = false;
       }
     }
     setSelectedMeats(JSON.parse(JSON.stringify(selectedMeats)));
+
+    document.getElementById("topping-count").textContent =
+      "Pick (" + (4 - count) + ")";
 
     localStorage.setItem("topping-count", count);
     localStorage.setItem("selected-meats", JSON.stringify(selectedMeats));
@@ -167,7 +172,7 @@ export default function Toppings() {
 
   return (
     <div className="w-screen overflow-y-show">
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-5">
         <img
           src={require("../../assets/logo.png")}
           className=".max-w-full and .h-12"
@@ -222,7 +227,12 @@ export default function Toppings() {
 
       {/* meat buttons */}
       <div>
-        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Meat</h1>
+        <div className="inline-flex">
+          <h1 class="text-3xl font-bold ml-10 mb-6 mt-10">Choose Meats</h1>
+          <h2 id="topping-count" class="text-3xl font-bold ml-2 mb-6 mt-10">
+            (Pick 4)
+          </h2>
+        </div>
         <div className="grid lg:grid-cols-4">
           <div className="grid lg:grid-cols-4 col-span-3">
             {selectedMeats.map((meat, index) => (
@@ -272,6 +282,11 @@ export default function Toppings() {
                 >
                   <img
                     src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                  <img
+                    src={require("../../assets/Basecheese.png")}
                     class="h-64 absolute"
                     alt=""
                   />

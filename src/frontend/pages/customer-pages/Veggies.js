@@ -82,6 +82,9 @@ export default function Veggies() {
         document.getElementById(selectedVeggies[i].value).checked = false;
       }
     }
+
+    document.getElementById("topping-count").textContent =
+      "(Pick " + (4 - count) + ")";
   }, []);
 
   useEffect(() => {
@@ -92,6 +95,8 @@ export default function Veggies() {
         document.getElementById(selectedVeggies[i].value).checked = false;
       }
     }
+    document.getElementById("topping-count").textContent =
+      "(Pick " + (4 - count) + ")";
   });
 
   // routes
@@ -132,8 +137,9 @@ export default function Veggies() {
         document.getElementById(id).checked = false;
       }
     }
-
     setSelectedVeggies(JSON.parse(JSON.stringify(selectedVeggies)));
+    document.getElementById("topping-count").textContent =
+      "(Pick " + (4 - count) + ")";
 
     localStorage.setItem("topping-count", count);
     localStorage.setItem("selected-veggies", JSON.stringify(selectedVeggies));
@@ -162,7 +168,7 @@ export default function Veggies() {
 
   return (
     <div className="w-screen overflow-y-show">
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-5">
         <img
           src={require("../../assets/logo.png")}
           className=".max-w-full and .h-12"
@@ -215,7 +221,12 @@ export default function Veggies() {
       </div>
 
       <div>
-        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Veggie</h1>
+        <div className="inline-flex">
+          <h1 class="text-3xl font-bold ml-10 mb-6 mt-10">Choose Meats</h1>
+          <h2 id="topping-count" class="text-3xl font-bold ml-2 mb-6 mt-10">
+            (Pick 4)
+          </h2>
+        </div>
         <div className="grid lg:grid-cols-4">
           <div className="grid lg:grid-cols-4 col-span-3">
             {veggies.map((veggie, index) => (
@@ -267,6 +278,11 @@ export default function Veggies() {
                 >
                   <img
                     src={require("../../assets/" + item.photo + ".png")}
+                    class="h-64 absolute"
+                    alt=""
+                  />
+                  <img
+                    src={require("../../assets/Basecheese.png")}
                     class="h-64 absolute"
                     alt=""
                   />
