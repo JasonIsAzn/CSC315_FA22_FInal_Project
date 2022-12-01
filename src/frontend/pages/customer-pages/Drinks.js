@@ -50,7 +50,7 @@ export default function Drinks() {
     }
   }, []);
 
-  // Render Page - Load onto Page
+  // // Render Page - Load onto Page
   useEffect(() => {
     // Format Selected Drinks
     for (let i = 0; i < selectedDrinks.length; i++) {
@@ -143,8 +143,6 @@ export default function Drinks() {
 
   // plus and minus counter
   const plusMinusCounter = async (event, increment_type, index) => {
-    console.log("plusMinusCounter", increment_type, index);
-    console.log(selectedDrinksCounts);
     if (increment_type === "plus") {
       selectedDrinksCounts[index].count += 1;
     } else {
@@ -173,6 +171,9 @@ export default function Drinks() {
 
   return (
     <div className="h-screen overflow-y-show">
+      <div className="flex justify-center mt-5">
+        <img src={require("../../assets/logo.png")} className="" />
+      </div>
       <div className="w-screen flex justify-start mt-16">
         <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
@@ -203,7 +204,7 @@ export default function Drinks() {
         </button>
       </div>
 
-      <div>
+      <div className="ml-5 mr-5">
         <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Drinks</h1>
         <div className="grid lg:grid-cols-4">
           {drinks.map((drink, index) => (
@@ -218,7 +219,7 @@ export default function Drinks() {
               <label
                 class=""
                 for={drink.value}
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-12 my-1 p-20 rounded-lg text-l flex justify-center items-center"
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold my-1 p-20 rounded-lg text-l flex justify-center min-w-full items-center"
               >
                 {drinksTextFormatted[index]}
               </label>

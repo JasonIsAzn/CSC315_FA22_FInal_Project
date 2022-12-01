@@ -1,18 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import party from "party-js";
 import "./customer_page.css";
 
 export default function Customer() {
-  useEffect(() => {
-    // confetti
-    document.querySelectorAll(".confetti-button").forEach((e) =>
-      e.addEventListener("click", function (e) {
-        party.confetti(this);
-      })
-    );
-  }, []);
-
   // Save Pizza Type
 
   // preset data for button
@@ -74,11 +64,8 @@ export default function Customer() {
 
   return (
     <div className="h-screen overflow-y-show">
-      <div className="flex justify-center">
-        <img
-          src={require("../../assets/logo.png")}
-          className=".max-w-full and .h-12"
-        />
+      <div className="flex justify-center mt-5">
+        <img src={require("../../assets/logo.png")} className="" />
       </div>
       {/* navigation bar */}
       <div className="w-screen flex justify-start mt-16">
@@ -106,21 +93,20 @@ export default function Customer() {
         <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goCheckout}
+          // Added drinks to selectedItems
         >
           Checkout
         </button>
       </div>
 
       {/* choose pizza buttons */}
-      {/* TODO: reformat and design buttons */}
       <div>
-        <h1 class="text-3xl font-bold ml-5 mb-6 mt-10">Choose Pizza</h1>
+        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Pizza</h1>
         <div className="grid lg:grid-cols-4 mx-20 mt-5">
           {pizza_type.map((pizza) => (
             <div>
-              {/* TODO: save pizza type */}
               <button
-                className="w-5.0 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-auto my-5 p-20 rounded-lg text-l flex justify-center items-center confetti-button"
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border text-white font-bold p-24 rounded-lg text-l flex justify-center items-center min-h-full min-w-full whitespace-nowrap"
                 name="pizza-btn"
                 id={pizza.type}
                 onClick={(event) => selectingPizza(event, pizza)}
