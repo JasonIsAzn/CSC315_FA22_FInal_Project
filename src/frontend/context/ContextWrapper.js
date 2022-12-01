@@ -22,6 +22,14 @@ export default function ContextWrapper(props) {
   // stores the max order ID
   const [maxID, setMaxID] = useState(0);
 
+  // needed for managing popups
+  const [zValue, setZValue] = useState("z-0");
+  const [showItemAdder, setShowItemAdder] = useState(false);
+  const [showItemEditor, setShowItemEditor] = useState(false);
+
+  // stores currently selected item
+  const [selectedItem, setSelectedItem] = useState(null);
+
   return (
     <GlobalContext.Provider
       value={{
@@ -50,6 +58,14 @@ export default function ContextWrapper(props) {
         setSelectedItems,
         maxID,
         setMaxID,
+        showItemAdder,
+        setShowItemAdder,
+        zValue,
+        setZValue,
+        selectedItem,
+        setSelectedItem,
+        showItemEditor,
+        setShowItemEditor,
       }}
     >
       {props.children}

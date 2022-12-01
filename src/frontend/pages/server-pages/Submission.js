@@ -3,9 +3,29 @@ import GlobalContext from "../../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// converts date format to ideal form
+function formatDate(date) {
+  let part1 = date.substring(5);
+  let part2 = date.substring(0, 4);
+  let result = part1 + "-" + part2;
+  return result;
+}
+
 export default function Submission() {
-  const { selectedItems, maxID, setSelectedItems, setMaxID } =
-    useContext(GlobalContext);
+  const {
+    selectedItems,
+    maxID,
+    setSelectedItems,
+    setMaxID,
+    allOrders,
+    setAllOrders,
+    listOrders,
+    setListOrders,
+    allItems,
+    setAllItems,
+    listItems,
+    setListItems,
+  } = useContext(GlobalContext);
 
   // stores customer name
   const [customerName, setCustomerName] = useState("");
@@ -53,7 +73,49 @@ export default function Submission() {
       return value;
     };
 
-    // add order information
+    // process order information (frontend)
+    const orderItems = new Set();
+    for (let i = 0; i < selectedItems.length; i++) {
+      orderItems.add(selectedItems[i].label);
+    }
+
+    const newOrder = {
+      id: maxID + 1,
+      customer_name: customerName,
+      total_cost: total(),
+      num_toppings: orderItems.size - 3,
+      time_stamp: formatDate(new Date().toISOString().split("T")[0]),
+      items: orderItems,
+    };
+
+    allOrders.push(newOrder);
+    listOrders.push([
+      newOrder.id,
+      newOrder.customer_name,
+      newOrder.total_cost,
+      newOrder.num_toppings,
+      newOrder.time_stamp,
+    ]);
+
+    setAllOrders(allOrders);
+    setListOrders(listOrders);
+
+    for (let i = 0; i < allItems.length; i++) {
+      if (orderItems.has(allItems[i].name)) {
+        allItems[i].count -= 1;
+      }
+    }
+
+    for (let i = 0; i < listItems.length; i++) {
+      if (orderItems.has(listItems[i][1])) {
+        listItems[i][2] -= 1;
+      }
+    }
+
+    setAllItems(allItems);
+    setListItems(listItems);
+
+    // process order information (backend)
     axios
       .post("http://localhost:5000/order", {
         name: customerName,

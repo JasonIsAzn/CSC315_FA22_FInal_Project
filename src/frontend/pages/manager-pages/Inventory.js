@@ -4,28 +4,23 @@ import axios from "axios";
 import MUIDataTable from "mui-datatables";
 import GlobalContext from "../../context/GlobalContext";
 import DatePicker from "react-datepicker";
-
-// makes item names more formal
-function formatName(name) {
-  let result = "";
-  const data = name.split("_");
-  for (let i = 0; i < data.length; i++) {
-    data[i] = data[i][0].toUpperCase() + data[i].substring(1);
-    result += data[i] + " ";
-  }
-
-  return result.substring(0, result.length - 1);
-}
+import ItemAdder from "../../components/ItemAdder";
+import ItemEditor from "../../components/ItemEditor";
 
 export default function Inventory() {
-  const { listItems, allItems, listOrders, allOrders } =
-    useContext(GlobalContext);
-
-  // stores new item's information
-  const [itemName, setItemName] = useState("");
-  const [count, setCount] = useState("");
-  const [price, setPrice] = useState("");
-  const [type, setType] = useState("");
+  const {
+    listItems,
+    allItems,
+    listOrders,
+    allOrders,
+    showItemAdder,
+    setShowItemAdder,
+    zValue,
+    setZValue,
+    showItemEditor,
+    setShowItemEditor,
+    setSelectedItem,
+  } = useContext(GlobalContext);
 
   // stores information for reports
   const [threshold, setThreshold] = useState("");
@@ -68,30 +63,9 @@ export default function Inventory() {
     viewColumns: false,
     rowsPerPage: 10,
     rowsPerPageOptions: [10, 50, 100],
+    onRowClick: (rowData) => onRowClick(rowData),
+    selectableRows: "none",
   };
-
-  // handles new item creation
-  async function addItem() {
-    axios
-      .post("http://localhost:5000/item/add_item", {
-        name: itemName,
-        price: price,
-        count: count,
-        type: type,
-      })
-      .then(() => {
-        alert("SENT");
-      })
-      .then(() => {
-        setCount(0);
-        setItemName("");
-        setPrice(0.0);
-        setType("");
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }
 
   // generates data for restock report
   const handleRestockReport = () => {
@@ -110,7 +84,7 @@ export default function Inventory() {
     // used to store each items' current and past inventory count
     let quants = new Map();
     for (let i = 0; i < allItems.length; i++) {
-      quants.set(formatName(allItems[i].name), [
+      quants.set(allItems[i].name, [
         Number(allItems[i].count),
         Number(allItems[i].count),
       ]);
@@ -123,31 +97,25 @@ export default function Inventory() {
       if (orderDate >= begin) {
         const items = allOrders[i].items;
         for (const item of items) {
-          quants.set(formatName(item), [
-            quants.get(formatName(item))[0],
-            quants.get(formatName(item))[1] + 1,
-          ]);
+          quants.set(item, [quants.get(item)[0], quants.get(item)[1] + 1]);
         }
       }
     }
 
     // find all items with sold proportion <= .10
-    let badItems = new Set();
-    for (const [key, value] of quants) {
-      if (value[0] / value[1] > 0.9) {
-        badItems.add(key);
-      }
-    }
+    // let badItems = new Set();
+    // for (const [key, value] of quants) {
+    //   if (value[0] / value[1] > 0.9) {
+    //     badItems.add(key);
+    //   }
+    // }
 
     for (let i = 0; i < listItems.length; i++) {
-      if (badItems.has(listItems[i][1])) {
-        let ratio =
-          (
-            1 -
-            quants.get(listItems[i][1])[0] / quants.get(listItems[i][1])[1]
-          ).toPrecision(4) * 100;
-        excessItems.push([listItems[i][1], ratio]);
-      }
+      // if (badItems.has(listItems[i][1])) {}
+      let ratio =
+        (1 - quants.get(listItems[i][1])[0] / quants.get(listItems[i][1])[1]) *
+        100;
+      excessItems.push([listItems[i][1], ratio.toPrecision(4)]);
     }
 
     setExcessItems(excessItems);
@@ -168,18 +136,24 @@ export default function Inventory() {
   // determines which columns to display based on data in table (TODO)
   const determineColumns = () => {
     if (displayData === 0) {
-      return ["id", "Name", "Count", "Price", "Type"];
+      return [
+        { name: "id", options: { display: false } },
+        "Name",
+        "Count",
+        "Price",
+        "Type",
+      ];
     } else if (displayData === 1) {
-      return ["Item Name", "Count"];
+      return [{ name: "Item Name", options: { display: true } }, "Count"];
     } else {
-      return ["Item Name", "% Sold"];
+      return [{ name: "Item Name", options: { display: true } }, "% Sold"];
     }
   };
 
   // determines which title the data table has
   const determineTitle = () => {
     if (displayData === 0) {
-      return "Inventory Contents";
+      return "Inventory Content";
     } else if (displayData === 1) {
       return "Restock Report";
     } else {
@@ -196,8 +170,34 @@ export default function Inventory() {
     setStartDate("");
   };
 
+  // displays item adder popup
+  const openItemAdder = () => {
+    setShowItemAdder(true);
+    setZValue("-z-10");
+  };
+
+  // displays item editor popup when item is selected
+  const onRowClick = (rowData) => {
+    if (displayData === 0) {
+      for (let i = 0; i < allItems.length; i++) {
+        if (rowData[1] === allItems[i].name) {
+          setSelectedItem(allItems[i]);
+          break;
+        }
+      }
+
+      setShowItemEditor(true);
+      setZValue("-z-10");
+    }
+  };
+
   return (
     <div className="h-screen w-full fixed left-0 top-0">
+      <div className="z-50">
+        {showItemAdder && <ItemAdder />}
+        {showItemEditor && <ItemEditor />}
+      </div>
+
       {/* header contents start here */}
       <div className="w-screen flex justify-center mt-16">
         <button
@@ -233,6 +233,12 @@ export default function Inventory() {
       <div className="flex flex-row">
         {/* sidebar contents start here */}
         <aside className="border mt-[2%] mr-[1%] w-1/5 rounded-lg flex flex-col items-center py-[1%] h-screen">
+          <button
+            className="my-[1%] bg-[#4FC3F7] border rounded-lg px-[3%] mb-[5%] w-[85%] py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold text-md"
+            onClick={openItemAdder}
+          >
+            Add New Item
+          </button>
           <div className="border w-[90%] items-center justify-center rounded-lg flex flex-col">
             <h1 className="font-semibold text-gray-600">Restock Report</h1>
             <h3 className="text-gray-500 px-[12.5%] mb-[3%]">
@@ -289,60 +295,15 @@ export default function Inventory() {
         </aside>
         {/* sidebar contents end here */}
 
-        <div className="px-[2%] flex flex-col w-4/5 h-auto">
-          {/* add item contents start here */}
-          <div className="flex justify-center items-center">
-            <div className="w-3/4 ml-8 grid grid-cols-2 grid-rows-2 gap-y-[20%]">
-              <input
-                type="text"
-                className="h-8 mx-[13%] mt-10 border border-1 border-black hover:border-gray-500 focus:ring-0 focus:outline-none rounded-lg text-xl"
-                placeholder="Item Name"
-                onChange={(e) => {
-                  setItemName(e.target.value);
-                }}
-              />
-              <input
-                type="text"
-                className="h-8 mx-[13%] mt-10 border border-1 border-black hover:border-gray-500 focus:ring-0 focus:outline-none rounded-lg text-xl"
-                placeholder="Count"
-                onChange={(e) => {
-                  setCount(e.target.value);
-                }}
-              />
-              <input
-                type="text"
-                className="h-8 mx-[13%] border border-1 border-black hover:border-gray-500 focus:ring-0 focus:outline-none rounded-lg text-xl"
-                placeholder="Price"
-                onChange={(e) => {
-                  setPrice(e.target.value);
-                }}
-              />
-              <input
-                type="text"
-                className="h-8 mx-[13%] border border-1 border-black hover:border-gray-500 focus:ring-0 focus:outline-none rounded-lg text-xl"
-                placeholder="Type"
-                onChange={(e) => {
-                  setType(e.target.value);
-                }}
-              />
-            </div>
-            <button
-              className="w-32 ml-8 border-[#4FC3F7] border-2 rounded-lg flex justify-center items-center text-[#4FC3F7] text-xl font-bold"
-              onClick={addItem}
-            >
-              Add item
-            </button>
-          </div>
-          {/* add item contents end here */}
-
-          <div>
-            <MUIDataTable
-              title={determineTitle()}
-              data={determineData()}
-              columns={determineColumns()}
-              options={options}
-            />
-          </div>
+        <div
+          className={`items-center justify-center px-[3%] pt-[3%] w-4/5 ${zValue}`}
+        >
+          <MUIDataTable
+            title={determineTitle()}
+            data={determineData()}
+            columns={determineColumns()}
+            options={options}
+          />
         </div>
       </div>
     </div>

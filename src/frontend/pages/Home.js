@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import GlobalContext from "../context/GlobalContext";
 
 export default function Home() {
+  const { listOrders, allOrders, setListOrders } = useContext(GlobalContext);
+
+  // misc. data activities
+  for (let i = 0; i < listOrders.length; i++) {
+    listOrders[i][3] = allOrders[i].num_toppings;
+  }
+  setListOrders(listOrders);
+
   const navigate = useNavigate();
 
   // sends the user to the Manager page

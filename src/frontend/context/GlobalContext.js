@@ -28,6 +28,14 @@ const GlobalContext = React.createContext({
   setSelectedItems: () => {},
   maxID: 0,
   setMaxID: () => {},
+  showItemAdder: false,
+  setShowItemAdder: () => {},
+  zValue: "z-0",
+  setZValue: () => {},
+  selectedItem: null,
+  setSelectedItem: () => {},
+  showItemEditor: false,
+  setShowItemEditor: () => {},
 });
 
 export default GlobalContext;
