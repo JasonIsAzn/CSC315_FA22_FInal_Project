@@ -82,6 +82,14 @@ export default function Sauces() {
       setSelectedSauce(JSON.parse(JSON.stringify(selectedSauce)));
     }
 
+
+    localStorage.setItem("selected-sauce", JSON.stringify(selectedSauce));
+    localStorage.setItem("selected-meats", JSON.stringify(selectedMeats));
+    localStorage.setItem("selected-veggies", JSON.stringify(selectedVeggies));
+    localStorage.setItem("selected-drizzles", JSON.stringify(selectedDrizzles));
+
+
+
     // Load Button Clicked
     for (let i = 0; i < selectedSauce.length; i++) {
       if (selectedSauce[i].selected === "checked") {
