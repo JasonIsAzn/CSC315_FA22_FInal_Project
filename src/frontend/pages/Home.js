@@ -28,6 +28,10 @@ export default function Home() {
     navigate("/customer");
   };
 
+  const goLocations = () => {
+    navigate("/locations");
+  }
+
   // sends the user back to login page
   const logout = () => {
     navigate("/");
@@ -67,6 +71,13 @@ export default function Home() {
             onClick={goServer}
           >
             Server
+          </button>
+
+          <button
+            className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl "
+            onClick={goLocations}
+          >
+            Locations
           </button>
         </div>
       </div>
