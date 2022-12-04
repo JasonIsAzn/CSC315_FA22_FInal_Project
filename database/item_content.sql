@@ -1,6 +1,7 @@
 INSERT INTO item ("name", count, price, "type") VALUES ('alfredo', 426, 2.5, 'sauce');
 INSERT INTO item ("name", count, price, "type") VALUES ('traditional_red', 55, 1.25, 'sauce');
 INSERT INTO item ("name", count, price, "type") VALUES ('zesty_red', 433, 1.75, 'sauce');
+INSERT INTO item ("name", count, price, "type") VALUES ('pesto', 426, 2.5, 'sauce');
 INSERT INTO item ("name", count, price, "type") VALUES ('regular', 110, 1.5, 'dough');
 INSERT INTO item ("name", count, price, "type") VALUES ('cauliflower', 243, 2.5, 'dough');
 INSERT INTO item ("name", count, price, "type") VALUES ('diced_ham', 243, 1.25, 'topping-meat');

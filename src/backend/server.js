@@ -126,19 +126,14 @@ app.post("/order_item", async (req, res) => {
 });
 
 // adds new item
-app.post("/item/add_item", async (req, res) => {
+app.post("/item", async (req, res) => {
   try {
-    await pool
-      .query(
-        "INSERT INTO item (name, count, price, type) VALUES ($1, $2, $3, $4);",
-        [req.body.name, req.body.count, req.body.price, req.body.type]
-      )
-      .then((inserted) => {
-        res.status(200).send({
-          response: `Inserted ${inserted.rowCount} rows`,
-        });
-      })
-      .catch((err) => res.status(500).send({ error: err }));
+    const newItem = await pool.query(
+      "INSERT INTO item (name, count, price, type) VALUES ($1, $2, $3, $4);",
+      [req.body.name, req.body.count, req.body.price, req.body.type]
+    );
+
+    res.end();
   } catch (err) {
     console.log(err.message);
   }
@@ -161,6 +156,20 @@ app.put("/item/count", async (req, res) => {
         format_putIC(values) +
         ";",
       []
+    );
+
+    res.end();
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+// updates an item's information
+app.put("/item", async (req, res) => {
+  try {
+    const updateItem = await pool.query(
+      'UPDATE "item" SET name = $1, count = $2, price = $3 WHERE id = $4;',
+      [req.body.name, req.body.count, req.body.price, req.body.id]
     );
 
     res.end();

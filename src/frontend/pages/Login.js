@@ -58,14 +58,20 @@ export default function Login() {
   useEffect(() => {
     axios.get("http://localhost:5001/item").then((result) => {
       // store all item data
-      setAllItems(result.data);
       const itemData = result.data;
+
+      // format names more appropriately
+      for (let i = 0; i < itemData.length; i++) {
+        itemData[i].name = formatName(itemData[i].name);
+      }
+
+      setAllItems(itemData);
 
       // setup item storage for MUI data tables
       for (let i = 0; i < itemData.length; i++) {
         let item = [];
         item.push(itemData[i].id);
-        item.push(formatName(itemData[i].name));
+        item.push(itemData[i].name);
         item.push(itemData[i].count);
         item.push(itemData[i].price);
         item.push(itemData[i].type);
@@ -78,37 +84,37 @@ export default function Login() {
       for (let i = 0; i < itemData.length; i++) {
         if (itemData[i].type === "sauce" && itemData[i].name !== "regular") {
           sauces.push({
-            label: formatName(itemData[i].name),
+            label: itemData[i].name,
             value: itemData[i].id,
             price: itemData[i].price,
           });
         } else if (itemData[i].type === "topping-meat") {
           meats.push({
-            label: formatName(itemData[i].name),
+            label: itemData[i].name,
             value: itemData[i].id,
             price: itemData[i].price,
           });
         } else if (itemData[i].type === "drizzle") {
           drizzles.push({
-            label: formatName(itemData[i].name),
+            label: itemData[i].name,
             value: itemData[i].id,
             price: itemData[i].price,
           });
         } else if (itemData[i].type === "topping-veggie") {
           veggies.push({
-            label: formatName(itemData[i].name),
+            label: itemData[i].name,
             value: itemData[i].id,
             price: itemData[i].price,
           });
         } else if (itemData[i].type === "drink") {
           drinks.push({
-            label: formatName(itemData[i].name),
+            label: itemData[i].name,
             value: itemData[i].id,
             price: itemData[i].price,
           });
         } else {
           doughs.push({
-            label: formatName(itemData[i].name),
+            label: itemData[i].name,
             value: itemData[i].id,
             price: itemData[i].price,
           });
@@ -167,7 +173,7 @@ export default function Login() {
               j < allOIs.length &&
               orderData[i].id === allOIs[j].order_id
             ) {
-              items.add(allOIs[j].name);
+              items.add(formatName(allOIs[j].name));
               j++;
             }
 
@@ -175,6 +181,7 @@ export default function Login() {
             orderData[i].time_stamp = formatDate(
               String(orderData[i].time_stamp).substring(0, 10)
             );
+            orderData[i].num_toppings = items.size - 3;
           }
 
           setAllOrders(orderData);

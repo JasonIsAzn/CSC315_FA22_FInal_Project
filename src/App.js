@@ -11,6 +11,7 @@ import Veggies from "./frontend/pages/customer-pages/Veggies";
 import Drizzles from "./frontend/pages/customer-pages/Drizzles";
 import Customer from "./frontend/pages/customer-pages/Customer";
 import Home from "./frontend/pages/Home";
+import Locations from "./frontend/pages/Locations"
 import Submission from "./frontend/pages/server-pages/Submission";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -21,6 +22,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/locations" element={<Locations/>} />
 
       {/* Server Routes */}
       <Route path="/server" element={<Server />} />

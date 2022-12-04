@@ -4,20 +4,8 @@ import MUIDataTable from "mui-datatables";
 import GlobalContext from "../../context/GlobalContext";
 import DatePicker from "react-datepicker";
 
-// makes item names more formal
-function formatName(name) {
-  let result = "";
-  const data = name.split("_");
-  for (let i = 0; i < data.length; i++) {
-    data[i] = data[i][0].toUpperCase() + data[i].substring(1);
-    result += data[i] + " ";
-  }
-
-  return result.substring(0, result.length - 1);
-}
-
 export default function Sales() {
-  const { listOrders, allOrders } = useContext(GlobalContext);
+  const { listOrders, allOrders, setListOrders } = useContext(GlobalContext);
 
   // stores information for reports
   const [startDate, setStartDate] = useState("");
@@ -61,6 +49,7 @@ export default function Sales() {
     viewColumns: false,
     rowsPerPage: 10,
     rowsPerPageOptions: [10, 50, 100],
+    selectableRows: "none",
   };
 
   // generates data for sales report
@@ -82,36 +71,35 @@ export default function Sales() {
   // generates data for combo report (TODO) [FIXME]
   const handleComboReport = () => {
     const combos = [
-      ["Smoked Chicken", "Bbq Sauce", 0],
-      ["Pepperoni", "Ftn Drink", 0],
+      ["Smoked Chicken", "BBQ Sauce", 0],
+      ["Pepperoni", "Fountain Drink", 0],
       ["Smoked Chicken", "Pineapple", 0],
-      ["Cauliflower", "Ranch", 0],
-      ["Pepsi", "Meatball", 0],
+      ["Cauliflower Dough", "Ranch", 0],
+      ["Pepsi", "Meatballs", 0],
       ["Spinach", "Alfredo", 0],
       ["Pepperoni", "Jalapenos", 0],
-      ["Cauliflower", "Mushrooms", 0],
-      ["Zesty Red", "Meatball", 0],
+      ["Cauliflower Dough", "Mushrooms", 0],
+      ["Zesty Red", "Meatballs", 0],
       ["Pepperoni", "Green Peppers", 0],
       ["Salami", "Black Olives", 0],
       ["Banana Peppers", "Smoked Chicken", 0],
       ["Pepperoni", "Gatorade", 0],
-      ["Alfredo", "Cauliflower", 0],
+      ["Alfredo", "Cauliflower Dough", 0],
       ["Mushrooms", "Smoked Chicken", 0],
-      ["Meatball", "Bbq Sauce", 0],
-      ["Smoked Chicken", "Siracha", 0],
-      ["Diced Ham", "Bbq Sauce", 0],
-      ["Spinach", "Meatball", 0],
+      ["Meatballs", "BBQ Sauce", 0],
+      ["Smoked Chicken", "Sriracha", 0],
+      ["Diced Ham", "BBQ Sauce", 0],
+      ["Spinach", "Meatballs", 0],
       ["Pepperoni", "Mushrooms", 0],
     ];
 
     for (let i = 0; i < allOrders.length; i++) {
       const orderDate = new Date(allOrders[i].time_stamp);
-      if (orderDate >= startDate) {
+      if (orderDate >= startDateCombo) {
         let items = new Set();
         const data = allOrders[i].items;
-
         for (const item of data) {
-          items.add(formatName(item));
+          items.add(item);
         }
 
         for (let j = 0; j < combos.length; j++) {
@@ -140,11 +128,27 @@ export default function Sales() {
   // determines which columns to display based on data in table (TODO)
   const determineColumns = () => {
     if (displayData === 0) {
-      return ["id", "Customer Name", "Cost", "# Toppings", "Date"];
+      return [
+        { name: "id", options: { display: false } },
+        "Customer Name",
+        "Cost",
+        "# Toppings",
+        "Date",
+      ];
     } else if (displayData === 1) {
-      return ["id", "Customer Name", "Cost", "# Toppings", "Date"];
+      return [
+        { name: "id", options: { display: false } },
+        "Customer Name",
+        "Cost",
+        "# Toppings",
+        "Date",
+      ];
     } else {
-      return ["Item 1", "Item 2", "Frequency"];
+      return [
+        { name: "Item 1", options: { display: true } },
+        "Item 2",
+        "Frequency",
+      ];
     }
   };
 

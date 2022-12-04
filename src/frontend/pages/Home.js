@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import GlobalContext from "../context/GlobalContext";
 
 export default function Home() {
+  const { listOrders, allOrders, setListOrders } = useContext(GlobalContext);
+
+  // misc. data activities
+  for (let i = 0; i < listOrders.length; i++) {
+    listOrders[i][3] = allOrders[i].num_toppings;
+  }
+  setListOrders(listOrders);
+
   const navigate = useNavigate();
 
   // sends the user to the Manager page
@@ -18,6 +27,10 @@ export default function Home() {
   const goCustomer = () => {
     navigate("/customer");
   };
+
+  const goLocations = () => {
+    navigate("/locations");
+  }
 
   // sends the user back to login page
   const logout = () => {
@@ -58,6 +71,13 @@ export default function Home() {
             onClick={goServer}
           >
             Server
+          </button>
+
+          <button
+            className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl "
+            onClick={goLocations}
+          >
+            Locations
           </button>
         </div>
       </div>

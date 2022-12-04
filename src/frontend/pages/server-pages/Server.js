@@ -17,6 +17,14 @@ export default function Server() {
     setSelectedItems,
   } = useContext(GlobalContext);
 
+  // stores items selected from each group
+  const [selectedDough, setSelectedDough] = useState([]);
+  const [selectedSauce, setSelectedSauce] = useState([]);
+  const [selectedMeat, setSelectedMeat] = useState([]);
+  const [selectedDrizzle, setSelectedDrizzle] = useState([]);
+  const [selectedVeggie, setSelectedVeggie] = useState([]);
+  const [selectedDrink, setSelectedDrink] = useState([]);
+
   const navigate = useNavigate();
 
   const goHome = () => {
@@ -37,12 +45,79 @@ export default function Server() {
       for (let i = 0; i < item.length; i++) {
         if (!selectedItems.includes(item[i])) {
           selectedItems.push(item[i]);
+          determineGroup(item[i]);
         }
       }
     } else {
       selectedItems.push(item);
+      determineGroup(item);
     }
     setSelectedItems(selectedItems);
+  };
+
+  // clears selected items list
+  const handleClearContents = () => {
+    setSelectedItems([]);
+    setSelectedDough([]);
+    setSelectedSauce([]);
+    setSelectedMeat([]);
+    setSelectedDrizzle([]);
+    setSelectedVeggie([]);
+    setSelectedDrink([]);
+  };
+
+  // determines which group to associate selected Item with
+  const determineGroup = (item) => {
+    let nameDoughs = new Set();
+    let nameSauces = new Set();
+    let nameMeats = new Set();
+    let nameDrizzles = new Set();
+    let nameVeggies = new Set();
+    let nameDrinks = new Set();
+
+    for (const dough of doughs) {
+      nameDoughs.add(dough.label);
+    }
+
+    for (const sauce of sauces) {
+      nameSauces.add(sauce.label);
+    }
+
+    for (const meat of meats) {
+      nameMeats.add(meat.label);
+    }
+
+    for (const drizzle of drizzles) {
+      nameDrizzles.add(drizzle.label);
+    }
+
+    for (const veggie of veggies) {
+      nameVeggies.add(veggie.label);
+    }
+
+    for (const drink of drinks) {
+      nameDrinks.add(drink.label);
+    }
+
+    if (nameDoughs.has(item.label)) {
+      selectedDough.push(item);
+      setSelectedDough(selectedDough);
+    } else if (nameSauces.has(item.label)) {
+      selectedSauce.push(item);
+      setSelectedSauce(selectedSauce);
+    } else if (nameMeats.has(item.label)) {
+      selectedMeat.push(item);
+      setSelectedMeat(selectedMeat);
+    } else if (nameDrizzles.has(item.label)) {
+      selectedDrizzle.push(item);
+      setSelectedDrizzle(selectedDrizzle);
+    } else if (nameVeggies.has(item.label)) {
+      selectedVeggie.push(item);
+      setSelectedVeggie(selectedVeggie);
+    } else if (nameDrinks.has(item.label)) {
+      selectedDrink.push(item);
+      setSelectedDrink(selectedDrink);
+    }
   };
 
   // used to style 'react-select' drop downs
@@ -63,6 +138,12 @@ export default function Server() {
       "::-webkit-scrollbar-thumb:hover": {
         background: "#555",
       },
+    }),
+
+    control: (base, state) => ({
+      ...base,
+      height: "60px",
+      "min-height": "60px",
     }),
   };
 
@@ -85,7 +166,7 @@ export default function Server() {
       </div>
 
       {/* main area with item content */}
-      <div className="p-[4%]">
+      <div className="p-[2%]">
         <div className="grid grid-cols-3 gap-x-[8%] mb-[12%]">
           <div className="flex flex-col">
             <h1 className="text-black mb-[3%] font-semibold text-3xl">Dough</h1>
@@ -100,6 +181,7 @@ export default function Server() {
                 DropdownIndicator: () => null,
                 IndicatorSeparator: () => null,
               }}
+              value={selectedDough}
             />
           </div>
 
@@ -117,6 +199,7 @@ export default function Server() {
                 DropdownIndicator: () => null,
                 IndicatorSeparator: () => null,
               }}
+              value={selectedSauce}
             />
           </div>
 
@@ -134,6 +217,7 @@ export default function Server() {
                 DropdownIndicator: () => null,
                 IndicatorSeparator: () => null,
               }}
+              value={selectedMeat}
             />
           </div>
         </div>
@@ -155,6 +239,7 @@ export default function Server() {
                 DropdownIndicator: () => null,
                 IndicatorSeparator: () => null,
               }}
+              value={selectedDrizzle}
             />
           </div>
 
@@ -174,6 +259,7 @@ export default function Server() {
                 DropdownIndicator: () => null,
                 IndicatorSeparator: () => null,
               }}
+              value={selectedVeggie}
             />
           </div>
 
@@ -191,13 +277,21 @@ export default function Server() {
                 DropdownIndicator: () => null,
                 IndicatorSeparator: () => null,
               }}
+              value={selectedDrink}
             />
           </div>
         </div>
       </div>
-      <div className="mt-[8%] items-center justify-center flex">
+      <div className="mt-[2%] items-center justify-center flex flex flex-col">
         <button
-          className="px-[15%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center"
+          className="px-[7.5%] py-[1%] bg-yellow-400 hover:bg-white hover:text-yellow-600 hover:border-yellow-600 hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center mb-[2%]"
+          onClick={handleClearContents}
+        >
+          Clear Contents
+        </button>
+
+        <button
+          className="px-[15%] py-[1%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center"
           onClick={goSubmission}
         >
           Confirm Contents
