@@ -82,14 +82,6 @@ export default function Sauces() {
       setSelectedSauce(JSON.parse(JSON.stringify(selectedSauce)));
     }
 
-
-    localStorage.setItem("selected-sauce", JSON.stringify(selectedSauce));
-    localStorage.setItem("selected-meats", JSON.stringify(selectedMeats));
-    localStorage.setItem("selected-veggies", JSON.stringify(selectedVeggies));
-    localStorage.setItem("selected-drizzles", JSON.stringify(selectedDrizzles));
-
-
-
     // Load Button Clicked
     for (let i = 0; i < selectedSauce.length; i++) {
       if (selectedSauce[i].selected === "checked") {
@@ -410,7 +402,9 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedSauce[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      item.key[selectedSauce[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -433,7 +427,9 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedMeats[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      item.key[selectedMeats[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -451,7 +447,9 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" +  item.key[selectedVeggies[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      item.key[selectedVeggies[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -469,7 +467,9 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedDrizzles[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      item.key[selectedDrizzles[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
