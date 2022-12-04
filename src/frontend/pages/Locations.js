@@ -54,10 +54,7 @@ export default function Locations() {
   if (!isLoaded) return "Loading Maps";
 
   async function calculateRoute() {
-    if (
-      locationRef.current.value === "" ||
-      destinationRef.current.value === ""
-    ) {
+    if (locationRef.current.value === "") {
       return;
     }
     console.log(locationRef.current.value);
