@@ -73,7 +73,7 @@ export default function Inventory() {
   // handles new item creation
   async function addItem() {
     axios
-      .post("http://localhost:5000/item/add_item", {
+      .post("http://localhost:5001/item/add_item", {
         name: itemName,
         price: price,
         count: count,
