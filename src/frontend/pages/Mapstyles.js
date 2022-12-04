@@ -10,7 +10,7 @@ export default [
         lightness: "-3",
       },
       {
-        visibility: "off",
+        visibility: "on",
       },
       {
         weight: "1.18",
