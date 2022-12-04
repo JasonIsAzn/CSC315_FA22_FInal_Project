@@ -43,7 +43,6 @@ export default function Checkout() {
 
   // sends the user to the Home page
   const goBack = () => {
-    setSelectedItems([]);
     navigate("/customer");
   };
 

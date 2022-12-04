@@ -10,7 +10,7 @@ export default [
         lightness: "-3",
       },
       {
-        visibility: "on",
+        visibility: "off",
       },
       {
         weight: "1.18",
@@ -22,7 +22,7 @@ export default [
     elementType: "labels",
     stylers: [
       {
-        visibility: "on",
+        visibility: "off",
       },
     ],
   },
@@ -31,7 +31,7 @@ export default [
     elementType: "labels",
     stylers: [
       {
-        visibility: "on",
+        visibility: "off",
       },
     ],
   },
@@ -52,7 +52,7 @@ export default [
     elementType: "labels",
     stylers: [
       {
-        visibility: "on",
+        visibility: "off",
       },
     ],
   },
@@ -70,7 +70,7 @@ export default [
     elementType: "labels",
     stylers: [
       {
-        visibility: "on",
+        visibility: "off",
       },
     ],
   },
@@ -91,7 +91,7 @@ export default [
     elementType: "labels",
     stylers: [
       {
-        visibility: "on",
+        visibility: "off",
       },
       {
         lightness: "12",

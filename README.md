@@ -14,10 +14,13 @@
 - Simple Counter of Number of Items (4/1)
   - This counter will require more logic than topping
   - FIRST DO Checkout Page Task.
+  - (can easily be done with a counter, if checkout is not implemented)
 
 ### `APIs`
 
 - google maps API (5/4)
+  - list of locations
+  - click location and set as desintation
 
 ### `Checkout Page`
 
@@ -40,7 +43,6 @@
       - display needs button to delete item
       - seleectedItems should be made when clicking "confirm" using the new list
         - can simply iterate through new list
-      
 
 ### `Special/Drinks`
 
