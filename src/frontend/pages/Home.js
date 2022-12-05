@@ -32,7 +32,7 @@ export default function Home() {
 
   const goLocations = () => {
     navigate("/locations");
-  }
+  };
 
   // sends the user back to login page
   const logout = () => {

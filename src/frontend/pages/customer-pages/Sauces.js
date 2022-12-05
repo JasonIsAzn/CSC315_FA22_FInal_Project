@@ -7,8 +7,14 @@ import toppingImages from "./images";
 export default function Sauces() {
   // prep-sauces data
 
-  const { sauces, drizzles, meats, veggies, selectedItems, setSelectedItems } =
-    useContext(GlobalContext);
+  const {
+    sauces,
+    drizzles,
+    meats,
+    veggies,
+    prepSelectedItems,
+    setPrepSelectedItems,
+  } = useContext(GlobalContext);
 
   if (sauces[sauces.length - 1].value != -1) {
     sauces.push({
@@ -81,14 +87,6 @@ export default function Sauces() {
       }
       setSelectedSauce(JSON.parse(JSON.stringify(selectedSauce)));
     }
-
-
-    localStorage.setItem("selected-sauce", JSON.stringify(selectedSauce));
-    localStorage.setItem("selected-meats", JSON.stringify(selectedMeats));
-    localStorage.setItem("selected-veggies", JSON.stringify(selectedVeggies));
-    localStorage.setItem("selected-drizzles", JSON.stringify(selectedDrizzles));
-
-
 
     // Load Button Clicked
     for (let i = 0; i < selectedSauce.length; i++) {
@@ -228,52 +226,53 @@ export default function Sauces() {
 
   // Add to Order Function
   const addOrder = () => {
-    console.log("Sauce", selectedSauce);
+    prepSelectedItems.push([]);
+    var my_order = { type: "pizza", items: [] };
+    prepSelectedItems[prepSelectedItems.length - 1].push(my_order);
+
     for (let i = 0; i < selectedSauce.length; ++i) {
       if (selectedSauce[i].selected === "checked") {
         if (selectedSauce[i].label != "no_sauce") {
-          selectedItems.push({
+          prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
             label: selectedSauce[i].label,
             value: selectedSauce[i].value,
             price: selectedSauce[i].price,
           });
-          setSelectedItems(selectedItems);
         }
       }
     }
 
     for (let i = 0; i < selectedMeats.length; ++i) {
       if (selectedMeats[i].selected === "checked") {
-        selectedItems.push({
+        prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
           label: selectedMeats[i].label,
           value: selectedMeats[i].value,
           price: selectedMeats[i].price,
         });
-        setSelectedItems(selectedItems);
       }
     }
 
     for (let i = 0; i < selectedVeggies.length; ++i) {
       if (selectedVeggies[i].selected === "checked") {
-        selectedItems.push({
+        prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
           label: selectedVeggies[i].label,
           value: selectedVeggies[i].value,
           price: selectedVeggies[i].price,
         });
-        setSelectedItems(selectedItems);
       }
     }
 
     for (let i = 0; i < selectedDrizzles.length; ++i) {
       if (selectedDrizzles[i].selected === "checked") {
-        selectedItems.push({
+        prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
           label: selectedDrizzles[i].label,
           value: selectedDrizzles[i].value,
           price: selectedDrizzles[i].price,
         });
-        setSelectedItems(selectedItems);
       }
     }
+
+    setPrepSelectedItems(prepSelectedItems);
 
     resetStorage();
     goCustomer();
@@ -399,8 +398,7 @@ export default function Sauces() {
             </motion.div>
             <div>
               {/* Generate Base Sauce */}
-              {toppingImages[0].map((item, index) => (
-                // console.log(item.key[selectedSauce[index].label])
+              {sauces.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -410,7 +408,9 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedSauce[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      toppingImages[0][0].key[selectedSauce[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -423,7 +423,7 @@ export default function Sauces() {
               ))}
 
               {/* Generate Meats */}
-              {toppingImages[1].map((item, index) => (
+              {meats.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -433,7 +433,9 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedMeats[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      toppingImages[1][0].key[selectedMeats[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -441,7 +443,7 @@ export default function Sauces() {
               ))}
 
               {/* Generate Veggies */}
-              {toppingImages[2].map((item, index) => (
+              {veggies.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -451,7 +453,9 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" +  item.key[selectedVeggies[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      toppingImages[2][0].key[selectedVeggies[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -459,7 +463,7 @@ export default function Sauces() {
               ))}
 
               {/* Generate Drizzles */}
-              {toppingImages[3].map((item, index) => (
+              {drizzles.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -469,13 +473,15 @@ export default function Sauces() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedDrizzles[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      toppingImages[3][0].key[selectedDrizzles[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
                 </motion.div>
               ))}
-            </div>
+            </div>{" "}
             <div className="mt-64 p-5 ">
               <div>
                 {toppingList[0].map((item, index) => (

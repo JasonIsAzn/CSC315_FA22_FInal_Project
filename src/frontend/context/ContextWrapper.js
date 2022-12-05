@@ -18,6 +18,7 @@ export default function ContextWrapper(props) {
   const [veggies, setVeggies] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [prepSelectedItems, setPrepSelectedItems] = useState([]);
 
   // stores the max order ID
   const [maxID, setMaxID] = useState(0);
@@ -54,6 +55,8 @@ export default function ContextWrapper(props) {
         setVeggies,
         drinks,
         setDrinks,
+        prepSelectedItems,
+        setPrepSelectedItems,
         selectedItems,
         setSelectedItems,
         maxID,
