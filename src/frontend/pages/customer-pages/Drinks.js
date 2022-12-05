@@ -11,8 +11,10 @@ export default function Drinks() {
     prepSelectedItems,
     setPrepSelectedItems,
   } = useContext(GlobalContext);
+
   const [selectedDrinks, setSelectedDrinks] = useState(drinks);
   const [selectedDrinksCounts, setSelectedDrinksCounts] = useState([]);
+
   let drinksTextFormatted = [];
   for (let i = 0; i < selectedDrinks.length; ++i) {
     let formatText = selectedDrinks[i].label;
@@ -33,6 +35,8 @@ export default function Drinks() {
   // Render Page - Initial Load Data
   useEffect(() => {
     // Selected Drinks
+    console.log(selectedDrinksCounts);
+    console.log(selectedDrinks);
     const data = localStorage.getItem("selected-drinks");
     if (data) {
       setSelectedDrinks(JSON.parse(data));
@@ -62,6 +66,22 @@ export default function Drinks() {
     for (let i = 0; i < selectedDrinks.length; i++) {
       if (selectedDrinks[i].selected === "checked") {
         document.getElementById(selectedDrinks[i].value).checked = true;
+        // Show Count
+        document
+          .getElementById("minus-" + i)
+          .setAttribute(
+            "class",
+            "h-8 w-8 flex items-center justify-center font-bold cursor-pointer border-b-2 border-black text-black"
+          );
+        document
+          .getElementById("num-" + i)
+          .setAttribute("class", "mx-4 font-bold");
+        document
+          .getElementById("plus-" + i)
+          .setAttribute(
+            "class",
+            "h-8 w-8 items-center justify-center flex font-bold cursor-pointer border-b-2 border-black text-black"
+          );
       } else {
         document.getElementById(selectedDrinks[i].value).checked = false;
       }

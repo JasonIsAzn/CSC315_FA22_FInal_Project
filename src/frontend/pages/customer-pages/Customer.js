@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import GlobalContext from "../../context/GlobalContext";
 import "./customer_page.css";
 
 export default function Customer() {
-  // Save Pizza Type
+  const {
+    selectedItems,
+    setSelectedItems,
+    prepSelectedItems,
+    setPrepSelectedItems,
+    selectedDrinksCounts,
+    setSelectedDrinksCounts,
+    drinks,
+  } = useContext(GlobalContext);
+
+  console.log(prepSelectedItems);
 
   // preset data for button
   const pizza_type = [
@@ -28,6 +39,7 @@ export default function Customer() {
   const navigate = useNavigate();
 
   const goCustomer = () => {
+    // addDrinks();
     navigate("/customer");
   };
 
@@ -43,11 +55,12 @@ export default function Customer() {
     navigate("/checkout");
   };
 
-  const selectingPizza = async (event, pizza) => {
-    localStorage.setItem("selected-pizza", JSON.stringify(pizza));
-    let count = 0;
-    localStorage.setItem("topping-count", count);
-    goSauces();
+  // reset localStorage
+  const goHome = () => {
+    setSelectedItems([]);
+    setPrepSelectedItems([]);
+    resetStorage();
+    navigate("/home");
   };
 
   // Delete Local Storage
@@ -56,10 +69,26 @@ export default function Customer() {
     localStorage.removeItem("selected-drinks-counts");
   };
 
-  // reset localStorage
-  const goHome = () => {
-    resetStorage();
-    navigate("/home");
+  const selectingPizza = async (event, pizza) => {
+    localStorage.setItem("selected-pizza", JSON.stringify(pizza));
+    let count = 0;
+    localStorage.setItem("topping-count", count);
+    goSauces();
+  };
+
+  const addDrinks = () => {
+    for (let i = 0; i < selectedDrinksCounts.length; ++i) {
+      if (selectedDrinksCounts[i].count > 0) {
+        prepSelectedItems.push([]);
+        var my_order = {
+          type: "drink",
+          count: selectedDrinksCounts[i].count,
+          items: drinks[i],
+        };
+        prepSelectedItems[prepSelectedItems.length - 1].push(my_order);
+      }
+    }
+    setPrepSelectedItems(prepSelectedItems);
   };
 
   return (

@@ -218,53 +218,54 @@ export default function Veggies() {
     localStorage.removeItem("topping-count");
   };
   // Add to Order Function
-  // Add to Order Function
   const addOrder = () => {
+    prepSelectedItems.push([]);
+    var my_order = { type: "pizza", items: [] };
+    prepSelectedItems[prepSelectedItems.length - 1].push(my_order);
+
     for (let i = 0; i < selectedSauce.length; ++i) {
       if (selectedSauce[i].selected === "checked") {
         if (selectedSauce[i].label != "no_sauce") {
-          selectedItems.push({
+          prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
             label: selectedSauce[i].label,
             value: selectedSauce[i].value,
             price: selectedSauce[i].price,
           });
-          setSelectedItems(selectedItems);
         }
       }
     }
 
     for (let i = 0; i < selectedMeats.length; ++i) {
       if (selectedMeats[i].selected === "checked") {
-        selectedItems.push({
+        prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
           label: selectedMeats[i].label,
           value: selectedMeats[i].value,
           price: selectedMeats[i].price,
         });
-        setSelectedItems(selectedItems);
       }
     }
 
     for (let i = 0; i < selectedVeggies.length; ++i) {
       if (selectedVeggies[i].selected === "checked") {
-        selectedItems.push({
+        prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
           label: selectedVeggies[i].label,
           value: selectedVeggies[i].value,
           price: selectedVeggies[i].price,
         });
-        setSelectedItems(selectedItems);
       }
     }
 
     for (let i = 0; i < selectedDrizzles.length; ++i) {
       if (selectedDrizzles[i].selected === "checked") {
-        selectedItems.push({
+        prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
           label: selectedDrizzles[i].label,
           value: selectedDrizzles[i].value,
           price: selectedDrizzles[i].price,
         });
-        setSelectedItems(selectedItems);
       }
     }
+
+    setPrepSelectedItems(prepSelectedItems);
 
     resetStorage();
     goCustomer();

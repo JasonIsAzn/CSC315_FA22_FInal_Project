@@ -6,13 +6,80 @@ import party from "party-js";
 import axios from "axios";
 
 export default function Checkout() {
-  const { selectedItems, maxID, setSelectedItems, setMaxID } =
-    useContext(GlobalContext);
+  const {
+    selectedItems,
+    maxID,
+    setSelectedItems,
+    setMaxID,
+    prepSelectedItems,
+    setPrepSelectedItems,
+    drinks,
+  } = useContext(GlobalContext);
 
   // stores customer name
   const [customerName, setCustomerName] = useState("");
+  const [selectedDrinks, setSelectedDrinks] = useState(drinks);
+  const [selectedDrinksCounts, setSelectedDrinksCounts] = useState([]);
+
+  for (let i = 0; i < prepSelectedItems.length; ++i) {
+    if (prepSelectedItems[i][0].type === "drink") {
+      prepSelectedItems.splice(i, 1);
+    }
+  }
+  console.log(prepSelectedItems);
 
   useEffect(() => {
+    // Selected Drinks
+    console.log(selectedDrinksCounts);
+    console.log(selectedDrinks);
+    const data = localStorage.getItem("selected-drinks");
+    if (data) {
+      setSelectedDrinks(JSON.parse(data));
+    } else {
+      for (let i = 0; i < selectedDrinks.length; i++) {
+        selectedDrinks[i].selected = "";
+      }
+    }
+
+    // Counts for Drinks
+    const countData = localStorage.getItem("selected-drinks-counts");
+    if (countData) {
+      setSelectedDrinksCounts(JSON.parse(countData));
+    } else {
+      for (let i = 0; i < selectedDrinks.length; i++) {
+        selectedDrinksCounts.push({
+          drink_id: selectedDrinks[i].value,
+          count: 0,
+        });
+      }
+    }
+  }, []);
+
+  for (let i = 0; i < selectedDrinksCounts.length; ++i) {
+    if (selectedDrinksCounts[i].count > 0) {
+      prepSelectedItems.push([]);
+      var my_order = {
+        type: "drink",
+        count: selectedDrinksCounts[i].count,
+        items: selectedDrinks[i],
+      };
+      prepSelectedItems[prepSelectedItems.length - 1].push(my_order);
+    }
+  }
+  setPrepSelectedItems(prepSelectedItems);
+
+  useEffect(() => {
+    // setSelectedItems([]);
+    for (let i = 0; i < prepSelectedItems.length; ++i) {
+      if (prepSelectedItems[i][0].type === "pizza") {
+        for (let j = 0; j < prepSelectedItems[i][0].items.length; ++j) {
+          selectedItems.push(prepSelectedItems[i][0].items[j]);
+        }
+      } else if (prepSelectedItems[i][0].type === "drink") {
+        selectedItems.push(prepSelectedItems[i][0].items);
+      }
+    }
+
     // confetti
     document.querySelectorAll(".confetti-button").forEach((e) =>
       e.addEventListener("click", function (e) {
@@ -25,14 +92,31 @@ export default function Checkout() {
   function displayContents() {
     let contents = "";
     let total = 0;
-    for (let i = 0; i < selectedItems.length; i++) {
-      contents +=
-        "\t\t" +
-        selectedItems[i].label +
-        " ($" +
-        selectedItems[i].price +
-        ") \n";
-      total += selectedItems[i].price;
+
+    for (let i = 0; i < prepSelectedItems.length; ++i) {
+      if (prepSelectedItems[i][0].type === "pizza") {
+        contents += "\t\tPizza:\n";
+        for (let j = 0; j < prepSelectedItems[i][0].items.length; ++j) {
+          contents +=
+            "\t\t\t\t" +
+            prepSelectedItems[i][0].items[j].label +
+            " ($" +
+            prepSelectedItems[i][0].items[j].price +
+            ") \n";
+          total += prepSelectedItems[i][0].items[j].price;
+        }
+      } else if (prepSelectedItems[i][0].type === "drink") {
+        contents +=
+          "\t\t" +
+          "(" +
+          prepSelectedItems[i][0].count +
+          ")" +
+          prepSelectedItems[i][0].items.label +
+          " ($" +
+          prepSelectedItems[i][0].items.price +
+          ") \n";
+        total += prepSelectedItems[i][0].items.price;
+      }
     }
 
     contents += "\n\n\t\tTotal: $" + parseFloat(String(total)).toFixed(2);
@@ -43,6 +127,7 @@ export default function Checkout() {
 
   // sends the user to the Home page
   const goBack = () => {
+    setSelectedItems([]);
     navigate("/customer");
   };
 
@@ -54,7 +139,6 @@ export default function Checkout() {
       for (let i = 0; i < selectedItems.length; i++) {
         value += selectedItems[i].price;
       }
-
       return value;
     };
 
@@ -91,6 +175,7 @@ export default function Checkout() {
               })
               .then(() => {
                 setSelectedItems([]);
+                setPrepSelectedItems([]);
                 setMaxID(maxID + 1);
                 navigate("/customer");
                 console.log("Order Processed -", maxID);
@@ -100,7 +185,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className="h-screen flex flex-col overflow-y-hidden">
+    <div className="h-screen flex flex-col overflow-y-show">
       {/* header button content */}
       <div className="flex flex-row h-[5%] mt-[3%]">
         <button
@@ -132,7 +217,7 @@ export default function Checkout() {
         />
 
         <button
-          className="w-1/2 mx-[25%] bg-[#4FC3F7] mb-12 hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-1 px-2 rounded-lg text-2xl flex justify-center items-center"
+          className="w-1/2 mx-[25%] bg-[#4FC3F7] mb-12 hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-1 px-2 rounded-lg text-2xl flex justify-center items-center confetti-button"
           onClick={handleSubmission}
         >
           Submit Order
