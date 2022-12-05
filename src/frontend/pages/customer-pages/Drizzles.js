@@ -6,7 +6,16 @@ import toppingImages from "./images";
 
 export default function Drizzles() {
   // prep-drizzle data
-  const { drizzles, veggies, meats, sauces } = useContext(GlobalContext);
+  const {
+    sauces,
+    drizzles,
+    meats,
+    veggies,
+    selectedItems,
+    setSelectedItems,
+    prepSelectedItems,
+    setPrepSelectedItems,
+  } = useContext(GlobalContext);
   const [selectedDrizzles, setSelectedDrizzles] = useState(drizzles);
   const [selectedVeggies, setSelectedVeggies] = useState(veggies);
   const [selectedMeats, setSelectedMeats] = useState(meats);
@@ -205,6 +214,54 @@ export default function Drizzles() {
   };
   // Add to Order Function
   const addOrder = () => {
+    prepSelectedItems.push([]);
+    var my_order = { type: "pizza", items: [] };
+    prepSelectedItems[prepSelectedItems.length - 1].push(my_order);
+
+    for (let i = 0; i < selectedSauce.length; ++i) {
+      if (selectedSauce[i].selected === "checked") {
+        if (selectedSauce[i].label != "no_sauce") {
+          prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
+            label: selectedSauce[i].label,
+            value: selectedSauce[i].value,
+            price: selectedSauce[i].price,
+          });
+        }
+      }
+    }
+
+    for (let i = 0; i < selectedMeats.length; ++i) {
+      if (selectedMeats[i].selected === "checked") {
+        prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
+          label: selectedMeats[i].label,
+          value: selectedMeats[i].value,
+          price: selectedMeats[i].price,
+        });
+      }
+    }
+
+    for (let i = 0; i < selectedVeggies.length; ++i) {
+      if (selectedVeggies[i].selected === "checked") {
+        prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
+          label: selectedVeggies[i].label,
+          value: selectedVeggies[i].value,
+          price: selectedVeggies[i].price,
+        });
+      }
+    }
+
+    for (let i = 0; i < selectedDrizzles.length; ++i) {
+      if (selectedDrizzles[i].selected === "checked") {
+        prepSelectedItems[prepSelectedItems.length - 1][0].items.push({
+          label: selectedDrizzles[i].label,
+          value: selectedDrizzles[i].value,
+          price: selectedDrizzles[i].price,
+        });
+      }
+    }
+
+    setPrepSelectedItems(prepSelectedItems);
+
     resetStorage();
     goCustomer();
   };
@@ -329,7 +386,7 @@ export default function Drizzles() {
             </motion.div>
             <div>
               {/* Generate Base Sauce */}
-              {toppingImages[0].map((item, index) => (
+              {sauces.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -339,7 +396,9 @@ export default function Drizzles() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedSauce[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      toppingImages[0][0].key[selectedSauce[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -352,7 +411,7 @@ export default function Drizzles() {
               ))}
 
               {/* Generate Meats */}
-              {toppingImages[1].map((item, index) => (
+              {meats.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -362,7 +421,9 @@ export default function Drizzles() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedMeats[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      toppingImages[1][0].key[selectedMeats[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -370,7 +431,7 @@ export default function Drizzles() {
               ))}
 
               {/* Generate Veggies */}
-              {toppingImages[2].map((item, index) => (
+              {veggies.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -380,7 +441,9 @@ export default function Drizzles() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedVeggies[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      toppingImages[2][0].key[selectedVeggies[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -388,7 +451,7 @@ export default function Drizzles() {
               ))}
 
               {/* Generate Drizzles */}
-              {toppingImages[3].map((item, index) => (
+              {drizzles.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -398,7 +461,9 @@ export default function Drizzles() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedDrizzles[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      toppingImages[3][0].key[selectedDrizzles[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
