@@ -58,6 +58,7 @@ export default function Submission() {
 
   // sends the user to the Manager page
   const goManager = () => {
+    setSelectedItems([]);
     navigate("/inventory");
   };
 

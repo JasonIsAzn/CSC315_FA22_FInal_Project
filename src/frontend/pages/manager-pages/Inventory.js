@@ -61,8 +61,8 @@ export default function Inventory() {
     elevation: 10,
     print: false,
     viewColumns: false,
-    rowsPerPage: 10,
-    rowsPerPageOptions: [10, 50, 100],
+    rowsPerPage: 50,
+    rowsPerPageOptions: [50, 200, 1000],
     onRowClick: (rowData) => onRowClick(rowData),
     selectableRows: "none",
   };

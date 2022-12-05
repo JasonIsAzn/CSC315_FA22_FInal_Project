@@ -47,8 +47,8 @@ export default function Sales() {
     elevation: 10,
     print: false,
     viewColumns: false,
-    rowsPerPage: 10,
-    rowsPerPageOptions: [10, 50, 100],
+    rowsPerPage: 50,
+    rowsPerPageOptions: [50, 200, 1000],
     selectableRows: "none",
   };
 
