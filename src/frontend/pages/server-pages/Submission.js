@@ -26,6 +26,7 @@ export default function Submission() {
     listItems,
     setListItems,
   } = useContext(GlobalContext);
+  console.log(selectedItems);
 
   // stores customer name
   const [customerName, setCustomerName] = useState("");
