@@ -26,6 +26,8 @@ const GlobalContext = React.createContext({
   setDrinks: () => {},
   selectedItems: [],
   setSelectedItems: () => {},
+  prepSelectedItems: [],
+  setPrepSelectedItems: () => {},
   maxID: 0,
   setMaxID: () => {},
   showItemAdder: false,

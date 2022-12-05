@@ -4,7 +4,13 @@ import GlobalContext from "../../context/GlobalContext";
 
 export default function Drinks() {
   // prep-drink data
-  const { drinks } = useContext(GlobalContext);
+  const {
+    drinks,
+    selectedItems,
+    setSelectedItems,
+    prepSelectedItems,
+    setPrepSelectedItems,
+  } = useContext(GlobalContext);
   const [selectedDrinks, setSelectedDrinks] = useState(drinks);
   const [selectedDrinksCounts, setSelectedDrinksCounts] = useState([]);
   let drinksTextFormatted = [];

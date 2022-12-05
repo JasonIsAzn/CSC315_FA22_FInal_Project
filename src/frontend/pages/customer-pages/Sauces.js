@@ -7,8 +7,16 @@ import toppingImages from "./images";
 export default function Sauces() {
   // prep-sauces data
 
-  const { sauces, drizzles, meats, veggies, selectedItems, setSelectedItems } =
-    useContext(GlobalContext);
+  const {
+    sauces,
+    drizzles,
+    meats,
+    veggies,
+    selectedItems,
+    setSelectedItems,
+    prepSelectedItems,
+    setPrepSelectedItems,
+  } = useContext(GlobalContext);
 
   if (sauces[sauces.length - 1].value != -1) {
     sauces.push({
@@ -220,7 +228,6 @@ export default function Sauces() {
 
   // Add to Order Function
   const addOrder = () => {
-    console.log("Sauce", selectedSauce);
     for (let i = 0; i < selectedSauce.length; ++i) {
       if (selectedSauce[i].selected === "checked") {
         if (selectedSauce[i].label != "no_sauce") {

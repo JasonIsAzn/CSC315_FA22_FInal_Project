@@ -6,7 +6,16 @@ import toppingImages from "./images";
 
 export default function Toppings() {
   // prep-meat data
-  const { drizzles, meats, veggies, sauces } = useContext(GlobalContext);
+  const {
+    sauces,
+    drizzles,
+    meats,
+    veggies,
+    selectedItems,
+    setSelectedItems,
+    prepSelectedItems,
+    setPrepSelectedItems,
+  } = useContext(GlobalContext);
   const [selectedDrizzles, setSelectedDrizzles] = useState(drizzles);
   const [selectedMeats, setSelectedMeats] = useState(meats);
   const [selectedVeggies, setSelectedVeggies] = useState(veggies);
@@ -210,6 +219,52 @@ export default function Toppings() {
   };
   // Add to Order Function
   const addOrder = () => {
+    for (let i = 0; i < selectedSauce.length; ++i) {
+      if (selectedSauce[i].selected === "checked") {
+        if (selectedSauce[i].label != "no_sauce") {
+          selectedItems.push({
+            label: selectedSauce[i].label,
+            value: selectedSauce[i].value,
+            price: selectedSauce[i].price,
+          });
+          setSelectedItems(selectedItems);
+        }
+      }
+    }
+
+    for (let i = 0; i < selectedMeats.length; ++i) {
+      if (selectedMeats[i].selected === "checked") {
+        selectedItems.push({
+          label: selectedMeats[i].label,
+          value: selectedMeats[i].value,
+          price: selectedMeats[i].price,
+        });
+        setSelectedItems(selectedItems);
+      }
+    }
+
+    for (let i = 0; i < selectedVeggies.length; ++i) {
+      if (selectedVeggies[i].selected === "checked") {
+        selectedItems.push({
+          label: selectedVeggies[i].label,
+          value: selectedVeggies[i].value,
+          price: selectedVeggies[i].price,
+        });
+        setSelectedItems(selectedItems);
+      }
+    }
+
+    for (let i = 0; i < selectedDrizzles.length; ++i) {
+      if (selectedDrizzles[i].selected === "checked") {
+        selectedItems.push({
+          label: selectedDrizzles[i].label,
+          value: selectedDrizzles[i].value,
+          price: selectedDrizzles[i].price,
+        });
+        setSelectedItems(selectedItems);
+      }
+    }
+
     resetStorage();
     goCustomer();
   };
@@ -330,7 +385,9 @@ export default function Toppings() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedSauce[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      item.key[selectedSauce[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -353,7 +410,9 @@ export default function Toppings() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedMeats[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      item.key[selectedMeats[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -371,7 +430,9 @@ export default function Toppings() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedVeggies[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      item.key[selectedVeggies[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
@@ -388,7 +449,9 @@ export default function Toppings() {
                   transition={{ duration: 0.5 }}
                 >
                   <img
-                    src={require("../../assets/" + item.key[selectedDrizzles[index].label] + ".png")}
+                    src={require("../../assets/" +
+                      item.key[selectedDrizzles[index].label] +
+                      ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
