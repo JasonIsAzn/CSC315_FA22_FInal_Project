@@ -21,17 +21,8 @@ export default function Checkout() {
   const [selectedDrinks, setSelectedDrinks] = useState(drinks);
   const [selectedDrinksCounts, setSelectedDrinksCounts] = useState([]);
 
-  for (let i = 0; i < prepSelectedItems.length; ++i) {
-    if (prepSelectedItems[i][0].type === "drink") {
-      prepSelectedItems.splice(i, 1);
-    }
-  }
-  console.log(prepSelectedItems);
-
   useEffect(() => {
     // Selected Drinks
-    console.log(selectedDrinksCounts);
-    console.log(selectedDrinks);
     const data = localStorage.getItem("selected-drinks");
     if (data) {
       setSelectedDrinks(JSON.parse(data));
@@ -53,33 +44,10 @@ export default function Checkout() {
         });
       }
     }
+    setPrepSelectedItems(prepSelectedItems);
   }, []);
 
-  for (let i = 0; i < selectedDrinksCounts.length; ++i) {
-    if (selectedDrinksCounts[i].count > 0) {
-      prepSelectedItems.push([]);
-      var my_order = {
-        type: "drink",
-        count: selectedDrinksCounts[i].count,
-        items: selectedDrinks[i],
-      };
-      prepSelectedItems[prepSelectedItems.length - 1].push(my_order);
-    }
-  }
-  setPrepSelectedItems(prepSelectedItems);
-
   useEffect(() => {
-    // setSelectedItems([]);
-    for (let i = 0; i < prepSelectedItems.length; ++i) {
-      if (prepSelectedItems[i][0].type === "pizza") {
-        for (let j = 0; j < prepSelectedItems[i][0].items.length; ++j) {
-          selectedItems.push(prepSelectedItems[i][0].items[j]);
-        }
-      } else if (prepSelectedItems[i][0].type === "drink") {
-        selectedItems.push(prepSelectedItems[i][0].items);
-      }
-    }
-
     // confetti
     document.querySelectorAll(".confetti-button").forEach((e) =>
       e.addEventListener("click", function (e) {
@@ -88,6 +56,26 @@ export default function Checkout() {
     );
   }, []);
 
+  // THIS IS HORRIBLE
+  let [useEffectCount, setUseEffectCount] = useState(0);
+  useEffect(() => {
+    if (useEffectCount < 2) {
+      for (let i = 0; i < selectedDrinksCounts.length; ++i) {
+        if (selectedDrinksCounts[i].count > 0) {
+          prepSelectedItems.push([]);
+          var my_order = {
+            type: "drink",
+            count: selectedDrinksCounts[i].count,
+            items: selectedDrinks[i],
+          };
+          prepSelectedItems[prepSelectedItems.length - 1].push(my_order);
+        }
+      }
+      useEffectCount = useEffectCount + 1;
+      setUseEffectCount(useEffectCount);
+    }
+  }, [selectedDrinks]);
+
   // displays currently selected items
   function displayContents() {
     let contents = "";
@@ -95,6 +83,9 @@ export default function Checkout() {
 
     for (let i = 0; i < prepSelectedItems.length; ++i) {
       if (prepSelectedItems[i][0].type === "pizza") {
+        if (prepSelectedItems[i][0].items.length == 0) {
+          continue;
+        }
         contents += "\t\tPizza:\n";
         for (let j = 0; j < prepSelectedItems[i][0].items.length; ++j) {
           contents +=
@@ -110,7 +101,7 @@ export default function Checkout() {
           "\t\t" +
           "(" +
           prepSelectedItems[i][0].count +
-          ")" +
+          ") " +
           prepSelectedItems[i][0].items.label +
           " ($" +
           prepSelectedItems[i][0].items.price +
@@ -126,13 +117,35 @@ export default function Checkout() {
   const navigate = useNavigate();
 
   // sends the user to the Home page
-  const goBack = () => {
+  const goBack = async () => {
     setSelectedItems([]);
+    // HORRIBLE SOLUTION
+    for (let j = 0; j < 100; ++j) {
+      for (let i = 0; i < prepSelectedItems.length; ++i) {
+        if (prepSelectedItems[i][0].type === "drink") {
+          prepSelectedItems.splice(i, 1);
+        }
+      }
+    }
+    console.log("rest drinks", prepSelectedItems);
     navigate("/customer");
   };
-
   // adds order and adjusts inventory
   const handleSubmission = () => {
+    setSelectedItems([]);
+    console.log("THIS TEST THO3", prepSelectedItems);
+    for (let i = 0; i < prepSelectedItems.length; ++i) {
+      if (prepSelectedItems[i][0].type === "pizza") {
+        for (let j = 0; j < prepSelectedItems[i][0].items.length; ++j) {
+          selectedItems.push(prepSelectedItems[i][0].items[j]);
+        }
+      } else if (prepSelectedItems[i][0].type === "drink") {
+        selectedItems.push(prepSelectedItems[i][0].items);
+      }
+    }
+    console.log("THIS THEST THO2: ", prepSelectedItems.length);
+    console.log("THIS TEST THO: ", selectedItems);
+
     // compute order total cost
     let total = () => {
       let value = 0;
@@ -176,6 +189,23 @@ export default function Checkout() {
               .then(() => {
                 setSelectedItems([]);
                 setPrepSelectedItems([]);
+
+                for (let i = 0; i < selectedDrinks.length; ++i) {
+                  selectedDrinks[i].selected = "";
+                  selectedDrinksCounts[i].count = 0;
+                }
+                setSelectedDrinks(selectedDrinks);
+                setSelectedDrinksCounts(selectedDrinksCounts);
+                localStorage.setItem(
+                  "selected-drinks",
+                  JSON.stringify(selectedDrinks)
+                );
+
+                localStorage.setItem(
+                  "selected-drinks-counts",
+                  JSON.stringify(selectedDrinksCounts)
+                );
+
                 setMaxID(maxID + 1);
                 navigate("/customer");
                 console.log("Order Processed -", maxID);
@@ -202,7 +232,7 @@ export default function Checkout() {
       </div>
       <div className="flex flex-col items-center mt-8">
         <div className="h-2/4 w-2/5 text-2xl border border-2 text-black rounded-xl overflow-y-scroll">
-          <h1 className="mb-[3%]   whitespace-pre-wrap px-[3%] py-[1%] ">
+          <h1 className="mb-[3%] whitespace-pre-wrap px-[3%] py-[1%] ">
             {displayContents()}
           </h1>
         </div>

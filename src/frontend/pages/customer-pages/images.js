@@ -1,324 +1,328 @@
 // sauce, meats, veggies, drizzles
 
-
-
 export default [
   [
     {
       photo: "Alfredo",
       key: {
-        "Alfredo":"Alfredo",
+        Alfredo: "Alfredo",
         "Traditional Red": "Traditionalred",
         "Zesty Red": "Zestyred",
-        "Pesto" : "Pesto",
-        "no-sauce": "Nosauce"
-      }
+        Pesto: "Pesto",
+        "no-sauce": "Nosauce",
+      },
     },
     {
       photo: "Traditionalred",
       key: {
-        "Alfredo":"Alfredo",
+        Alfredo: "Alfredo",
         "Traditional Red": "Traditionalred",
         "Zesty Red": "Zestyred",
-        "Pesto" : "Pesto",
-        "no-sauce": "Nosauce"
-      }
+        Pesto: "Pesto",
+        "no-sauce": "Nosauce",
+      },
     },
     {
       photo: "Zestyred",
       key: {
-        "Alfredo":"Alfredo",
+        Alfredo: "Alfredo",
         "Traditional Red": "Traditionalred",
         "Zesty Red": "Zestyred",
-        "Pesto" : "Pesto",
-        "no-sauce": "Nosauce"
-      }
+        Pesto: "Pesto",
+        "no-sauce": "Nosauce",
+      },
     },
     {
       photo: "Pesto",
       key: {
-        "Alfredo":"Alfredo",
+        Alfredo: "Alfredo",
         "Traditional Red": "Traditionalred",
         "Zesty Red": "Zestyred",
-        "Pesto" : "Pesto",
-        "no-sauce": "Nosauce"
-      }
+        Pesto: "Pesto",
+        "no-sauce": "Nosauce",
+      },
     },
     {
       photo: "Nosauce",
       key: {
-        "Alfredo":"Alfredo",
+        Alfredo: "Alfredo",
         "Traditional Red": "Traditionalred",
         "Zesty Red": "Zestyred",
-        "Pesto" : "Pesto",
-        "no-sauce": "Nosauce"
-      }
+        Pesto: "Pesto",
+        "no-sauce": "Nosauce",
+      },
     },
   ],
   [
     {
-      photo: "Meatball", // Change Later
+      photo: "Meatballs", // Change Later
       key: {
-        "Italian Sasusage": "Italiansasuage",
+        "Italian Sausage": "Italiansasuage",
         "Diced Ham": "Dicedham",
-        "Salami": "Salami",
-        "Pepperoni": "Pepperoni",
-        "Smoked Chicken": "Smokedchicken"
-      }
+        Salami: "Salami",
+        Pepperoni: "Pepperoni",
+        "Smoked Chicken": "Smokedchicken",
+        Meatballs: "Meatballs",
+      },
     },
     {
       photo: "Dicedham",
       key: {
-        "Italian Sasusage": "Italiansasuage",
+        "Italian Sausage": "Italiansasuage",
         "Diced Ham": "Dicedham",
-        "Salami": "Salami",
-        "Pepperoni": "Pepperoni",
-        "Smoked Chicken": "Smokedchicken"
-      }
+        Salami: "Salami",
+        Pepperoni: "Pepperoni",
+        "Smoked Chicken": "Smokedchicken",
+        Meatballs: "Meatballs",
+      },
     },
     {
       photo: "Italiansasuage",
       key: {
-        "Italian Sasusage": "Italiansasuage",
+        "Italian Sausage": "Italiansasuage",
         "Diced Ham": "Dicedham",
-        "Salami": "Salami",
-        "Pepperoni": "Pepperoni",
-        "Smoked Chicken": "Smokedchicken"
-      }
+        Salami: "Salami",
+        Pepperoni: "Pepperoni",
+        "Smoked Chicken": "Smokedchicken",
+        Meatballs: "Meatballs",
+      },
     },
     {
       photo: "Salami",
       key: {
-        "Italian Sasusage": "Italiansasuage",
+        "Italian Sausage": "Italiansasuage",
         "Diced Ham": "Dicedham",
-        "Salami": "Salami",
-        "Pepperoni": "Pepperoni",
-        "Smoked Chicken": "Smokedchicken"
-      }
+        Salami: "Salami",
+        Pepperoni: "Pepperoni",
+        "Smoked Chicken": "Smokedchicken",
+        Meatballs: "Meatballs",
+      },
     },
     {
       photo: "Pepperoni",
       key: {
-        "Italian Sasusage": "Italiansasuage",
+        "Italian Sausage": "Italiansasuage",
         "Diced Ham": "Dicedham",
-        "Salami": "Salami",
-        "Pepperoni": "Pepperoni",
-        "Smoked Chicken": "Smokedchicken"
-      }
+        Salami: "Salami",
+        Pepperoni: "Pepperoni",
+        "Smoked Chicken": "Smokedchicken",
+        Meatballs: "Meatballs",
+      },
     },
     {
       photo: "Smokedchicken",
       key: {
-        "Italian Sasusage": "Italiansasuage",
+        "Italian Sausage": "Italiansasuage",
         "Diced Ham": "Dicedham",
-        "Salami": "Salami",
-        "Pepperoni": "Pepperoni",
-        "Smoked Chicken": "Smokedchicken"
-      }
+        Salami: "Salami",
+        Pepperoni: "Pepperoni",
+        "Smoked Chicken": "Smokedchicken",
+        Meatballs: "Meatballs",
+      },
     },
   ],
   [
     {
       photo: "Mushrooms",
       key: {
-        "Mushrooms": "Mushrooms",
+        Mushrooms: "Mushrooms",
         "Green Peppers": "Greenpepper",
         "Black Olives": "Olive",
-        "Jalapenos": "Jalapenos",
+        Jalapenos: "Jalapenos",
         "Roasted Garlic": "Roastedgarlic",
-        "Spinach": "Spinach",
-        "Tomatoes":"Tomatoes",
-        "Pineapple": "Pineapple",
-        "Onions": "Onion",
-        "Banana Peppers": "Bananapepper"
-      }
+        Spinach: "Spinach",
+        Tomatoes: "Tomatoes",
+        Pineapple: "Pineapple",
+        Onions: "Onion",
+        "Banana Peppers": "Bananapepper",
+      },
     },
     {
       photo: "Greenpepper",
       key: {
-        "Mushrooms": "Mushrooms",
+        Mushrooms: "Mushrooms",
         "Green Peppers": "Greenpepper",
         "Black Olives": "Olive",
-        "Jalapenos": "Jalapenos",
+        Jalapenos: "Jalapenos",
         "Roasted Garlic": "Roastedgarlic",
-        "Spinach": "Spinach",
-        "Tomatoes":"Tomatoes",
-        "Pineapple": "Pineapple",
-        "Onions": "Onion",
-        "Banana Peppers": "Bananapepper"
-      }
+        Spinach: "Spinach",
+        Tomatoes: "Tomatoes",
+        Pineapple: "Pineapple",
+        Onions: "Onion",
+        "Banana Peppers": "Bananapepper",
+      },
     },
     {
       photo: "Olive",
       key: {
-        "Mushrooms": "Mushrooms",
+        Mushrooms: "Mushrooms",
         "Green Peppers": "Greenpepper",
         "Black Olives": "Olive",
-        "Jalapenos": "Jalapenos",
+        Jalapenos: "Jalapenos",
         "Roasted Garlic": "Roastedgarlic",
-        "Spinach": "Spinach",
-        "Tomatoes":"Tomatoes",
-        "Pineapple": "Pineapple",
-        "Onions": "Onion",
-        "Banana Peppers": "Bananapepper"
-      }
+        Spinach: "Spinach",
+        Tomatoes: "Tomatoes",
+        Pineapple: "Pineapple",
+        Onions: "Onion",
+        "Banana Peppers": "Bananapepper",
+      },
     },
     {
       photo: "Jalapenos",
       key: {
-        "Mushrooms": "Mushrooms",
+        Mushrooms: "Mushrooms",
         "Green Peppers": "Greenpepper",
         "Black Olives": "Olive",
-        "Jalapenos": "Jalapenos",
+        Jalapenos: "Jalapenos",
         "Roasted Garlic": "Roastedgarlic",
-        "Spinach": "Spinach",
-        "Tomatoes":"Tomatoes",
-        "Pineapple": "Pineapple",
-        "Onions": "Onion",
-        "Banana Peppers": "Bananapepper"
-      }
+        Spinach: "Spinach",
+        Tomatoes: "Tomatoes",
+        Pineapple: "Pineapple",
+        Onions: "Onion",
+        "Banana Peppers": "Bananapepper",
+      },
     },
     {
       photo: "Roastedgarlic",
       key: {
-        "Mushrooms": "Mushrooms",
+        Mushrooms: "Mushrooms",
         "Green Peppers": "Greenpepper",
         "Black Olives": "Olive",
-        "Jalapenos": "Jalapenos",
+        Jalapenos: "Jalapenos",
         "Roasted Garlic": "Roastedgarlic",
-        "Spinach": "Spinach",
-        "Tomatoes":"Tomatoes",
-        "Pineapple": "Pineapple",
-        "Onions": "Onion",
-        "Banana Peppers": "Bananapepper"
-      }
+        Spinach: "Spinach",
+        Tomatoes: "Tomatoes",
+        Pineapple: "Pineapple",
+        Onions: "Onion",
+        "Banana Peppers": "Bananapepper",
+      },
     },
     {
       photo: "Spinach",
       key: {
-        "Mushrooms": "Mushrooms",
+        Mushrooms: "Mushrooms",
         "Green Peppers": "Greenpepper",
         "Black Olives": "Olive",
-        "Jalapenos": "Jalapenos",
+        Jalapenos: "Jalapenos",
         "Roasted Garlic": "Roastedgarlic",
-        "Spinach": "Spinach",
-        "Tomatoes":"Tomatoes",
-        "Pineapple": "Pineapple",
-        "Onions": "Onion",
-        "Banana Peppers": "Bananapepper"
-      }
+        Spinach: "Spinach",
+        Tomatoes: "Tomatoes",
+        Pineapple: "Pineapple",
+        Onions: "Onion",
+        "Banana Peppers": "Bananapepper",
+      },
     },
     {
       photo: "Tomatoes",
       key: {
-        "Mushrooms": "Mushrooms",
+        Mushrooms: "Mushrooms",
         "Green Peppers": "Greenpepper",
         "Black Olives": "Olive",
-        "Jalapenos": "Jalapenos",
+        Jalapenos: "Jalapenos",
         "Roasted Garlic": "Roastedgarlic",
-        "Spinach": "Spinach",
-        "Tomatoes":"Tomatoes",
-        "Pineapple": "Pineapple",
-        "Onions": "Onion",
-        "Banana Peppers": "Bananapepper"
-      }
+        Spinach: "Spinach",
+        Tomatoes: "Tomatoes",
+        Pineapple: "Pineapple",
+        Onions: "Onion",
+        "Banana Peppers": "Bananapepper",
+      },
     },
     {
       photo: "Pineapple",
       key: {
-        "Mushrooms": "Mushrooms",
+        Mushrooms: "Mushrooms",
         "Green Peppers": "Greenpepper",
         "Black Olives": "Olive",
-        "Jalapenos": "Jalapenos",
+        Jalapenos: "Jalapenos",
         "Roasted Garlic": "Roastedgarlic",
-        "Spinach": "Spinach",
-        "Tomatoes":"Tomatoes",
-        "Pineapple": "Pineapple",
-        "Onions": "Onion",
-        "Banana Peppers": "Bananapepper"
-      }
+        Spinach: "Spinach",
+        Tomatoes: "Tomatoes",
+        Pineapple: "Pineapple",
+        Onions: "Onion",
+        "Banana Peppers": "Bananapepper",
+      },
     },
     {
       photo: "Onion",
       key: {
-        "Mushrooms": "Mushrooms",
+        Mushrooms: "Mushrooms",
         "Green Peppers": "Greenpepper",
         "Black Olives": "Olive",
-        "Jalapenos": "Jalapenos",
+        Jalapenos: "Jalapenos",
         "Roasted Garlic": "Roastedgarlic",
-        "Spinach": "Spinach",
-        "Tomatoes":"Tomatoes",
-        "Pineapple": "Pineapple",
-        "Onions": "Onion",
-        "Banana Peppers": "Bananapepper"
-      }
+        Spinach: "Spinach",
+        Tomatoes: "Tomatoes",
+        Pineapple: "Pineapple",
+        Onions: "Onion",
+        "Banana Peppers": "Bananapepper",
+      },
     },
     {
       photo: "Bananapepper",
       key: {
-        "Mushrooms": "Mushrooms",
+        Mushrooms: "Mushrooms",
         "Green Peppers": "Greenpepper",
         "Black Olives": "Olive",
-        "Jalapenos": "Jalapenos",
+        Jalapenos: "Jalapenos",
         "Roasted Garlic": "Roastedgarlic",
-        "Spinach": "Spinach",
-        "Tomatoes":"Tomatoes",
-        "Pineapple": "Pineapple",
-        "Onions": "Onion",
-        "Banana Peppers": "Bananapepper"
-      }
+        Spinach: "Spinach",
+        Tomatoes: "Tomatoes",
+        Pineapple: "Pineapple",
+        Onions: "Onion",
+        "Banana Peppers": "Bananapepper",
+      },
     },
   ],
   [
     {
       photo: "Ranch",
       key: {
-        "Ranch":"Ranch",
+        Ranch: "Ranch",
         "BBQ Sauce": "Bbqsauce",
-        "Siracha": "Siracha",
+        Sriracha: "Siracha",
         "Olive Oil": "Oliveoil",
-        "Oregano": "Oregano"
-      }
+        Oregano: "Oregano",
+      },
     },
     {
       photo: "Bbqsauce",
       key: {
-        "Ranch":"Ranch",
+        Ranch: "Ranch",
         "BBQ Sauce": "Bbqsauce",
-        "Siracha": "Siracha",
+        Siracha: "Siracha",
         "Olive Oil": "Oliveoil",
-        "Oregano": "Oregano"
-      }
+        Oregano: "Oregano",
+      },
     },
     {
       photo: "Siracha",
       key: {
-        "Ranch":"Ranch",
+        Ranch: "Ranch",
         "BBQ Sauce": "Bbqsauce",
-        "Siracha": "Siracha",
+        Siracha: "Siracha",
         "Olive Oil": "Oliveoil",
-        "Oregano": "Oregano"
-      }
+        Oregano: "Oregano",
+      },
     },
     {
       photo: "Oliveoil",
       key: {
-        "Ranch":"Ranch",
+        Ranch: "Ranch",
         "BBQ Sauce": "Bbqsauce",
-        "Siracha": "Siracha",
+        Siracha: "Siracha",
         "Olive Oil": "Oliveoil",
-        "Oregano": "Oregano"
-      }
+        Oregano: "Oregano",
+      },
     },
     {
       photo: "Oregano",
       key: {
-        "Ranch":"Ranch",
+        Ranch: "Ranch",
         "BBQ Sauce": "Bbqsauce",
-        "Siracha": "Siracha",
+        Siracha: "Siracha",
         "Olive Oil": "Oliveoil",
-        "Oregano": "Oregano"
-      }
+        Oregano: "Oregano",
+      },
     },
   ],
 ];

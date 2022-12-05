@@ -44,6 +44,7 @@ export default function Drinks() {
       for (let i = 0; i < selectedDrinks.length; i++) {
         selectedDrinks[i].selected = "";
       }
+      setSelectedDrinks(selectedDrinks);
     }
 
     // Counts for Drinks
@@ -57,12 +58,14 @@ export default function Drinks() {
           count: 0,
         });
       }
+      setSelectedDrinksCounts(selectedDrinksCounts);
     }
   }, []);
 
-  // // Render Page - Load onto Page
+  // Render Page - Load onto Page
   useEffect(() => {
     // Format Selected Drinks
+    console.log("drinktest", selectedDrinks);
     for (let i = 0; i < selectedDrinks.length; i++) {
       if (selectedDrinks[i].selected === "checked") {
         document.getElementById(selectedDrinks[i].value).checked = true;
@@ -84,6 +87,16 @@ export default function Drinks() {
           );
       } else {
         document.getElementById(selectedDrinks[i].value).checked = false;
+        // Hide Count
+        document
+          .getElementById("minus-" + i)
+          .setAttribute("class", "h-8 w-8 text-white");
+        document
+          .getElementById("num-" + i)
+          .setAttribute("class", "mx-4 font-bold text-white");
+        document
+          .getElementById("plus-" + i)
+          .setAttribute("class", "h-8 w-8 text-white");
       }
     }
 
@@ -108,6 +121,20 @@ export default function Drinks() {
   const goCheckout = () => {
     navigate("/checkout");
   };
+
+  let item_counter = prepSelectedItems.length;
+  let drink_counter = 0;
+  for (let i = 0; i < selectedDrinks.length; ++i) {
+    if (selectedDrinks[i].selected == "checked") {
+      drink_counter++;
+    }
+  }
+  item_counter += drink_counter;
+  console.log("testseting", selectedDrinks);
+  useEffect(() => {
+    document.getElementById("item-count").textContent =
+      "(TOTAL ITEMS: " + item_counter + ")";
+  });
 
   // store selected drink and update button
   const selectingDrinks = async (event, index, id) => {
@@ -164,6 +191,17 @@ export default function Drinks() {
         );
       }
     }
+
+    item_counter = prepSelectedItems.length;
+    drink_counter = 0;
+    for (let i = 0; i < selectedDrinks.length; ++i) {
+      if (selectedDrinks[i].selected == "checked") {
+        drink_counter++;
+      }
+    }
+    item_counter += drink_counter;
+    document.getElementById("item-count").textContent =
+      "(TOTAL ITEMS: " + item_counter + ")";
     localStorage.setItem("selected-drinks", JSON.stringify(selectedDrinks));
   };
 
@@ -231,7 +269,12 @@ export default function Drinks() {
       </div>
 
       <div className="ml-5 mr-5">
-        <h1 class="text-3xl font-bold ml-20 mb-6 mt-10">Choose Drinks</h1>
+        <div className="inline-flex">
+          <h1 class="text-3xl font-bold ml-10 mb-6 mt-10">Choose Drink</h1>
+          <h2 id="item-count" class="text-3xl font-bold ml-2 mb-6 mt-10">
+            (TOTAL ITEMS: 0)
+          </h2>
+        </div>
         <div className="grid lg:grid-cols-4">
           {drinks.map((drink, index) => (
             <div className="min-w-full">

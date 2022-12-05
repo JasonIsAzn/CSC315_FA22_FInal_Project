@@ -376,7 +376,7 @@ export default function Toppings() {
             </motion.div>
             <div>
               {/* Generate Base Sauce */}
-              {toppingImages[0].map((item, index) => (
+              {sauces.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -387,7 +387,7 @@ export default function Toppings() {
                 >
                   <img
                     src={require("../../assets/" +
-                      item.key[selectedSauce[index].label] +
+                      toppingImages[0][0].key[selectedSauce[index].label] +
                       ".png")}
                     class="h-64 absolute"
                     alt=""
@@ -401,7 +401,7 @@ export default function Toppings() {
               ))}
 
               {/* Generate Meats */}
-              {toppingImages[1].map((item, index) => (
+              {meats.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -412,7 +412,7 @@ export default function Toppings() {
                 >
                   <img
                     src={require("../../assets/" +
-                      item.key[selectedMeats[index].label] +
+                      toppingImages[1][0].key[selectedMeats[index].label] +
                       ".png")}
                     class="h-64 absolute"
                     alt=""
@@ -421,7 +421,7 @@ export default function Toppings() {
               ))}
 
               {/* Generate Veggies */}
-              {toppingImages[2].map((item, index) => (
+              {veggies.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -432,15 +432,16 @@ export default function Toppings() {
                 >
                   <img
                     src={require("../../assets/" +
-                      item.key[selectedVeggies[index].label] +
+                      toppingImages[2][0].key[selectedVeggies[index].label] +
                       ".png")}
                     class="h-64 absolute"
                     alt=""
                   />
                 </motion.div>
               ))}
+
               {/* Generate Drizzles */}
-              {toppingImages[3].map((item, index) => (
+              {drizzles.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{
@@ -451,7 +452,7 @@ export default function Toppings() {
                 >
                   <img
                     src={require("../../assets/" +
-                      item.key[selectedDrizzles[index].label] +
+                      toppingImages[3][0].key[selectedDrizzles[index].label] +
                       ".png")}
                     class="h-64 absolute"
                     alt=""
