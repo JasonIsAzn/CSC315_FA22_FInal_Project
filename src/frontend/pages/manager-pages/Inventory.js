@@ -67,28 +67,28 @@ export default function Inventory() {
     selectableRows: "none",
   };
 
-  // handles new item creation
-  async function addItem() {
-    axios
-      .post("http://localhost:5001/item/add_item", {
-        name: itemName,
-        price: price,
-        count: count,
-        type: type,
-      })
-      .then(() => {
-        alert("SENT");
-      })
-      .then(() => {
-        setCount(0);
-        setItemName("");
-        setPrice(0.0);
-        setType("");
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }
+  // // handles new item creation
+  // async function addItem() {
+  //   axios
+  //     .post("http://localhost:5001/item/add_item", {
+  //       name: itemName,
+  //       price: price,
+  //       count: count,
+  //       type: type,
+  //     })
+  //     .then(() => {
+  //       alert("SENT");
+  //     })
+  //     .then(() => {
+  //       setCount(0);
+  //       setItemName("");
+  //       setPrice(0.0);
+  //       setType("");
+  //     })
+  //     .catch((err) => {
+  //       alert(err);
+  //     });
+  // }
 
   // generates data for restock report
   const handleRestockReport = () => {

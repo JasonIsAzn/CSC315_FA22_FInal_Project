@@ -2,7 +2,9 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../context/GlobalContext";
 
+
 export default function Home() {
+
   const { listOrders, allOrders, setListOrders } = useContext(GlobalContext);
 
   // misc. data activities
