@@ -227,8 +227,12 @@ export default function Login() {
         />
       </span>
 
+      <h4 className="mb-[2.5%] font-semibold w-[12%]">
+        <span>or</span>
+      </h4>
+
       <button
-        className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-semibold mx-6 px-[5%] py-[1%] rounded-md text-xl"
+        className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-semibold mx-6 px-[3%] py-[1%] rounded-md text-xl"
         onClick={goHome}
       >
         Continue as Guest
