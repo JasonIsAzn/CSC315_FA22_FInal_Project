@@ -4,6 +4,7 @@ import GlobalContext from "../../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
 import party from "party-js";
 import axios from "axios";
+import Select from "react-select";
 
 export default function Checkout() {
   const {
@@ -21,6 +22,7 @@ export default function Checkout() {
   const [selectedDrinks, setSelectedDrinks] = useState(drinks);
   const [selectedDrinksCounts, setSelectedDrinksCounts] = useState([]);
 
+  let deleteOptions = [];
   useEffect(() => {
     // Selected Drinks
     const data = localStorage.getItem("selected-drinks");
@@ -76,6 +78,10 @@ export default function Checkout() {
     }
   }, [selectedDrinks]);
 
+  useEffect(() => {
+    fillOptions();
+  });
+
   // displays currently selected items
   function displayContents() {
     let contents = "";
@@ -86,7 +92,7 @@ export default function Checkout() {
         if (prepSelectedItems[i][0].items.length == 0) {
           continue;
         }
-        contents += "\t\tPizza:\n";
+        contents += "\t\tPizza " + (i + 1) + " :\n";
         for (let j = 0; j < prepSelectedItems[i][0].items.length; ++j) {
           contents +=
             "\t\t\t\t" +
@@ -115,6 +121,54 @@ export default function Checkout() {
   }
 
   const navigate = useNavigate();
+  // used to style 'react-select' drop downs
+  const styles = {
+    menuList: (base) => ({
+      ...base,
+
+      "::-webkit-scrollbar": {
+        width: "0px",
+        height: "0px",
+      },
+      "::-webkit-scrollbar-track": {
+        background: "#f1f1f1",
+      },
+      "::-webkit-scrollbar-thumb": {
+        background: "#888",
+      },
+      "::-webkit-scrollbar-thumb:hover": {
+        background: "#555",
+      },
+    }),
+
+    control: (base, state) => ({
+      ...base,
+      height: "60px",
+      "min-height": "60px",
+    }),
+  };
+
+  const fillOptions = () => {
+    for (let i = 0; i < prepSelectedItems.length; ++i) {
+      if (prepSelectedItems[i][0].type === "pizza") {
+        deleteOptions.push({
+          label: prepSelectedItems[i][0].type + " " + (i + 1),
+          index: i,
+        });
+      } else if (prepSelectedItems[i][0].type === "drink") {
+        console.log(prepSelectedItems[i][0].items);
+        deleteOptions.push({
+          label: prepSelectedItems[i][0].items.label,
+          index: i,
+        });
+      }
+    }
+    console.log(deleteOptions);
+  };
+
+  const deleteItem = () => {
+    // console.log
+  };
 
   // sends the user to the Home page
   const goBack = async () => {
@@ -127,24 +181,21 @@ export default function Checkout() {
         }
       }
     }
-    console.log("rest drinks", prepSelectedItems);
     navigate("/customer");
   };
   // adds order and adjusts inventory
   const handleSubmission = () => {
     setSelectedItems([]);
-    console.log("THIS TEST THO3", prepSelectedItems);
     for (let i = 0; i < prepSelectedItems.length; ++i) {
       if (prepSelectedItems[i][0].type === "pizza") {
         for (let j = 0; j < prepSelectedItems[i][0].items.length; ++j) {
           selectedItems.push(prepSelectedItems[i][0].items[j]);
         }
       } else if (prepSelectedItems[i][0].type === "drink") {
+        console.log(prepSelectedItems[i][0]);
         selectedItems.push(prepSelectedItems[i][0].items);
       }
     }
-    console.log("THIS THEST THO2: ", prepSelectedItems.length);
-    console.log("THIS TEST THO: ", selectedItems);
 
     // compute order total cost
     let total = () => {
@@ -235,6 +286,28 @@ export default function Checkout() {
           <h1 className="mb-[3%] whitespace-pre-wrap px-[3%] py-[1%] ">
             {displayContents()}
           </h1>
+        </div>
+
+        <div className="flex inline-flex mt-5">
+          <Select
+            options={deleteOptions}
+            placeholder="DELETE AN ITEM"
+            className="w-full"
+            maxMenuHeight={150}
+            // onChange={fillDele}
+            styles={styles}
+            components={{
+              DropdownIndicator: () => null,
+              IndicatorSeparator: () => null,
+            }}
+            // value={selectedDough}
+          />
+          <button
+            className="bg-[#ED2939] hover:bg-white hover:text-[#ED2939] hover:border-[#ED2939] hover:border-2 text-white mt-3 mb-3 mx-6 px-2 py-3 rounded-lg text-2xl justify-center items-center whitespace-nowrap"
+            onClick={deleteItem}
+          >
+            Delete
+          </button>
         </div>
 
         <input

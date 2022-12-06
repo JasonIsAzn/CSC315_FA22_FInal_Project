@@ -36,8 +36,6 @@ export default function Drinks() {
   // Render Page - Initial Load Data
   useEffect(() => {
     // Selected Drinks
-    console.log(selectedDrinksCounts);
-    console.log(selectedDrinks);
     const data = localStorage.getItem("selected-drinks");
     if (data) {
       setSelectedDrinks(JSON.parse(data));
@@ -66,7 +64,6 @@ export default function Drinks() {
   // Render Page - Load onto Page
   useEffect(() => {
     // Format Selected Drinks
-    console.log("drinktest", selectedDrinks);
     for (let i = 0; i < selectedDrinks.length; i++) {
       if (selectedDrinks[i].selected === "checked") {
         document.getElementById(selectedDrinks[i].value).checked = true;
@@ -131,7 +128,6 @@ export default function Drinks() {
     }
   }
   item_counter += drink_counter;
-  console.log("testseting", selectedDrinks);
   useEffect(() => {
     document.getElementById("item-count").textContent =
       "(TOTAL ITEMS: " + item_counter + ")";

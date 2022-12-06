@@ -16,8 +16,6 @@ export default function Customer() {
   const [selectedDrinks, setSelectedDrinks] = useState(drinks);
   const [selectedDrinksCounts, setSelectedDrinksCounts] = useState([]);
 
-  console.log(prepSelectedItems);
-
   // preset data for button
   const pizza_type = [
     {
@@ -91,14 +89,13 @@ export default function Customer() {
     }
   }, []);
 
-  let item_counter = prepSelectedItems.length;
-  for (let i = 0; i < selectedDrinks.length; ++i) {
-    if (selectedDrinks[i].selected == "checked") {
-      item_counter++;
-    }
-  }
-  console.log("testseting", selectedDrinks);
   useEffect(() => {
+    let item_counter = prepSelectedItems.length;
+    for (let i = 0; i < selectedDrinks.length; ++i) {
+      if (selectedDrinks[i].selected === "checked") {
+        item_counter++;
+      }
+    }
     document.getElementById("item-count").textContent =
       "(TOTAL ITEMS: " + item_counter + ")";
   });
