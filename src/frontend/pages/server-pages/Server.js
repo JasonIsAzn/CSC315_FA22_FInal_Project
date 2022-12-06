@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
+import logo from "../../assets/logo.png";
 
 export default function Server() {
   const {
@@ -150,15 +151,16 @@ export default function Server() {
   return (
     <div className="h-screen flex flex-col">
       {/* header button content */}
-      <div className="flex flex-row mt-8 justify-end">
+      <div className="flex flex-row mt-[3%] justify-end">
+        <img src={logo} className="h-12 w-36 mr-[67%]" />
         <button
-          className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl flex justify-center items-center"
+          className="h-12 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl flex justify-center items-center"
           onClick={goHome}
         >
           <h1 className="">Home</h1>
         </button>
         <button
-          className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center whitespace-nowrap"
+          className="h-12 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center whitespace-nowrap"
           onClick={goManager}
         >
           <h1 className="">Manager Mode</h1>
@@ -167,7 +169,7 @@ export default function Server() {
 
       {/* main area with item content */}
       <div className="p-[2%]">
-        <div className="grid grid-cols-3 gap-x-[8%] mb-[12%]">
+        <div className="grid grid-cols-3 gap-x-[5%] mb-[12%] mt-[3%]">
           <div className="flex flex-col">
             <h1 className="text-black mb-[3%] font-semibold text-3xl">Dough</h1>
             <Select
@@ -282,19 +284,19 @@ export default function Server() {
           </div>
         </div>
       </div>
-      <div className="mt-[2%] items-center justify-center flex flex flex-col">
-        <button
-          className="px-[7.5%] py-[1%] bg-yellow-400 hover:bg-white hover:text-yellow-600 hover:border-yellow-600 hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center mb-[2%]"
-          onClick={handleClearContents}
-        >
-          Clear Contents
-        </button>
+      <div className="mt-[5%] items-center justify-center flex flex flex-col">
 
         <button
-          className="px-[15%] py-[1%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center"
+          className="h-12 w-[25%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center mb-[2%]"
           onClick={goSubmission}
         >
           Confirm Contents
+        </button>
+        <button
+          className="h-12 w-[25%] bg-yellow-400 hover:bg-white hover:text-yellow-600 hover:border-yellow-600 hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center"
+          onClick={handleClearContents}
+        >
+          Clear Contents
         </button>
       </div>
     </div>

@@ -10,6 +10,7 @@ import {
 import mapStyles from "./Mapstyles";
 import { IconButton, Button } from "@chakra-ui/react";
 import { FaLocationArrow } from "react-icons/fa";
+import logo from "../assets/logo.png";
 
 export default function Locations() {
   const navigate = useNavigate();
@@ -87,6 +88,7 @@ export default function Locations() {
         >
           <h1 className="">Back</h1>
         </button>
+        <img src={logo} alt="Spin 'N Stone Logo" className="h-12" />
       </div>
       <div className="flex flex-row">
         <aside className="border mr-[1%] ml-[1%] w-1/5 rounded-lg flex flex-col py-[1%] h-screen">

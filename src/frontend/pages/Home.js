@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../context/GlobalContext";
 import { GoogleLogout } from "react-google-login";
+import logo from "../assets/logo.png";
 
 const client_id =
   "276997609841-if2htiha5o7n10ifa0ror9jsjnctuod1.apps.googleusercontent.com";
@@ -69,9 +70,9 @@ export default function Home() {
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex flex-col">
       {/* header section for logout button */}
-
+      
       <div className="flex justify-end items-center px-[3%] my-[1%]">
-        <div id="google_translate_element" className="border rounded-lg"></div>
+      <img src={logo} className="mr-[30%] h-24 w-56 mt-12" />
         {usedOAuth ? (
           <div id="signOutButton" className="mx-[5%]">
             <GoogleLogout
@@ -119,6 +120,7 @@ export default function Home() {
           >
             Locations
           </button>
+          <div id="google_translate_element" className="border rounded-lg mt-6"></div>
         </div>
       </div>
     </div>
