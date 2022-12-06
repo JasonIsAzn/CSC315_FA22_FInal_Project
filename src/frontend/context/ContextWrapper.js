@@ -31,6 +31,9 @@ export default function ContextWrapper(props) {
   // stores currently selected item
   const [selectedItem, setSelectedItem] = useState(null);
 
+  // signals whether user signed in with google
+  const [usedOAuth, setUsedOAuth] = useState(false);
+
   return (
     <GlobalContext.Provider
       value={{
@@ -69,6 +72,8 @@ export default function ContextWrapper(props) {
         setSelectedItem,
         showItemEditor,
         setShowItemEditor,
+        usedOAuth,
+        setUsedOAuth,
       }}
     >
       {props.children}

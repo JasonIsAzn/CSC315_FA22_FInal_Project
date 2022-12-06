@@ -38,6 +38,8 @@ const GlobalContext = React.createContext({
   setSelectedItem: () => {},
   showItemEditor: false,
   setShowItemEditor: () => {},
+  usedOAuth: false,
+  setUsedOAuth: () => {},
 });
 
 export default GlobalContext;

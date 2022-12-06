@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import MUIDataTable from "mui-datatables";
 import GlobalContext from "../../context/GlobalContext";
 import DatePicker from "react-datepicker";
@@ -66,29 +65,6 @@ export default function Inventory() {
     onRowClick: (rowData) => onRowClick(rowData),
     selectableRows: "none",
   };
-
-  // // handles new item creation
-  // async function addItem() {
-  //   axios
-  //     .post("http://localhost:5001/item/add_item", {
-  //       name: itemName,
-  //       price: price,
-  //       count: count,
-  //       type: type,
-  //     })
-  //     .then(() => {
-  //       alert("SENT");
-  //     })
-  //     .then(() => {
-  //       setCount(0);
-  //       setItemName("");
-  //       setPrice(0.0);
-  //       setType("");
-  //     })
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
-  // }
 
   // generates data for restock report
   const handleRestockReport = () => {

@@ -1,0 +1,3 @@
+OAuth Client ID: 276997609841-if2htiha5o7n10ifa0ror9jsjnctuod1.apps.googleusercontent.com
+
+OAuth Client Secret: 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

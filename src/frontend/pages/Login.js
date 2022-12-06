@@ -2,6 +2,11 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import GlobalContext from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
+import GoogleLogin from "react-google-login";
+import logo from "../assets/logo.png";
+
+const client_id =
+  "276997609841-if2htiha5o7n10ifa0ror9jsjnctuod1.apps.googleusercontent.com";
 
 export default function Login() {
   const {
@@ -26,6 +31,7 @@ export default function Login() {
     setVeggies,
     setDrizzles,
     setMaxID,
+    setUsedOAuth,
   } = useContext(GlobalContext);
 
   // HELPER FUNCTIONS START HERE //
@@ -56,7 +62,7 @@ export default function Login() {
 
   // get all items
   useEffect(() => {
-    axios.get("http://localhost:5001/item").then((result) => {
+    axios.get("http://localhost:5000/item").then((result) => {
       // store all item data
       const itemData = result.data;
 
@@ -133,7 +139,7 @@ export default function Login() {
   // get all orders
   useEffect(() => {
     axios
-      .get("http://localhost:5001/order")
+      .get("http://localhost:5000/order")
       .then((result) => {
         // store all order data
         const orderData = result.data;
@@ -163,7 +169,7 @@ export default function Login() {
       })
       .then((orderData) => {
         // associates all orders with their items (TODO)
-        axios.get("http://localhost:5001/order_item/all").then((result) => {
+        axios.get("http://localhost:5000/order_item/all").then((result) => {
           const allOIs = result.data;
 
           let j = 0;
@@ -196,15 +202,36 @@ export default function Login() {
     navigate("/home");
   };
 
+  // sends Google sign in user to home page
+  const onSuccess = () => {
+    navigate("/home");
+    setUsedOAuth(true);
+  };
+
+  // handle sign in failure
+  const onFailure = () => {};
+
   return (
-    <div className="h-screen w-full fixed left-0 top-0 flex flex-col items-center">
-      <h1 className="text-gray-500 text-3xl py-[5%]">OAuth Stuff Goes Here</h1>
+    <div className="h-screen w-full flex flex-col items-center justify-center">
+      <img src={logo} alt="Spin 'N Stone Logo" className="mt-[-10%]" />
+      <span
+        id="signInButton"
+        className="text-xl font-semibold mt-[3%] mb-[2%] border rounded-4xl"
+      >
+        <GoogleLogin
+          clientId={client_id}
+          buttonText="Sign in with Google"
+          onSuccess={onSuccess}
+          onFailure={onFailure}
+          cookiePolicy={"single_host_origin"}
+        />
+      </span>
 
       <button
-        className="w-1/4 h-1/4 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-3xl text-4xl"
+        className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-semibold mx-6 px-[5%] py-[1%] rounded-md text-xl"
         onClick={goHome}
       >
-        Login
+        Continue as Guest
       </button>
     </div>
   );

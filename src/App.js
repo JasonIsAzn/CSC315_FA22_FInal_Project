@@ -11,18 +11,32 @@ import Veggies from "./frontend/pages/customer-pages/Veggies";
 import Drizzles from "./frontend/pages/customer-pages/Drizzles";
 import Customer from "./frontend/pages/customer-pages/Customer";
 import Home from "./frontend/pages/Home";
-import Locations from "./frontend/pages/Locations"
+import Locations from "./frontend/pages/Locations";
 import Submission from "./frontend/pages/server-pages/Submission";
 import "react-datepicker/dist/react-datepicker.css";
 
+import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { gapi } from "gapi-script";
+
+const client_id =
+  "276997609841-if2htiha5o7n10ifa0ror9jsjnctuod1.apps.googleusercontent.com";
 
 function App() {
+  // misc. OAuth stuff
+  function start() {
+    gapi.client.init({
+      clientId: client_id,
+      scope: "",
+    });
+  }
+  gapi.load("client:auth2", start);
+
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/locations" element={<Locations/>} />
+      <Route path="/locations" element={<Locations />} />
 
       {/* Server Routes */}
       <Route path="/server" element={<Server />} />

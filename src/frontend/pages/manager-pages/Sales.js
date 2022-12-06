@@ -198,7 +198,7 @@ export default function Sales() {
         </button>
 
         <button
-          className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-6 p-6 rounded-lg text-l flex justify-center items-center"
+          className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-[2%] p-6 rounded-lg text-l flex justify-center items-center"
           onClick={goServer}
         >
           Server Mode
@@ -270,7 +270,7 @@ export default function Sales() {
         </aside>
         {/* sidebar contents end here */}
 
-        <div className="items-center justify-center px-[3%] pt-[3%] w-4/5">
+        <div className="items-center justify-center px-[2%] pt-[2%] w-4/5">
           <MUIDataTable
             title={determineTitle()}
             data={determineData()}
