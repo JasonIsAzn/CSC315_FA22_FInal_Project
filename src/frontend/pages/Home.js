@@ -76,7 +76,7 @@ export default function Home() {
       {/* header section for logout button */}
       
       <div className="flex justify-end items-center px-[3%] my-[1%]">
-      <img src={logo} className="mr-[30%] h-24 w-56 mt-12" />
+      <img src={logo} className="mr-[30%] h-16 w-56 mt-12" />
         {usedOAuth ? (
           <div id="signOutButton" className="mx-[5%]">
             <GoogleLogout
