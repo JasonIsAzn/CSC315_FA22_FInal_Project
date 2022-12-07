@@ -3,6 +3,10 @@ import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
 
+/**
+ * Page where server users can create orders for customers
+ *
+ */
 export default function Server() {
   const {
     listItems,

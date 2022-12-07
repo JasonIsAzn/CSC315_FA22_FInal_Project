@@ -11,6 +11,10 @@ import mapStyles from "./Mapstyles";
 import { IconButton, Button } from "@chakra-ui/react";
 import { FaLocationArrow } from "react-icons/fa";
 
+/**
+ * Page where Google Maps functionality is found
+ *
+ */
 export default function Locations() {
   const navigate = useNavigate();
   const goBack = () => {

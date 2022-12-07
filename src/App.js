@@ -13,6 +13,7 @@ import Customer from "./frontend/pages/customer-pages/Customer";
 import Home from "./frontend/pages/Home";
 import Locations from "./frontend/pages/Locations";
 import Submission from "./frontend/pages/server-pages/Submission";
+import Documentation from "./frontend/components/Documentation";
 import "react-datepicker/dist/react-datepicker.css";
 
 import React from "react";
@@ -54,6 +55,9 @@ function App() {
       <Route path="/sauces" element={<Sauces />} />
       <Route path="/veggies" element={<Veggies />} />
       <Route path="/drizzles" element={<Drizzles />} />
+
+      {/* Misc. Route */}
+      <Route path="/documentation" element={<Documentation />} />
     </Routes>
   );
 }

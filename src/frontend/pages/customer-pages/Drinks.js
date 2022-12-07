@@ -2,6 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
 
+/**
+ * Page where customer users can select their order's drink(s)
+ *
+ */
 export default function Drinks() {
   // prep-drink data
   const {

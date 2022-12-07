@@ -11,6 +11,10 @@ function formatDate(date) {
   return result;
 }
 
+/**
+ * Page where server users can process orders for customers
+ *
+ */
 export default function Submission() {
   const {
     selectedItems,
@@ -63,7 +67,9 @@ export default function Submission() {
     navigate("/inventory");
   };
 
-  // adds order and adjusts inventory
+  /**
+   * Computes total associated with all items selected by user to be part of a new order, then accounts for this new order all throughout the system. In the UI/UX and database, the selected items' quantities are all reduced to account for the use of inventory and the order is accounted for in the restaurant's sales data.
+   */
   const handleSubmission = () => {
     // compute order total cost
     let total = () => {
@@ -84,7 +90,7 @@ export default function Submission() {
     const newOrder = {
       id: maxID + 1,
       customer_name: customerName,
-      total_cost: total(),
+      total_cost: Number(total().toFixed(2)),
       num_toppings: orderItems.size - 3,
       time_stamp: formatDate(new Date().toISOString().split("T")[0]),
       items: orderItems,
@@ -121,7 +127,7 @@ export default function Submission() {
     axios
       .post("http://localhost:5000/order", {
         name: customerName,
-        cost: total(),
+        cost: Number(total().toFixed(2)),
         num_toppings: 3,
         date: new Date().toISOString().split("T")[0],
       })

@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
 import "./customer_page.css";
 
+/**
+ * Base page for customer mode of application; this is where customer users start creating their order
+ *
+ */
 export default function Customer() {
   const {
     selectedItems,

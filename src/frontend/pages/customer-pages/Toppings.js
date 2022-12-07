@@ -4,6 +4,10 @@ import GlobalContext from "../../context/GlobalContext";
 import { motion } from "framer-motion";
 import toppingImages from "./images";
 
+/**
+ * Page where customer users can start choosing their toppings
+ *
+ */
 export default function Toppings() {
   // prep-meat data
   const {

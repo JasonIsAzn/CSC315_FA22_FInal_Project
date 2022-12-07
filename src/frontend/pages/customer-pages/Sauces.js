@@ -4,6 +4,10 @@ import GlobalContext from "../../context/GlobalContext";
 import { motion } from "framer-motion";
 import toppingImages from "./images";
 
+/**
+ * Page where customer users can select their order's sauce(s)
+ *
+ */
 export default function Sauces() {
   // prep-sauces data
 

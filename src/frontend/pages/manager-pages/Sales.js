@@ -4,6 +4,10 @@ import MUIDataTable from "mui-datatables";
 import GlobalContext from "../../context/GlobalContext";
 import DatePicker from "react-datepicker";
 
+/**
+ * Page where manager users can monitor their sales data and access sales and combo report
+ *
+ */
 export default function Sales() {
   const { listOrders, allOrders, setListOrders } = useContext(GlobalContext);
 
@@ -52,7 +56,9 @@ export default function Sales() {
     selectableRows: "none",
   };
 
-  // generates data for sales report
+  /**
+   * Filters sales data table such that only orders whose date falls between a user provided start and end date are included in the table
+   */
   const handleSalesReport = () => {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -68,8 +74,11 @@ export default function Sales() {
     setDisplayData(1);
   };
 
-  // generates data for combo report (TODO) [FIXME]
+  /**
+   * Determines how many times each combination of items in a predetermined list has been bought together in the same order since a date specified by the user. Gives user a sense of which combinations are most/least popular
+   */
   const handleComboReport = () => {
+    // [FIXME]
     const combos = [
       ["Smoked Chicken", "BBQ Sauce", 0],
       ["Pepperoni", "Fountain Drink", 0],

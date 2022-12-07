@@ -3,6 +3,10 @@ import Select from "react-select";
 import GlobalContext from "../context/GlobalContext";
 import axios from "axios";
 
+/**
+ * Popup that allows for the updating of an existing item
+ *
+ */
 export default function () {
   const {
     setShowItemEditor,
@@ -49,7 +53,10 @@ export default function () {
     }
   };
 
-  // handles updating of selected item
+  /**
+   * Updates an existing item in the system based on details (name, price, count, type) provided by the user. It handles accounting for the updated item all throughout the UI/UX and updates the item's details in the 'item' table in the app's database.
+   *
+   */
   const handleUpdateItem = () => {
     // process item information (frontend)
     for (let i = 0; i < allItems.length; i++) {

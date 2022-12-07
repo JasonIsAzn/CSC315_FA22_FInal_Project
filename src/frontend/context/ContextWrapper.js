@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import GlobalContext from "./GlobalContext";
 
+/**
+ * Allows global states to be distributed and used throughout all pages/components. These states are the backbone of all our app's functionalities.
+ *
+ */
 export default function ContextWrapper(props) {
   // all global states are declared here
 

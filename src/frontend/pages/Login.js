@@ -7,7 +7,10 @@ import logo from "../assets/logo.png";
 
 const client_id =
   "276997609841-if2htiha5o7n10ifa0ror9jsjnctuod1.apps.googleusercontent.com";
-
+/**
+ * Landing page for our app; this is where user can login with Google (or go on as a guest). This is also where all relevant app data is brought over from database.
+ *
+ */
 export default function Login() {
   const {
     allItems,

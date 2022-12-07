@@ -6,6 +6,10 @@ import { GoogleLogout } from "react-google-login";
 const client_id =
   "276997609841-if2htiha5o7n10ifa0ror9jsjnctuod1.apps.googleusercontent.com";
 
+/**
+ * Home page where user can select the mode (manager, server, or customer) they're looking to use the app in
+ *
+ */
 export default function Home() {
   // TRANSLATE STUFF STARTS HERE //
   const googleTranslateElementInit = () => {

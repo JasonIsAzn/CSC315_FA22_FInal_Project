@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import party from "party-js";
 import axios from "axios";
 
+/**
+ * Page where customer users can process their orders
+ *
+ */
 export default function Checkout() {
   const {
     selectedItems,

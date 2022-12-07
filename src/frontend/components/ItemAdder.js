@@ -3,6 +3,10 @@ import axios from "axios";
 import GlobalContext from "../context/GlobalContext";
 import Select from "react-select";
 
+/**
+ * Popup that allows for the creation of a new item
+ *
+ */
 export default function ItemAdder() {
   const {
     allItems,
@@ -41,7 +45,10 @@ export default function ItemAdder() {
     { label: "Drink", value: "drink" },
   ];
 
-  // handles new item creation
+  /**
+   * Adds a new item to the system based on details (name, price, count, type) provided by the user. It handles accounting for the new item all throughout the UI/UX and adds the new item's details to the 'item' table in the app's database.
+   *
+   */
   const handleAddItem = () => {
     // process item information (frontend)
     let itemIDs = [];

@@ -6,6 +6,10 @@ import DatePicker from "react-datepicker";
 import ItemAdder from "../../components/ItemAdder";
 import ItemEditor from "../../components/ItemEditor";
 
+/**
+ * Page where manager users can monitor their inventory levels, add/update items in their system, and access restock and excess reports
+ *
+ */
 export default function Inventory() {
   const {
     listItems,
@@ -66,7 +70,9 @@ export default function Inventory() {
     selectableRows: "none",
   };
 
-  // generates data for restock report
+  /**
+   * Filters inventory data table such that only items with 'count' values below the user provided threshold remain.
+   */
   const handleRestockReport = () => {
     for (let i = 0; i < listItems.length; i++) {
       if (listItems[i][2] <= threshold) {
@@ -78,8 +84,11 @@ export default function Inventory() {
     setDisplayData(1);
   };
 
-  // generates data for excess report (TODO) [FIXME]
+  /**
+   * Determines the inventory counts of all items on a previous date specified by the user, then uses this knowledge to generate a table describing what percentage of each item has been sold from the user specified date up until the current date
+   */
   const handleExcessReport = () => {
+    // [FIXME]
     // used to store each items' current and past inventory count
     let quants = new Map();
     for (let i = 0; i < allItems.length; i++) {
