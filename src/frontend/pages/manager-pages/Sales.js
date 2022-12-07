@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MUIDataTable from "mui-datatables";
 import GlobalContext from "../../context/GlobalContext";
 import DatePicker from "react-datepicker";
+import logo from "../../assets/logo.png";
 
 /**
  * Page where manager users can monitor their sales data and access sales and combo report
@@ -184,7 +185,8 @@ export default function Sales() {
 
   return (
     <div className="h-screen overflow-y-hidden">
-      <div className=" w-screen flex justify-center mt-16">
+      <img src={logo} className="h-12 w-36 mt-8 ml-8" />
+      <div className=" w-screen flex justify-center mt-8">
         <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goHome}
@@ -216,7 +218,7 @@ export default function Sales() {
 
       <div className="flex flex-row">
         {/* sidebar contents start here */}
-        <aside className="border mt-[2%] mr-[1%] w-1/5 rounded-lg flex flex-col items-center py-[1%] h-screen">
+        <aside className="border mt-[2%] mr-[1%] w-1/5 rounded-lg flex flex-col items-center py-[1%]">
           <div className="border w-[90%] items-center justify-center rounded-lg flex flex-col">
             <h1 className="font-semibold text-gray-600"> Sales Report </h1>
             <h3 className="text-gray-500 px-[12.5%] mb-[3%]">
@@ -240,7 +242,7 @@ export default function Sales() {
               }}
             />
             <button
-              className="mt-[2%] bg-green-400 border border-2 rounded-lg border-green-600 mb-[3%] w-3/4 hover:bg-white text-gray-500 mb-[6%] py-[1%]"
+              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white"
               onClick={handleSalesReport}
             >
               Generate Report
@@ -263,7 +265,7 @@ export default function Sales() {
             />
 
             <button
-              className="mt-[2%] bg-green-400 border border-2 rounded-lg border-green-600 mb-[3%] w-3/4 hover:bg-white text-gray-500 mb-[6%] py-[1%]"
+              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white"
               onClick={handleComboReport}
             >
               Generate Report
@@ -271,10 +273,10 @@ export default function Sales() {
           </div>
 
           <button
-            className="mt-[25%] bg-red-400 border border-2 rounded-lg px-[3%] border-red-600 w-3/4 py-[5%] hover:bg-white text-gray-600"
+            className="mt-[10%] bg-yellow-400 rounded-lg border-red-600 w-3/4 py-[2%] hover:bg-white hover:border-2 hover:border-yellow-400 hover:text-yellow-400 text-black text-xl font-bold"
             onClick={handleEndReport}
           >
-            End Report
+            Reset
           </button>
         </aside>
         {/* sidebar contents end here */}

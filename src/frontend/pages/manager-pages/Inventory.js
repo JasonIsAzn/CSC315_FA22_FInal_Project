@@ -5,6 +5,7 @@ import GlobalContext from "../../context/GlobalContext";
 import DatePicker from "react-datepicker";
 import ItemAdder from "../../components/ItemAdder";
 import ItemEditor from "../../components/ItemEditor";
+import logo from "../../assets/logo.png";
 
 /**
  * Page where manager users can monitor their inventory levels, add/update items in their system, and access restock and excess reports
@@ -202,12 +203,14 @@ export default function Inventory() {
   return (
     <div className="h-screen w-full fixed left-0 top-0">
       <div className="z-50">
+
         {showItemAdder && <ItemAdder />}
         {showItemEditor && <ItemEditor />}
       </div>
 
       {/* header contents start here */}
-      <div className="w-screen flex justify-center mt-16">
+      <img src={logo} className="h-12 w-36 mt-8 ml-8" />
+      <div className="w-screen flex justify-center mt-8">
         <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goHome}
@@ -240,7 +243,7 @@ export default function Inventory() {
 
       <div className="flex flex-row">
         {/* sidebar contents start here */}
-        <aside className="border mt-[2%] mr-[1%] w-1/5 rounded-lg flex flex-col items-center py-[1%] h-screen">
+        <aside className="border mt-[2%] mr-[1%] w-1/5 rounded-lg flex flex-col items-center py-[1%]">
           <button
             className="my-[1%] bg-[#4FC3F7] border rounded-lg px-[3%] mb-[5%] w-[85%] py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold text-md"
             onClick={openItemAdder}
@@ -264,7 +267,7 @@ export default function Inventory() {
             />
 
             <button
-              className="mt-[2%] bg-green-400 border border-2 rounded-lg w-3/4 border-green-600 mb-[6%] py-[1%] hover:bg-white text-gray-600"
+              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white"
               onClick={handleRestockReport}
             >
               Generate Report
@@ -287,7 +290,7 @@ export default function Inventory() {
             />
 
             <button
-              className="mt-[2%] bg-green-400 border border-2 rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white text-gray-600"
+              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white"
               onClick={handleExcessReport}
             >
               Generate Report
@@ -295,10 +298,10 @@ export default function Inventory() {
           </div>
 
           <button
-            className="mt-[25%] bg-red-400 border border-2 rounded-lg px-[3%] border-red-600 w-3/4 py-[5%] hover:bg-white text-gray-600"
+            className="mt-[10%] bg-yellow-400 rounded-lg border-red-600 w-3/4 py-[2%] hover:bg-white hover:border-2 hover:border-yellow-400 hover:text-yellow-400 text-black text-xl font-bold"
             onClick={handleEndReport}
           >
-            End Report
+            Reset
           </button>
         </aside>
         {/* sidebar contents end here */}

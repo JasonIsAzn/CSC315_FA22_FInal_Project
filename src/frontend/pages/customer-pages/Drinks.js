@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
+import logo from "../../assets/logo.png";
 
 /**
  * Page where customer users can select their order's drink(s)
@@ -39,8 +40,6 @@ export default function Drinks() {
   // Render Page - Initial Load Data
   useEffect(() => {
     // Selected Drinks
-    console.log(selectedDrinksCounts);
-    console.log(selectedDrinks);
     const data = localStorage.getItem("selected-drinks");
     if (data) {
       setSelectedDrinks(JSON.parse(data));
@@ -69,7 +68,6 @@ export default function Drinks() {
   // Render Page - Load onto Page
   useEffect(() => {
     // Format Selected Drinks
-    console.log("drinktest", selectedDrinks);
     for (let i = 0; i < selectedDrinks.length; i++) {
       if (selectedDrinks[i].selected === "checked") {
         document.getElementById(selectedDrinks[i].value).checked = true;
@@ -134,7 +132,6 @@ export default function Drinks() {
     }
   }
   item_counter += drink_counter;
-  console.log("testseting", selectedDrinks);
   useEffect(() => {
     document.getElementById("item-count").textContent =
       "(TOTAL ITEMS: " + item_counter + ")";
@@ -240,9 +237,9 @@ export default function Drinks() {
   return (
     <div className="h-screen overflow-y-show">
       <div className="flex justify-center mt-5">
-        <img src={require("../../assets/logo.png")} className="" />
+        <img src={logo} alt="Spin 'N Stone Logo" className="h-16" />
       </div>
-      <div className="w-screen flex justify-start mt-16">
+      <div className="w-screen flex justify-start mt-8">
         <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goHome}
@@ -258,7 +255,7 @@ export default function Drinks() {
         </button>
 
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
+          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
           onClick={goDrinks}
         >
           Drinks
@@ -279,7 +276,7 @@ export default function Drinks() {
             (TOTAL ITEMS: 0)
           </h2>
         </div>
-        <div className="grid lg:grid-cols-4">
+        <div className="grid lg:grid-cols-4 gap-3 mx-6">
           {drinks.map((drink, index) => (
             <div className="min-w-full">
               <input
@@ -297,7 +294,7 @@ export default function Drinks() {
                 {drinksTextFormatted[index]}
               </label>
 
-              <div className="h-10 w-auto mb-5 flex items-center justify-center bg-[#FFF]">
+              <div className="h-10 w-auto flex items-center justify-center bg-[#FFF]">
                 <span
                   className="h-8 w-8 text-white"
                   id={"minus-" + index}

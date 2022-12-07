@@ -20,6 +20,11 @@
 ### `Checkout Page` (2/3)
 
 - Remove an Item from the list
+  - when delete is clicked
+  - get value from select
+  - delete item from preselectedItems
+  - update drop menu
+  - update items in list
 
 ### `Special/Drinks`
 

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
 import { motion } from "framer-motion";
 import toppingImages from "./images";
+import logo from "../../assets/logo.png";
 
 /**
  * Page where customer users can start choosing their toppings
@@ -282,15 +283,12 @@ export default function Toppings() {
   return (
     <div className="w-screen overflow-y-show">
       <div className="flex justify-center mt-5">
-        <img
-          src={require("../../assets/logo.png")}
-          className=".max-w-full and .h-12"
-        />
+      <img src={logo} alt="Spin 'N Stone Logo" className="h-16" />
       </div>
       {/* navigation bar */}
       <div className="flex flex-row mt-2 justify-end">
         <button
-          className="bg-[#90ee90] hover:bg-white hover:text-[#90ee90] hover:border-[#90ee90] hover:border-2 text-white p-2 rounded-lg text-2xl flex justify-center items-center"
+          className="bg-yellow-400 hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border-2 text-white p-2 rounded-lg text-2xl flex justify-center items-center"
           onClick={addOrder}
         >
           <h1 className="">Add to Order</h1>
@@ -313,7 +311,7 @@ export default function Toppings() {
         </button>
 
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
+          className="w-1/2 h-1 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
           onClick={goToppings}
         >
           Meats
@@ -343,7 +341,7 @@ export default function Toppings() {
           </h2>
         </div>
         <div className="grid lg:grid-cols-4">
-          <div className="grid lg:grid-cols-4 col-span-3">
+          <div className="grid lg:grid-cols-4 col-span-3 gap-3 ml-12">
             {selectedMeats.map((meat, index) => (
               <div className="">
                 <input
@@ -364,7 +362,7 @@ export default function Toppings() {
             ))}
           </div>
           {/* PIZZA ANIMATION HERE */}
-          <div className="flex relative ml-32">
+          <div className="flex relative ml-16">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{

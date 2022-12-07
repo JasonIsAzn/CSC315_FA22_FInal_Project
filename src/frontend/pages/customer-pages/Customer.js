@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
 import "./customer_page.css";
+import logo from "../../assets/logo.png";
 
 /**
  * Base page for customer mode of application; this is where customer users start creating their order
@@ -19,8 +20,6 @@ export default function Customer() {
   const [selectedDrinks, setSelectedDrinks] = useState(drinks);
   const [selectedDrinksCounts, setSelectedDrinksCounts] = useState([]);
 
-  console.log(prepSelectedItems);
-
   // preset data for button
   const pizza_type = [
     {
@@ -34,7 +33,7 @@ export default function Customer() {
       topping_amount: [0, 0],
     },
     {
-      name: "Classic Pepproni",
+      name: "Classic Pepperoni",
       type: 2,
       topping_amount: [1, 1],
     },
@@ -94,14 +93,13 @@ export default function Customer() {
     }
   }, []);
 
-  let item_counter = prepSelectedItems.length;
-  for (let i = 0; i < selectedDrinks.length; ++i) {
-    if (selectedDrinks[i].selected == "checked") {
-      item_counter++;
-    }
-  }
-  console.log("testseting", selectedDrinks);
   useEffect(() => {
+    let item_counter = prepSelectedItems.length;
+    for (let i = 0; i < selectedDrinks.length; ++i) {
+      if (selectedDrinks[i].selected === "checked") {
+        item_counter++;
+      }
+    }
     document.getElementById("item-count").textContent =
       "(TOTAL ITEMS: " + item_counter + ")";
   });
@@ -122,10 +120,10 @@ export default function Customer() {
   return (
     <div className="w-screen overflow-y-show">
       <div className="flex justify-center mt-5">
-        <img src={require("../../assets/logo.png")} className="" />
+        <img src={logo} alt="Spin 'N Stone Logo" className="h-16" />
       </div>
       {/* navigation bar */}
-      <div className="w-screen flex justify-start mt-16">
+      <div className="w-screen flex justify-start mt-8">
         <button
           className="w-4.5 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-6 rounded-lg text-2xl flex justify-center items-center"
           onClick={goHome}
@@ -134,7 +132,7 @@ export default function Customer() {
         </button>
 
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
+          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
           onClick={goCustomer}
         >
           Pizza
@@ -164,7 +162,7 @@ export default function Customer() {
             (TOTAL ITEMS: 0)
           </h2>
         </div>
-        <div className="grid lg:grid-cols-4 mx-20 mt-5">
+        <div className="grid lg:grid-cols-3 mx-12 mt-5 gap-3">
           {pizza_type.map((pizza) => (
             <div>
               <button
