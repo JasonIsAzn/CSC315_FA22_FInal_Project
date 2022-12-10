@@ -25,6 +25,7 @@ export default function Checkout() {
   const [customerName, setCustomerName] = useState("");
   const [selectedDrinks, setSelectedDrinks] = useState(drinks);
   const [selectedDrinksCounts, setSelectedDrinksCounts] = useState([]);
+  const [selectedDeleteItem, setSelectedDeleteItem] = useState(-1);
 
   let deleteOptions = [];
   useEffect(() => {
@@ -152,17 +153,17 @@ export default function Checkout() {
     }),
   };
 
+  const handleDelete = (item) => {
+    console.log("handle: items", item);
+    setSelectedDeleteItem(item.index);
+    console.log("check selected:", selectedDeleteItem);
+  };
+
   const fillOptions = () => {
     for (let i = 0; i < prepSelectedItems.length; ++i) {
       if (prepSelectedItems[i][0].type === "pizza") {
         deleteOptions.push({
           label: prepSelectedItems[i][0].type + " " + (i + 1),
-          index: i,
-        });
-      } else if (prepSelectedItems[i][0].type === "drink") {
-        console.log(prepSelectedItems[i][0].items);
-        deleteOptions.push({
-          label: prepSelectedItems[i][0].items.label,
           index: i,
         });
       }
@@ -171,7 +172,40 @@ export default function Checkout() {
   };
 
   const deleteItem = () => {
-    // console.log
+    if (selectedDeleteItem == -1) {
+      return;
+    }
+
+    let containsPizza = false;
+    for (let i = 0; i < prepSelectedItems.length; ++i) {
+      if (prepSelectedItems[i][0].type === "pizza") {
+        containsPizza = true;
+        break;
+      }
+    }
+
+    if (!containsPizza) {
+      return;
+    }
+
+    console.log("deletion test: ", selectedDeleteItem);
+    console.log("deletion1: test: ", prepSelectedItems);
+    prepSelectedItems.splice(selectedDeleteItem, 1);
+    deleteOptions = [];
+    for (let i = 0; i < prepSelectedItems.length; ++i) {
+      if (prepSelectedItems[i][0].type === "pizza") {
+        deleteOptions.push({
+          label: prepSelectedItems[i][0].type + " " + (i + 1),
+          index: i,
+        });
+      }
+    }
+    const $select = document.querySelector("#deleteDropDown");
+    $select.options = deleteOptions;
+
+    document.getElementById("displayContents").textContent = displayContents();
+    console.log("deletion2: test: ", prepSelectedItems);
+    console.log("deletion3: test: ", deleteOptions);
   };
 
   // sends the user to the Home page
@@ -196,7 +230,6 @@ export default function Checkout() {
           selectedItems.push(prepSelectedItems[i][0].items[j]);
         }
       } else if (prepSelectedItems[i][0].type === "drink") {
-        console.log(prepSelectedItems[i][0]);
         selectedItems.push(prepSelectedItems[i][0].items);
       }
     }
@@ -287,24 +320,27 @@ export default function Checkout() {
       </div>
       <div className="flex flex-col items-center mt-8">
         <div className="h-2/4 w-2/5 text-2xl border border-2 text-black rounded-xl overflow-y-scroll">
-          <h1 className="mb-[3%] whitespace-pre-wrap px-[3%] py-[1%] ">
+          <h1
+            className="mb-[3%] whitespace-pre-wrap px-[3%] py-[1%] "
+            id="displayContents"
+          >
             {displayContents()}
           </h1>
         </div>
 
         <div className="flex inline-flex mt-5">
           <Select
+            id="deleteDropDown"
             options={deleteOptions}
             placeholder="DELETE AN ITEM"
             className="w-full"
             maxMenuHeight={150}
-            // onChange={fillDele}
+            onChange={handleDelete}
             styles={styles}
             components={{
               DropdownIndicator: () => null,
               IndicatorSeparator: () => null,
             }}
-            // value={selectedDough}
           />
           <button
             className="bg-[#ED2939] hover:bg-white hover:text-[#ED2939] hover:border-[#ED2939] hover:border-2 text-white mt-3 mb-3 mx-6 px-2 py-3 rounded-lg text-2xl justify-center items-center whitespace-nowrap"
