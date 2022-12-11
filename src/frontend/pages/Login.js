@@ -65,7 +65,7 @@ export default function Login() {
 
   // get all items
   useEffect(() => {
-    axios.get("http://localhost:5001/item").then((result) => {
+    axios.get("http://localhost:5000/item").then((result) => {
       // store all item data
       const itemData = result.data;
 
@@ -142,7 +142,7 @@ export default function Login() {
   // get all orders
   useEffect(() => {
     axios
-      .get("http://localhost:5001/order")
+      .get("http://localhost:5000/order")
       .then((result) => {
         // store all order data
         const orderData = result.data;
@@ -172,7 +172,7 @@ export default function Login() {
       })
       .then((orderData) => {
         // associates all orders with their items (TODO)
-        axios.get("http://localhost:5001/order_item/all").then((result) => {
+        axios.get("http://localhost:5000/order_item/all").then((result) => {
           const allOIs = result.data;
 
           let j = 0;

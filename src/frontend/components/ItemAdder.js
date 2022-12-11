@@ -114,7 +114,7 @@ export default function ItemAdder() {
 
     // process item information (backend)
     axios
-      .post("http://localhost:5001/item", {
+      .post("http://localhost:5000/item", {
         name: itemName,
         price: price,
         count: count,

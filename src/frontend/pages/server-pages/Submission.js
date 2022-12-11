@@ -125,7 +125,7 @@ export default function Submission() {
 
     // process order information (backend)
     axios
-      .post("http://localhost:5001/order", {
+      .post("http://localhost:5000/order", {
         name: customerName,
         cost: Number(total().toFixed(2)),
         num_toppings: 3,
@@ -139,7 +139,7 @@ export default function Submission() {
         }
 
         axios
-          .post("http://localhost:5001/order_item", {
+          .post("http://localhost:5000/order_item", {
             order_id: maxID + 1,
             ids: item_ids,
           })
@@ -151,7 +151,7 @@ export default function Submission() {
             }
 
             axios
-              .put("http://localhost:5001/item/count", {
+              .put("http://localhost:5000/item/count", {
                 ids: item_ids,
               })
               .then(() => {

@@ -212,7 +212,7 @@ export default function Checkout() {
 
     // add order information
     axios
-      .post("http://localhost:5001/order", {
+      .post("http://localhost:5000/order", {
         name: customerName,
         cost: total(),
         num_toppings: 3,
@@ -226,7 +226,7 @@ export default function Checkout() {
         }
 
         axios
-          .post("http://localhost:5001/order_item", {
+          .post("http://localhost:5000/order_item", {
             order_id: maxID + 1,
             ids: item_ids,
           })
@@ -238,7 +238,7 @@ export default function Checkout() {
             }
 
             axios
-              .put("http://localhost:5001/item/count", {
+              .put("http://localhost:5000/item/count", {
                 ids: item_ids,
               })
               .then(() => {
