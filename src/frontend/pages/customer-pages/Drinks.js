@@ -289,7 +289,7 @@ export default function Drinks() {
               <label
                 class=""
                 for={drink.value}
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold my-1 p-20 rounded-lg text-l flex justify-center min-w-full items-center"
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold my-1 p-20 rounded-lg text-l flex justify-center min-w-full items-center hover:text-3xl"
               >
                 {drinksTextFormatted[index]}
               </label>

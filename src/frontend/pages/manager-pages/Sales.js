@@ -242,7 +242,7 @@ export default function Sales() {
               }}
             />
             <button
-              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white"
+              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white hover:text-3xl"
               onClick={handleSalesReport}
             >
               Generate Report
@@ -265,7 +265,7 @@ export default function Sales() {
             />
 
             <button
-              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white"
+              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white hover:text-3xl"
               onClick={handleComboReport}
             >
               Generate Report
@@ -273,7 +273,7 @@ export default function Sales() {
           </div>
 
           <button
-            className="mt-[10%] bg-yellow-400 rounded-lg border-red-600 w-3/4 py-[2%] hover:bg-white hover:border-2 hover:border-yellow-400 hover:text-yellow-400 text-black text-xl font-bold"
+            className="mt-[10%] bg-yellow-400 rounded-lg border-red-600 w-3/4 py-[2%] hover:bg-white hover:border-2 hover:border-yellow-400 hover:text-yellow-400 text-black text-xl font-bold hover:text-3xl"
             onClick={handleEndReport}
           >
             Reset

@@ -166,7 +166,7 @@ export default function Customer() {
           {pizza_type.map((pizza) => (
             <div>
               <button
-                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border text-white font-bold p-24 rounded-lg text-l flex justify-center items-center min-h-full min-w-full whitespace-nowrap"
+                className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border text-white font-bold p-24 rounded-lg text-l flex justify-center items-center min-h-full min-w-full whitespace-nowrap hover:text-3xl"
                 name="pizza-btn"
                 id={pizza.type}
                 onClick={(event) => selectingPizza(event, pizza)}

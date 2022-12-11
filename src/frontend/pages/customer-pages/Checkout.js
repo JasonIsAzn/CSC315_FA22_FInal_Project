@@ -343,7 +343,7 @@ export default function Checkout() {
             }}
           />
           <button
-            className="bg-[#ED2939] hover:bg-white hover:text-[#ED2939] hover:border-[#ED2939] hover:border-2 text-white mt-3 mb-3 mx-6 px-2 py-3 rounded-lg text-2xl justify-center items-center whitespace-nowrap"
+            className="bg-[#ED2939] hover:bg-white hover:text-[#ED2939] hover:border-[#ED2939] hover:border-2 text-white mt-3 mb-3 mx-6 px-2 py-3 rounded-lg text-2xl justify-center items-center whitespace-nowrap hover:text-3xl"
             onClick={deleteItem}
           >
             Delete
@@ -360,7 +360,7 @@ export default function Checkout() {
         />
 
         <button
-          className="w-1/2 mx-[25%] bg-[#4FC3F7] mb-12 hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-1 px-2 rounded-lg text-2xl flex justify-center items-center confetti-button"
+          className="w-1/2 mx-[25%] bg-[#4FC3F7] mb-12 hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-1 px-2 rounded-lg text-2xl flex justify-center items-center confetti-button hover:text-3xl"
           onClick={handleSubmission}
         >
           Submit Order
