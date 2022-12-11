@@ -6,19 +6,33 @@ import party from "party-js";
 import axios from "axios";
 import Select from "react-select";
 
+// converts date format to ideal form
+function formatDate(date) {
+  let part1 = date.substring(5);
+  let part2 = date.substring(0, 4);
+  let result = part1 + "-" + part2;
+  return result;
+}
+
 /**
  * Page where customer users can process their orders
  *
  */
 export default function Checkout() {
   const {
-    selectedItems,
     maxID,
-    setSelectedItems,
     setMaxID,
     prepSelectedItems,
     setPrepSelectedItems,
     drinks,
+    allItems,
+    listItems,
+    setAllItems,
+    setListItems,
+    setListOrders,
+    setAllOrders,
+    allOrders,
+    listOrders,
   } = useContext(GlobalContext);
 
   // stores customer name
@@ -187,9 +201,6 @@ export default function Checkout() {
     if (!containsPizza) {
       return;
     }
-
-    console.log("deletion test: ", selectedDeleteItem);
-    console.log("deletion1: test: ", prepSelectedItems);
     prepSelectedItems.splice(selectedDeleteItem, 1);
     deleteOptions = [];
     for (let i = 0; i < prepSelectedItems.length; ++i) {
@@ -204,13 +215,10 @@ export default function Checkout() {
     $select.options = deleteOptions;
 
     document.getElementById("displayContents").textContent = displayContents();
-    console.log("deletion2: test: ", prepSelectedItems);
-    console.log("deletion3: test: ", deleteOptions);
   };
 
   // sends the user to the Home page
   const goBack = async () => {
-    setSelectedItems([]);
     // HORRIBLE SOLUTION
     for (let j = 0; j < 100; ++j) {
       for (let i = 0; i < prepSelectedItems.length; ++i) {
@@ -221,9 +229,10 @@ export default function Checkout() {
     }
     navigate("/customer");
   };
+
   // adds order and adjusts inventory
   const handleSubmission = () => {
-    setSelectedItems([]);
+    let selectedItems = [];
     for (let i = 0; i < prepSelectedItems.length; ++i) {
       if (prepSelectedItems[i][0].type === "pizza") {
         for (let j = 0; j < prepSelectedItems[i][0].items.length; ++j) {
@@ -233,6 +242,7 @@ export default function Checkout() {
         selectedItems.push(prepSelectedItems[i][0].items);
       }
     }
+    console.log("HELGLEO", selectedItems);
 
     // compute order total cost
     let total = () => {
@@ -243,7 +253,49 @@ export default function Checkout() {
       return value;
     };
 
-    // add order information
+    // process order information (frontend)
+    const orderItems = new Set();
+    for (let i = 0; i < selectedItems.length; i++) {
+      orderItems.add(selectedItems[i].label);
+    }
+
+    const newOrder = {
+      id: maxID + 1,
+      customer_name: customerName,
+      total_cost: Number(total().toFixed(2)),
+      num_toppings: orderItems.size - 3,
+      time_stamp: formatDate(new Date().toISOString().split("T")[0]),
+      items: orderItems,
+    };
+
+    allOrders.push(newOrder);
+    listOrders.push([
+      newOrder.id,
+      newOrder.customer_name,
+      newOrder.total_cost,
+      newOrder.num_toppings,
+      newOrder.time_stamp,
+    ]);
+
+    setAllOrders(allOrders);
+    setListOrders(listOrders);
+
+    for (let i = 0; i < allItems.length; i++) {
+      if (orderItems.has(allItems[i].name)) {
+        allItems[i].count -= 1;
+      }
+    }
+
+    for (let i = 0; i < listItems.length; i++) {
+      if (orderItems.has(listItems[i][1])) {
+        listItems[i][2] -= 1;
+      }
+    }
+
+    setAllItems(allItems);
+    setListItems(listItems);
+
+    // add order information (backend)
     axios
       .post("http://localhost:5001/order", {
         name: customerName,
@@ -275,7 +327,6 @@ export default function Checkout() {
                 ids: item_ids,
               })
               .then(() => {
-                setSelectedItems([]);
                 setPrepSelectedItems([]);
 
                 for (let i = 0; i < selectedDrinks.length; ++i) {
