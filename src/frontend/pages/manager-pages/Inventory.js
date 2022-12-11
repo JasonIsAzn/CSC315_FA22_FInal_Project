@@ -245,7 +245,7 @@ export default function Inventory() {
         {/* sidebar contents start here */}
         <aside className="border mt-[2%] mr-[1%] w-1/5 rounded-lg flex flex-col items-center py-[1%]">
           <button
-            className="my-[1%] bg-[#4FC3F7] border rounded-lg px-[3%] mb-[5%] w-[85%] py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold text-md"
+            className="my-[1%] bg-[#4FC3F7] border rounded-lg px-[3%] mb-[5%] w-[85%] py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold text-md hover:text-3xl"
             onClick={openItemAdder}
           >
             Add New Item
@@ -267,15 +267,15 @@ export default function Inventory() {
             />
 
             <button
-              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white"
+              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white hover:text-3xl"
               onClick={handleRestockReport}
             >
               Generate Report
             </button>
           </div>
 
-          <div className="border w-[90%] items-center justify-center rounded-lg flex flex-col mt-[15%]">
-            <h1 className="font-semibold text-gray-600">Excess Report</h1>
+          <div className="border w-[90%] items-center justify-center rounded-lg flex flex-col mt-[15%] ">
+            <h1 className="font-semibold text-gray-600 ">Excess Report</h1>
             <h3 className="text-gray-500 px-[10%] mb-[3%]">
               See which items haven't been selling too well since a specified
               date
@@ -290,7 +290,7 @@ export default function Inventory() {
             />
 
             <button
-              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white"
+              className="mt-[2%] bg-[#4FC3F7] rounded-lg px-[3%] border-green-600 mb-[6%] w-3/4 py-[1%] hover:bg-white hover:text-[#4FC3F7] hover:border-2 hover:border-[#4FC3F7] text-white hover:text-3xl"
               onClick={handleExcessReport}
             >
               Generate Report
@@ -298,7 +298,7 @@ export default function Inventory() {
           </div>
 
           <button
-            className="mt-[10%] bg-yellow-400 rounded-lg border-red-600 w-3/4 py-[2%] hover:bg-white hover:border-2 hover:border-yellow-400 hover:text-yellow-400 text-black text-xl font-bold"
+            className="mt-[10%] bg-yellow-400 rounded-lg border-red-600 w-3/4 py-[2%] hover:bg-white hover:border-2 hover:border-yellow-400 hover:text-yellow-400 text-black text-xl font-bold hover:text-3xl"
             onClick={handleEndReport}
           >
             Reset

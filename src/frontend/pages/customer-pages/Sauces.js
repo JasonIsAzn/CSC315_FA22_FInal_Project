@@ -344,7 +344,7 @@ export default function Sauces() {
         className="w-screen flex justify-right mt-2"
       >
         <button
-          className="w-1/2 h-1 bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center border-2 border-black"
+          className="w-1/2 h-1 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-1 p-6 rounded-xl text-2xl flex justify-center items-center"
           onClick={goSauces}
         >
           Sauces
@@ -378,7 +378,7 @@ export default function Sauces() {
                 />
                 <label
                   class=""
-                  className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border text-white font-bold p-24 rounded-lg text-l flex justify-center items-center min-h-full min-w-full whitespace-nowrap"
+                  className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border text-white font-bold p-24 rounded-lg text-l flex justify-center items-center min-h-full min-w-full whitespace-nowrap hover:text-3xl"
                   for={sauce.value}
                 >
                   {saucesTextFormatted[index]}

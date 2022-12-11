@@ -291,13 +291,13 @@ export default function Server() {
       <div className="mt-[5%] items-center justify-center flex flex flex-col">
 
         <button
-          className="h-12 w-[25%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center mb-[2%]"
+          className="h-12 w-[25%] bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center mb-[2%] hover:text-3xl"
           onClick={goSubmission}
         >
           Confirm Contents
         </button>
         <button
-          className="h-12 w-[25%] bg-yellow-400 hover:bg-white hover:text-yellow-600 hover:border-yellow-600 hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center"
+          className="h-12 w-[25%] bg-yellow-400 hover:bg-white hover:text-yellow-600 hover:border-yellow-600 hover:border-2 text-white mx-6 p-2 rounded-lg text-2xl justify-center items-center hover:text-3xl"
           onClick={handleClearContents}
         >
           Clear Contents

@@ -235,7 +235,7 @@ export default function Login() {
       </h4>
 
       <button
-        className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-semibold mx-6 px-[3%] py-[1%] rounded-md text-xl"
+        className="bg-[#4FC3F7] hover:bg-white hover:text-[#4FC3F7] hover:border-[#4FC3F7] hover:border-2 text-white font-semibold mx-6 px-[3%] py-[1%] rounded-md text-xl hover:text-3xl"
         onClick={goHome}
       >
         Continue as Guest
