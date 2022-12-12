@@ -74,9 +74,9 @@ export default function Home() {
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex flex-col">
       {/* header section for logout button */}
-      
+
       <div className="flex justify-end items-center px-[3%] my-[1%]">
-      <img src={logo} className="mr-[30%] h-16 w-56 mt-12" />
+        <img src={logo} className="mr-[30%] h-16 w-56 mt-12" />
         {usedOAuth ? (
           <div id="signOutButton" className="mx-[5%]">
             <GoogleLogout
@@ -104,19 +104,23 @@ export default function Home() {
           Welcome to Spin 'N Stone!
         </button>
         <div className="h-1/3 grid grid-cols-1 ">
-          <button
-            className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl hover:text-3xl"
-            onClick={goManager}
-          >
-            Manager
-          </button>
+          {usedOAuth && (
+            <button
+              className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl hover:text-3xl"
+              onClick={goManager}
+            >
+              Manager
+            </button>
+          )}
 
-          <button
-            className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl mt-6 hover:text-3xl"
-            onClick={goServer}
-          >
-            Server
-          </button>
+          {usedOAuth && (
+            <button
+              className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl mt-6 hover:text-3xl"
+              onClick={goServer}
+            >
+              Server
+            </button>
+          )}
 
           <button
             className="w-32 h-20 hover:bg-[#4FC3F7] bg-white text-[#4FC3F7] border-[#4FC3F7] border-2 hover:text-white font-bold mx-6 rounded-xl text-xl mt-6 hover:text-3xl hover:w-36"
@@ -124,7 +128,10 @@ export default function Home() {
           >
             Locations
           </button>
-          <div id="google_translate_element" className="border rounded-lg mt-6"></div>
+          <div
+            id="google_translate_element"
+            className="border rounded-lg mt-6"
+          ></div>
         </div>
       </div>
     </div>
