@@ -2,9 +2,9 @@ import random
 
 sauces = {"'alfredo'": 2.50, "'traditional_red'": 1.25, "'zesty_red'": 1.75 }
 doughs = {"'regular'": 1.50, "'cauliflower'": 2.50 }
-meats = {"'diced_ham'": 1.25, "'pepperoni'": .75, "'salami'": 2.00, "'meatball'": 1.50}
-veggies = {"'tomatoes'": .30, "'onions'": .30, "'mushrooms'": .50, "'pineapple'": .75, "'green_peppers'": .30}
-drizzles = {"'bbq_sauce'": 1.50, "'ranch'": 1.00, "'siracha'": .50, "'olive_oil'": .50}
+meats = {"'diced_ham'": 1.25, "'pepperoni'": .75, "'salami'": 2.00, "'meatball'": 1.50, "'italian_sasuage'": 1.0, "'smoked_chicken'":1.5}
+veggies = {"'tomatoes'": .30, "'onions'": .30, "'mushrooms'": .50, "'pineapple'": .75, "'green_peppers'": .30, "'banana_peppers'":1.5, "'black_olives'":1.5, "'jalapenos'":1.5, "'roasted_garlic'":2.0, "'spinach'":1.5}
+drizzles = {"'bbq_sauce'": 1.50, "'ranch'": 1.00, "'siracha'": .50, "'olive_oil'": .50, "'oregano'":1.5}
 drinks = {"'gatorade'": 2.00, "'pepsi'": 2.50, "'mtn_dew'": 2.50, "'aquafina'": 1.50, "'ftn_drink'": 3.00}
 
 customers = ["'anne'", "'bob'", "'carson'", "'david'"]
@@ -55,7 +55,7 @@ while (total_spent < 15000):
 
     order_price = (sauces[sauce] + doughs[dough] + meats[meat] + veggies[veggie] + drizzles[drizzle] + drinks[drink])
     total_spent += order_price
-    order_queries.append("INSERT INTO \"order\" (customer_name, total_cost, num_toppings, time_stamp, server_id) VALUES (" + customer_name + ", " + str(round(order_price, 2)) + ", " + str(3) + ", '2022-10-" + str(int(day_num)) + "', " + str(random.randint(1, 6)) + ");\n")
+    order_queries.append("INSERT INTO \"order\" (customer_name, total_cost, num_toppings, time_stamp, server_id) VALUES (" + customer_name + ", " + str(round(order_price, 2)) + ", " + str(3) + ", '2022-12-" + str(int(day_num) + 3) + "', " + str(random.randint(1, 6)) + ");\n")
 
     # TODO: add entries to order_item
     curr_items = [sauce, dough, meat, veggie, drizzle, drink]

@@ -41,6 +41,7 @@ export default function Checkout() {
   const [selectedDrinksCounts, setSelectedDrinksCounts] = useState([]);
   const [selectedDeleteItem, setSelectedDeleteItem] = useState(-1);
 
+  // const [deleteOptions, setDeleteOptions] = useState([]);
   let deleteOptions = [];
   useEffect(() => {
     // Selected Drinks
@@ -171,6 +172,8 @@ export default function Checkout() {
     console.log("handle: items", item);
     setSelectedDeleteItem(item.index);
     console.log("check selected:", selectedDeleteItem);
+    // deleteOptions.splice(item.index, 1);
+    // setDeleteOptions(deleteOptions);
   };
 
   const fillOptions = () => {
@@ -380,6 +383,7 @@ export default function Checkout() {
         </div>
 
         <div className="flex inline-flex mt-5">
+          {/* default value for select*/}
           <Select
             id="deleteDropDown"
             options={deleteOptions}
